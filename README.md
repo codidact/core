@@ -1,2 +1,2 @@
 # core
-The core expert-engine Q&amp;A software implementation
+The core Codidact Q&amp;A software implementation
