@@ -14,10 +14,10 @@ give it to someone else.
 
 ## What's the workflow?
 If you're an **external contributor**, please fork the repository and make your changes, then send a pull request targeting our
-`master` branch.
+`development` branch.
 
 If you're an **internal contributor**, please create a topic branch and make your changes there, then create a pull request targeting
-`master`.
+`development`.
 
 In either case, **status checks are required to pass** and **at least one approving review** is required from the team before any
 pull request can be merged. If status checks don't pass, we won't be able to merge - there are no exceptions, so please fix the
