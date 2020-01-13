@@ -1,4 +1,5 @@
 using Codidact.Application;
+using Codidact.Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -20,6 +21,7 @@ namespace Codidact.WebUI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddApplication();
+            services.AddInfrastructure(Configuration);
             services
                 .AddControllersWithViews()
                 .AddRazorRuntimeCompilation();
