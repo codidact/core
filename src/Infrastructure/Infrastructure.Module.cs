@@ -1,4 +1,5 @@
-﻿using Codidact.Infrastructure.Persistence;
+﻿using Codidact.Application.Common.Interfaces;
+using Codidact.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -21,6 +22,9 @@ namespace Codidact.Infrastructure
                options.UseNpgsql(
                    configuration.GetConnectionString("DefaultConnection"),
                    b => b.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName)));
+
+            services.AddScoped<IApplicationDbContext>(provider => provider.GetService<ApplicationDbContext>());
+
             return services;
         }
     }
