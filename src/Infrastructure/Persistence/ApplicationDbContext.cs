@@ -15,6 +15,7 @@ namespace Codidact.Infrastructure.Persistence
             : base(options) { }
 
         public DbSet<Member> Members { get; set; }
+        public DbSet<Community> Communities { get; set; }
         public DbSet<TrustLevel> TrustLevels { get; set; }
 
 
