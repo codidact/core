@@ -1,17 +1,37 @@
-﻿using Codidact.Domain.Entities;
+﻿using Codidact.Application.Common.Interfaces;
+using Codidact.Domain.Common;
+using Codidact.Domain.Entities;
 using Codidact.Domain.Extensions;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Codidact.Infrastructure.Persistence
 {
-    public class ApplicationDbContext : DbContext
+    public class ApplicationDbContext : DbContext, IApplicationDbContext
     {
         public ApplicationDbContext(DbContextOptions options)
             : base(options) { }
 
         public DbSet<Member> Members { get; set; }
+        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
+        {
+            foreach (var entry in ChangeTracker.Entries<AuditableEntity>())
+            {
+                switch (entry.State)
+                {
+                    case EntityState.Added:
+                        // TODO: Modify for insert
+                        break;
+                    case EntityState.Modified:
+                        // TODO: Modify for update
+                        break;
+                }
+            }
 
+            return base.SaveChangesAsync(cancellationToken);
+        }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
