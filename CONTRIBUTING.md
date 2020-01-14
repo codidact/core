@@ -34,7 +34,10 @@ request. Here they are:
  * [Code standards: CSS naming](https://github.com/codidact/core/wiki/Code-standards:-CSS-naming)
  * [Code standards: HTML](https://github.com/codidact/core/wiki/Code-standards:-HTML)
  * [Code standards: JS](https://github.com/codidact/core/wiki/Code-standards:-JS)
-
+ * For C# code standards, please follow the [Microsoft style guide](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/inside-a-program/coding-conventions).
+ 
+When writing CSS, keep in mind that our design framework, [Co-Design](https://design.codidact.org/) is available in Core, and
+should be used where possible. Avoid writing custom CSS if you can; favour using components and atomic classes from Co-Design.
 
 We also have some [guidelines for commit messages](https://github.com/codidact/core/wiki/Committing-guidelines). Again, please
 follow these where possible, as they help us to keep a cohesive commit history and see how the project has developed.
