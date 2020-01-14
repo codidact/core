@@ -13,5 +13,5 @@ rules.
 [AGPL v3.0](https://github.com/codidact/core/blob/develop/LICENSE).
 
 ## Contributions
-Very welcome! Please read our [contrtibuting guidelines](https://github.com/codidact/core/blob/develop/CONTRIBUTING.md) before
+Very welcome! Please read our [contributing guidelines](https://github.com/codidact/core/blob/develop/CONTRIBUTING.md) before
 you start writing code.
