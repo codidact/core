@@ -5,9 +5,9 @@
     /// </summary>
     public class AuditableEntity
     {
-        /// <summary>
-        /// Auto Incremented Identification number
-        /// </summary>
-        public string Id { get; set; }
+
+
+        // TODO: Add Modified/Created/Deleted Columns as per
+        // https://forum.codidact.org/t/db-naming-convention-round-2/527
     }
 }

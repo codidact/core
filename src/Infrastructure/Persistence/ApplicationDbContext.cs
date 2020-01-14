@@ -15,6 +15,9 @@ namespace Codidact.Infrastructure.Persistence
             : base(options) { }
 
         public DbSet<Member> Members { get; set; }
+        public DbSet<TrustLevel> TrustLevels { get; set; }
+
+
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
         {
             foreach (var entry in ChangeTracker.Entries<AuditableEntity>())
@@ -36,9 +39,16 @@ namespace Codidact.Infrastructure.Persistence
         {
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 
+            modelBuilder.UseSerialColumns();
+
+            RenameEntitiesToSnakeCase(modelBuilder);
+
             base.OnModelCreating(modelBuilder);
 
+        }
 
+        private static void RenameEntitiesToSnakeCase(ModelBuilder modelBuilder)
+        {
             foreach (var entity in modelBuilder.Model.GetEntityTypes())
             {
                 entity.SetTableName(entity.GetTableName().ToSnakeCase());
