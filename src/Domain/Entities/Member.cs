@@ -11,7 +11,7 @@ namespace Codidact.Domain.Entities
         /// <summary>
         /// The display name that is to be displayed for the member
         /// </summary>
-        public string DisplayContent { get; set; }
+        public string DisplayName { get; set; }
 
         /// <summary>
         /// The bio information of the member
@@ -22,11 +22,6 @@ namespace Codidact.Domain.Entities
         /// The main email of the member
         /// </summary>
         public string Email { get; set; }
-
-        /// <summary>
-        /// Hash for the gravatar to be used for the profile image
-        /// </summary>
-        public string GravatarHash { get; set; }
 
         /// <summary>
         /// Geographical location of the member

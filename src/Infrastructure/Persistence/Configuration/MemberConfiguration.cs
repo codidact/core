@@ -11,7 +11,7 @@ namespace Codidact.Infrastructure.Persistence.Configuration
     {
         public void Configure(EntityTypeBuilder<Member> builder)
         {
-            builder.Property(t => t.DisplayContent)
+            builder.Property(t => t.DisplayName)
                 .HasMaxLength(100)
                 .IsRequired();
 
