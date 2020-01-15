@@ -12,6 +12,7 @@ namespace Codidact.Domain.Entities
         /// Auto Incremented Identification number
         /// </summary>
         public long Id { get; set; }
+        
         /// <summary>
         /// The display name that is to be displayed for the member
         /// </summary>
