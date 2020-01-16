@@ -55,6 +55,7 @@ namespace Codidact.Infrastructure.Persistence
 
             return base.SaveChangesAsync(cancellationToken);
         }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
@@ -85,6 +86,7 @@ namespace Codidact.Infrastructure.Persistence
                 }
             }
         }
+
         private static void RenameEntitiesToSnakeCase(ModelBuilder modelBuilder)
         {
             foreach (var entity in modelBuilder.Model.GetEntityTypes())
