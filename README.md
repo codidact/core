@@ -23,6 +23,13 @@ We'll be using Visual Studio for this setup.
 Alternatively, if you don't want to run Visual Studio just to start the project, you can navigate to the src/WebUI folder
 (so that `WebUI.csproj` is in your working directory) and issue the command `dotnet run`.
 
+#### Linux
+1. [Download .NET Core SDK](https://docs.microsoft.com/en-us/dotnet/core/install/linux-package-manager-ubuntu-1904). Specifically,
+   from this page, follow the sections labeled "Register Microsoft Key and feed" and "Install the .NET Core SDK"
+2. Once installation is complete, clone/download the repository and extract it somewhere.
+3. You can run Codidact by navigating to the src/WebUI folder (so that `WebUI.csproj` is in your working directory) and issuing
+   the command `dotnet run`.
+
 ## License
 [AGPL v3.0](https://github.com/codidact/core/blob/develop/LICENSE).
 
