@@ -11,11 +11,11 @@ namespace Codidact.Infrastructure.Persistence.Configuration
     {
         public void Configure(EntityTypeBuilder<TrustLevel> builder)
         {
-            builder.Property(t => t.Content)
+            builder.Property(t => t.Name)
                 .HasMaxLength(100)
                 .IsRequired();
 
-            builder.HasIndex(t => t.Content)
+            builder.HasIndex(t => t.Name)
                 .IsUnique();
 
             builder.HasIndex(t => t.Explanation)
