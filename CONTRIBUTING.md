@@ -4,11 +4,11 @@ Contributions are very welcome! Codidact is an open, community-run project, and 
 ## What needs doing?
  - **Bugs** are reported here on GitHub. Have a look at the open issues tagged `type: bug` to find something that needs fixing.
  - **Requests for features** are first discussed on our [forum](https://forum.codidact.org/) to create consensus around their
-   specification. Once consensus is built, an issue will be created here containing the details of the feature to be built.
-   These issues are tagged `type: feature request`.
+   specification. Once consensus is built, a card will be added to our
+   [MVP GitHub project](https://github.com/codidact/core/projects/1) as a To Do item.
    
 Once you've picked what you're going to work on, please **leave a comment** on the issue to indicate you're planning to work on
-it; this helps us reduce wasted effort. If you need time to work on an issue, that's absolutely fine, but please **keep us
+it; this helps us reduce wasted effort. If there's not already an issue for the feature you want to work on, please create one. If you need time to work on an issue, that's absolutely fine, but please **keep us
 updated** with comments on the issue - if we don't hear from you for a few weeks, we may assume you've given up working on that
 issue and give it to someone else.
 
