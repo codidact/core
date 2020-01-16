@@ -1,4 +1,5 @@
 ﻿using Codidact.Domain.Common;
+using Codidact.Domain.Common.Interfaces;
 using System;
 
 namespace Codidact.Domain.Entities
@@ -6,7 +7,7 @@ namespace Codidact.Domain.Entities
     /// <summary>
     /// An Entity that represents a member of the community
     /// </summary>
-    public class Member : AuditableEntity
+    public class Member : AuditableEntity, ISoftDeletable
     {
         /// <summary>
         /// Auto Incremented Identification number
@@ -67,5 +68,20 @@ namespace Codidact.Domain.Entities
         /// When does the suspension end
         /// </summary>
         public DateTime? SuspensionEndDate { get; set; }
+
+        /// <summary>
+        /// Date at which the entity has been deleted
+        /// </summary>
+        public DateTime? DeletedDateAt { get; set; }
+
+        /// <summary>
+        /// Whether the entity has been deleted
+        /// </summary>
+        public bool IsDeleted { get; set; }
+
+        /// <summary>
+        /// By which member Id the entity has been deleted
+        /// </summary>
+        public long? DeletedByMemberId { get; set; }
     }
 }
