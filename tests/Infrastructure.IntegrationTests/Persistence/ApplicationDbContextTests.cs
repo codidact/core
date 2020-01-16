@@ -56,5 +56,87 @@ namespace Infrastructure.IntegrationTests.Persistence
             Assert.NotNull(trustLevelModel);
             Assert.Equal("trust_level", trustLevelModel.GetTableName());
         }
+
+        [Fact]
+        public async Task CreatedDateAtIsModifiedOnInsert()
+        {
+            var member = new Member
+            {
+                DisplayName = "John Doe",
+                Bio = "Not to be confused with John Galt",
+                Email = "john@gmail.com"
+            };
+            _sutContext.Add(member);
+            await _sutContext.SaveChangesAsync();
+
+            Assert.Equal(member.CreateDateAt.Date, DateTime.UtcNow.Date);
+        }
+
+        [Fact]
+        public async Task LastModifiedDateAtIsModifiedOnUpdate()
+        {
+            var member = new Member
+            {
+                DisplayName = "John Doe",
+                Bio = "Not to be confused with John Galt",
+                Email = "john@gmail.com"
+            };
+            _sutContext.Add(member);
+            await _sutContext.SaveChangesAsync();
+
+            Assert.Null(member.LastModifiedDate);
+
+            member.DisplayName = "John Galt";
+            _sutContext.Update(member);
+            await _sutContext.SaveChangesAsync();
+
+            Assert.True(member.LastModifiedDate.HasValue);
+            Assert.Equal(member.LastModifiedDate.Value.Date, DateTime.UtcNow.Date);
+        }
+
+        [Fact]
+        public async Task DeletingASoftDeletableShouldOnlyUpdateIsDeletedAndDate()
+        {
+            var member = new Member
+            {
+                DisplayName = "John Doe",
+                Bio = "Not to be confused with John Galt",
+                Email = "john@gmail.com"
+            };
+            _sutContext.Add(member);
+            await _sutContext.SaveChangesAsync();
+
+            _sutContext.Remove(member);
+            await _sutContext.SaveChangesAsync();
+
+            Assert.True(member.IsDeleted);
+            Assert.NotNull(member.DeletedDateAt);
+            Assert.Equal(member.DeletedDateAt.Value.Date, DateTime.UtcNow.Date);
+        }
+
+
+        [Fact]
+        public async Task DeletedEntitiesDontShowUpInQuery()
+        {
+            var member = new Member
+            {
+                DisplayName = "John Doe",
+                Bio = "Not to be confused with John Galt",
+                Email = "john@gmail.com"
+            };
+            _sutContext.Add(member);
+            await _sutContext.SaveChangesAsync();
+
+            _sutContext.Remove(member);
+            await _sutContext.SaveChangesAsync();
+
+            Assert.Null(_sutContext.Members.FirstOrDefault(mem => mem.Id == member.Id));
+
+            member.IsDeleted = false;
+            _sutContext.Update(member);
+            await _sutContext.SaveChangesAsync();
+
+            Assert.NotNull(_sutContext.Members.FirstOrDefault(mem => mem.Id == member.Id));
+        }
     }
 }
