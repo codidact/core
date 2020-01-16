@@ -47,12 +47,12 @@ namespace Codidact.Domain.Entities
         /// <summary>
         /// When was the data validated against StackExchange
         /// </summary>
-        public DateTime? StackExchangeValidated { get; set; }
+        public DateTime? StackExchangeValidatedAt { get; set; }
 
         /// <summary>
         /// When was the last time the data was imported from StackExchange
         /// </summary>
-        public DateTime? StackExchangeLastImported { get; set; }
+        public DateTime? StackExchangeLastImportedAt { get; set; }
 
         /// <summary>
         /// Whether the email has been verified for the member
@@ -67,7 +67,7 @@ namespace Codidact.Domain.Entities
         /// <summary>
         /// When does the suspension end
         /// </summary>
-        public DateTime? SuspensionEndDate { get; set; }
+        public DateTime? SuspensionEndDateAt { get; set; }
 
         /// <summary>
         /// Date at which the entity has been deleted
