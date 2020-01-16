@@ -10,7 +10,12 @@ for everyone to use. The software will also be available to download and run you
 rules.
 
 ## Installation
-These instructions are for setting up and running a local instance of Codidact.
+These instructions are for setting up and running a local development instance of Codidact.
+
+#### Technology Stack
+A list of the current tech stack is [here](https://github.com/codidact/docs/wiki/Technology-Stack).
+These items will be installed in the steps below, but if all of these are already installed on your
+system you can skip straight to running the project.
 
 #### Windows
 We'll be using Visual Studio for this setup.
@@ -20,7 +25,10 @@ We'll be using Visual Studio for this setup.
 2. When prompted to select workloads, select the "ASP.NET and Web Development" workload, and then install it.
 3. Once the installation is complete, clone/download this repository and extract it somewhere.
 4. In the root of the repository, open the `Codidact.sln` file with visual studio to get started.
-5. Once Visual Studio has finished loading, you can run Codidact by setting the WebUI project as the startup project.
+5. Visual Studio will attempt to install any missing packages. This usually requires no additional action, *but if it fails to do so, 
+   [perform a package restore](https://docs.microsoft.com/en-US/nuget/consume-packages/package-restore).*
+6. Once Visual Studio has finished loading, you can run Codidact by setting the WebUI project as the startup project. You'll
+   know you're ready to run the project when a Start IIS Express button appears.
 
 Alternatively, if you don't want to run Visual Studio just to start the project, you can navigate to the src/WebUI folder
 (so that `WebUI.csproj` is in your working directory) and issue the command `dotnet run`.
@@ -32,8 +40,6 @@ Alternatively, if you don't want to run Visual Studio just to start the project,
 3. You can run Codidact by navigating to the src/WebUI folder (so that `WebUI.csproj` is in your working directory) and issuing
    the command `dotnet run`.
 
-#### Technology Stack
-A list of the current tech stack is [here](https://github.com/codidact/docs/wiki/Technology-Stack).
 
 ## License
 [AGPL v3.0](https://github.com/codidact/core/blob/develop/LICENSE).
