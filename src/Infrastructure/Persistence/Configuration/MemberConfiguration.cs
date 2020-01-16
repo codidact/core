@@ -16,7 +16,7 @@ namespace Codidact.Infrastructure.Persistence.Configuration
                 .IsRequired();
 
             builder.Property(t => t.Email)
-                .HasMaxLength(255)
+                .HasMaxLength(320)
                 .IsRequired();
 
             builder.HasIndex(t => t.Email)
