@@ -67,12 +67,12 @@ namespace Codidact.Domain.Entities
         /// <summary>
         /// When does the suspension end
         /// </summary>
-        public DateTime? SuspensionEndDateAt { get; set; }
+        public DateTime? SuspensionEndAt { get; set; }
 
         /// <summary>
         /// Date at which the entity has been deleted
         /// </summary>
-        public DateTime? DeletedDateAt { get; set; }
+        public DateTime? DeletedAt { get; set; }
 
         /// <summary>
         /// Whether the entity has been deleted

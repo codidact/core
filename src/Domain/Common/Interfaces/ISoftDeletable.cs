@@ -10,7 +10,7 @@ namespace Codidact.Domain.Common.Interfaces
         /// <summary>
         /// Date at which the entity has been deleted
         /// </summary>
-        DateTime? DeletedDateAt { get; set; }
+        DateTime? DeletedAt { get; set; }
 
         /// <summary>
         /// Whether the entity has been deleted
