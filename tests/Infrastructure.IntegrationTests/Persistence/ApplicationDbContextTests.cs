@@ -84,14 +84,14 @@ namespace Infrastructure.IntegrationTests.Persistence
             _sutContext.Add(member);
             await _sutContext.SaveChangesAsync();
 
-            Assert.Null(member.LastModifiedDate);
+            Assert.Null(member.LastModifiedAt);
 
             member.DisplayName = "John Galt";
             _sutContext.Update(member);
             await _sutContext.SaveChangesAsync();
 
-            Assert.True(member.LastModifiedDate.HasValue);
-            Assert.Equal(member.LastModifiedDate.Value.Date, DateTime.UtcNow.Date);
+            Assert.True(member.LastModifiedAt.HasValue);
+            Assert.Equal(member.LastModifiedAt.Value.Date, DateTime.UtcNow.Date);
         }
 
         [Fact]
@@ -110,8 +110,8 @@ namespace Infrastructure.IntegrationTests.Persistence
             await _sutContext.SaveChangesAsync();
 
             Assert.True(member.IsDeleted);
-            Assert.NotNull(member.DeletedDateAt);
-            Assert.Equal(member.DeletedDateAt.Value.Date, DateTime.UtcNow.Date);
+            Assert.NotNull(member.DeletedAt);
+            Assert.Equal(member.DeletedAt.Value.Date, DateTime.UtcNow.Date);
         }
 
 

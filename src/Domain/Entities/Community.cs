@@ -34,7 +34,7 @@ namespace Codidact.Domain.Entities
         /// <summary>
         /// Date at which the entity has been deleted
         /// </summary>
-        public DateTime? DeletedDateAt { get; set; }
+        public DateTime? DeletedAt { get; set; }
 
         /// <summary>
         /// Whether the entity has been deleted

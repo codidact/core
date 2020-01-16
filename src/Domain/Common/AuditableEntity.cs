@@ -15,7 +15,7 @@ namespace Codidact.Domain.Common
         /// <summary>
         /// The date at which the entity was last modified
         /// </summary>
-        public DateTime? LastModifiedDate { get; set; }
+        public DateTime? LastModifiedAt { get; set; }
 
         /// <summary>
         /// The member id which created this entity

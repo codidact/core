@@ -34,7 +34,7 @@ namespace Codidact.Infrastructure.Persistence
                         // set the current Member id to CreatedByMemberId
                         break;
                     case EntityState.Modified:
-                        entry.Entity.LastModifiedDate = DateTime.UtcNow;
+                        entry.Entity.LastModifiedAt = DateTime.UtcNow;
                         // TODO: Once an identity service is added
                         // set the current Member id to LastModifiedByMemberId
                         break;
@@ -44,7 +44,7 @@ namespace Codidact.Infrastructure.Persistence
                             // Unchanged so only the relevant columns are sent to the db
                             entry.State = EntityState.Unchanged;
 
-                            deletable.DeletedDateAt = DateTime.UtcNow;
+                            deletable.DeletedAt = DateTime.UtcNow;
                             deletable.IsDeleted = true;
                             // TODO: Once an identity service is added
                             // set the current Member id to DeletedByMemberId
