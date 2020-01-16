@@ -20,9 +20,6 @@ namespace Codidact.Infrastructure.Persistence.Configuration
                 .HasMaxLength(100)
                 .IsRequired();
 
-            builder.HasIndex(t => t.Tagline)
-               .IsUnique(true);
-
             builder.Property(t => t.Url)
                 .HasMaxLength(255)
                 .IsRequired();
