@@ -15,7 +15,7 @@ namespace Codidact.Domain.Entities
         /// <summary>
         /// Name of the trust level
         /// </summary>
-        public string Content { get; set; }
+        public string Name { get; set; }
         
         /// <summary>
         /// A short explaination of this trust level and its meaning
