@@ -10,6 +10,8 @@ for everyone to use. The software will also be available to download and run you
 rules.
 
 ## Installation
+These instructions are for setting up and running a local instance of Codidact.
+
 #### Windows
 We'll be using Visual Studio for this setup.
 
@@ -29,6 +31,9 @@ Alternatively, if you don't want to run Visual Studio just to start the project,
 2. Once installation is complete, clone/download the repository and extract it somewhere.
 3. You can run Codidact by navigating to the src/WebUI folder (so that `WebUI.csproj` is in your working directory) and issuing
    the command `dotnet run`.
+
+#### Technology Stack
+A list of the current tech stack is [here](https://github.com/codidact/docs/wiki/Technology-Stack).
 
 ## License
 [AGPL v3.0](https://github.com/codidact/core/blob/develop/LICENSE).
