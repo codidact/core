@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.2" last-position="0,115" last-zoom="1" max-obj-count="4"
+<dbmodel pgmodeler-ver="0.9.2" last-position="0,114" last-zoom="1" max-obj-count="4"
 	 default-schema="public" default-owner="postgres">
 <database name="codidact_core" encoding="UTF8" lc-collate="C" is-template="false" allow-conns="true">
 </database>
@@ -54,6 +54,9 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	</column>
 	<constraint name="Community_pk" type="pk-constr" table="public.&quot;Community&quot;">
 		<columns names="Id" ref-type="src-columns"/>
+	</constraint>
+	<constraint name="Community_Name_uq" type="uq-constr" table="public.&quot;Community&quot;">
+		<columns names="Name" ref-type="src-columns"/>
 	</constraint>
 </table>
 

@@ -37,7 +37,8 @@ CREATE TABLE public."Community"
 (
 	"Id" integer NOT NULL GENERATED ALWAYS AS IDENTITY,
 	"Name" varchar(50) NOT NULL,
-	CONSTRAINT "Community_pk" PRIMARY KEY ("Id")
+	CONSTRAINT "Community_pk" PRIMARY KEY ("Id"),
+	CONSTRAINT "Community_Name_uq" UNIQUE ("Name")
 
 );
 -- ddl-end --
