@@ -11,8 +11,7 @@ This file is a temporary list of pending tasks regarding the skeleton implementa
   - C#
   - SQL
 - document project architecture (create a new diagram)
-- define UNIQUE constraint for join tables
-- define UNIQUE constraint for tables with `Title` (or equivalent) and  `CommunityId` (fk) columns
+- define UNIQUE constraint for tables with `Title` (or equivalent)
 - add baseline dependencies such as EF Core
 - implement a sample domain model class and *Razor Page* querying the database through it.
 
