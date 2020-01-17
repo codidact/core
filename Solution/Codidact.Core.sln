@@ -21,6 +21,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Codidact.Core.WebApplicatio
 		{96847DA7-27CA-4F3E-8B59-9C71A8F25582} = {96847DA7-27CA-4F3E-8B59-9C71A8F25582}
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E0B62BD8-8067-4E96-8FC5-7DB5F701FD28}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
