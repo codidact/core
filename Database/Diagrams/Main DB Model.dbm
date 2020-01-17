@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.2" last-position="0,116" last-zoom="1" max-obj-count="4"
+<dbmodel pgmodeler-ver="0.9.2" last-position="0,115" last-zoom="1" max-obj-count="4"
 	 default-schema="public" default-owner="postgres">
 <database name="codidact_core" encoding="UTF8" lc-collate="C" is-template="false" allow-conns="true">
 </database>
@@ -64,7 +64,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	 custom-color="#9826fd"
 	 src-table="public.&quot;Community&quot;"
 	 dst-table="public.&quot;Question&quot;"
-	 src-required="false" dst-required="false"/>
+	 src-required="true" dst-required="false"/>
 
 <table name="Tag" layer="0" collapse-mode="2" max-obj-count="6">
 	<schema name="public"/>
@@ -114,7 +114,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	 custom-color="#8abc04"
 	 src-table="public.&quot;Community&quot;"
 	 dst-table="public.&quot;Tag&quot;"
-	 src-required="false" dst-required="false"/>
+	 src-required="true" dst-required="false"/>
 
 <constraint name="Tag_Title_uq" type="uq-constr" table="public.&quot;Tag&quot;">
 	<columns names="CommunityId,Title" ref-type="src-columns"/>

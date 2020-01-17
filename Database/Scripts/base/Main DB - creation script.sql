@@ -20,7 +20,7 @@
 CREATE TABLE public."Question"
 (
 	"Id" integer NOT NULL GENERATED ALWAYS AS IDENTITY,
-	"CommunityId" integer,
+	"CommunityId" integer NOT NULL,
 	"DatetimeCreated" timestamptz NOT NULL DEFAULT NOW(),
 	"Title" varchar(255) NOT NULL,
 	"Body" varchar NOT NULL,
@@ -48,7 +48,7 @@ CREATE TABLE public."Community"
 -- ALTER TABLE public."Question" DROP CONSTRAINT IF EXISTS "Community_fk" CASCADE;
 ALTER TABLE public."Question" ADD CONSTRAINT "Community_fk" FOREIGN KEY ("CommunityId")
 REFERENCES public."Community" ("Id") MATCH FULL
-ON DELETE SET NULL ON UPDATE CASCADE;
+ON DELETE RESTRICT ON UPDATE CASCADE;
 -- ddl-end --
 
 -- object: public."Tag" | type: TABLE --
@@ -56,7 +56,7 @@ ON DELETE SET NULL ON UPDATE CASCADE;
 CREATE TABLE public."Tag"
 (
 	"Id" integer NOT NULL GENERATED ALWAYS AS IDENTITY,
-	"CommunityId" integer,
+	"CommunityId" integer NOT NULL,
 	"DatetimeCreated" timestamptz NOT NULL DEFAULT NOW(),
 	"Title" varchar(40) NOT NULL,
 	"Description" varchar,
@@ -96,7 +96,7 @@ ON DELETE RESTRICT ON UPDATE CASCADE;
 -- ALTER TABLE public."Tag" DROP CONSTRAINT IF EXISTS "Community_fk" CASCADE;
 ALTER TABLE public."Tag" ADD CONSTRAINT "Community_fk" FOREIGN KEY ("CommunityId")
 REFERENCES public."Community" ("Id") MATCH FULL
-ON DELETE SET NULL ON UPDATE CASCADE;
+ON DELETE RESTRICT ON UPDATE CASCADE;
 -- ddl-end --
 
 -- object: "Tag_Title_uq" | type: CONSTRAINT --
