@@ -3,13 +3,23 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29709.97
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Codidact.Core.DomainModel", "Codidact.Core.DomainModel\Codidact.Core.DomainModel.csproj", "{6EF3731E-D29F-4E6D-8AEB-2FDFB32D0680}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Codidact.Core.DomainModel", "Codidact.Core.DomainModel\Codidact.Core.DomainModel.csproj", "{6EF3731E-D29F-4E6D-8AEB-2FDFB32D0680}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Codidact.Core.DomainServices", "Codidact.Core.DomainServices\Codidact.Core.DomainServices.csproj", "{96847DA7-27CA-4F3E-8B59-9C71A8F25582}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Codidact.Core.DomainServices", "Codidact.Core.DomainServices\Codidact.Core.DomainServices.csproj", "{96847DA7-27CA-4F3E-8B59-9C71A8F25582}"
+	ProjectSection(ProjectDependencies) = postProject
+		{6EF3731E-D29F-4E6D-8AEB-2FDFB32D0680} = {6EF3731E-D29F-4E6D-8AEB-2FDFB32D0680}
+		{EF246F63-5E9C-4ABB-800D-FA73BC121A96} = {EF246F63-5E9C-4ABB-800D-FA73BC121A96}
+	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Codidact.Core.Infrastructure", "Codidact.Core.Infrastructure\Codidact.Core.Infrastructure.csproj", "{EF246F63-5E9C-4ABB-800D-FA73BC121A96}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Codidact.Core.Infrastructure", "Codidact.Core.Infrastructure\Codidact.Core.Infrastructure.csproj", "{EF246F63-5E9C-4ABB-800D-FA73BC121A96}"
+	ProjectSection(ProjectDependencies) = postProject
+		{6EF3731E-D29F-4E6D-8AEB-2FDFB32D0680} = {6EF3731E-D29F-4E6D-8AEB-2FDFB32D0680}
+	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Codidact.Core.WebApplication", "Codidact.Core.WebApplication\Codidact.Core.WebApplication.csproj", "{E23B1A45-73B1-485B-A22C-0C4D422BE8B5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Codidact.Core.WebApplication", "Codidact.Core.WebApplication\Codidact.Core.WebApplication.csproj", "{E23B1A45-73B1-485B-A22C-0C4D422BE8B5}"
+	ProjectSection(ProjectDependencies) = postProject
+		{96847DA7-27CA-4F3E-8B59-9C71A8F25582} = {96847DA7-27CA-4F3E-8B59-9C71A8F25582}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
