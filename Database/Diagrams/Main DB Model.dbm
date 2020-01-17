@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+CAUTION: Do not modify this file unless you know what you are doing.
+         Unexpected results may occur if the code is changed deliberately.
+-->
+<dbmodel pgmodeler-ver="0.9.2" last-position="0,116" last-zoom="1" max-obj-count="4"
+	 default-schema="public" default-owner="postgres">
+<database name="codidact_core" encoding="UTF8" lc-collate="C" is-template="false" allow-conns="true">
+</database>
+
+<schema name="public" layer="0" fill-color="#e1e1e1" sql-disabled="true">
+</schema>
+
+<table name="Question" layer="0" collapse-mode="2" max-obj-count="6">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="720" y="520"/>
+	<column name="Id" not-null="true"
+	 identity-type="ALWAYS">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="DatetimeCreated" not-null="true" default-value="NOW()">
+		<type name="timestamptz" length="0"/>
+	</column>
+	<column name="Title" not-null="true">
+		<type name="varchar" length="255"/>
+	</column>
+	<column name="Body" not-null="true">
+		<type name="varchar" length="0"/>
+	</column>
+	<constraint name="Question_pk" type="pk-constr" table="public.&quot;Question&quot;">
+		<columns names="Id" ref-type="src-columns"/>
+	</constraint>
+
+	<customidxs object-type="column">
+		<object name="CommunityId" index="1"/>
+	</customidxs>
+
+	<customidxs object-type="constraint">
+		<object name="Community_fk" index="1"/>
+	</customidxs>
+</table>
+
+<table name="Community" layer="0" collapse-mode="2" max-obj-count="2">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="400" y="240"/>
+	<column name="Id" not-null="true"
+	 identity-type="ALWAYS">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="Name" not-null="true">
+		<type name="varchar" length="50"/>
+	</column>
+	<constraint name="Community_pk" type="pk-constr" table="public.&quot;Community&quot;">
+		<columns names="Id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<relationship name="Community_Question_one-to-many" type="rel1n" layer="0"
+	 src-col-pattern="{st}{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#9826fd"
+	 src-table="public.&quot;Community&quot;"
+	 dst-table="public.&quot;Question&quot;"
+	 src-required="false" dst-required="false"/>
+
+<table name="Tag" layer="0" collapse-mode="2" max-obj-count="6">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1000" y="240"/>
+	<column name="Id" not-null="true"
+	 identity-type="ALWAYS">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="DatetimeCreated" not-null="true" default-value="NOW()">
+		<type name="timestamptz" length="0"/>
+	</column>
+	<column name="Title" not-null="true">
+		<type name="varchar" length="40"/>
+	</column>
+	<column name="Description">
+		<type name="varchar" length="0"/>
+	</column>
+	<constraint name="Tag_pk" type="pk-constr" table="public.&quot;Tag&quot;">
+		<columns names="Id" ref-type="src-columns"/>
+	</constraint>
+
+	<customidxs object-type="column">
+		<object name="CommunityId" index="1"/>
+	</customidxs>
+
+	<customidxs object-type="constraint">
+		<object name="Community_fk" index="1"/>
+	</customidxs>
+</table>
+
+<relationship name="Question_Tag_many-to-many" type="relnn" layer="0"
+	 src-col-pattern="{st}{sc}" dst-col-pattern="{dt}{sc}"
+	 pk-pattern="{gt}_pk" uq-pattern="{gt}_uq"
+	 src-fk-pattern="{st}_fk" dst-fk-pattern="{dt}_fk"
+	 pk-col-pattern="Id"
+	 custom-color="#911456"
+	 src-table="public.&quot;Question&quot;"
+	 dst-table="public.&quot;Tag&quot;"
+	 src-required="false" dst-required="false"
+	 table-name="Question_Tag"/>
+
+<relationship name="Community_Tag_one-to-many" type="rel1n" layer="0"
+	 src-col-pattern="{st}{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#8abc04"
+	 src-table="public.&quot;Community&quot;"
+	 dst-table="public.&quot;Tag&quot;"
+	 src-required="false" dst-required="false"/>
+
+<constraint name="Tag_Title_uq" type="uq-constr" table="public.&quot;Tag&quot;">
+	<columns names="CommunityId,Title" ref-type="src-columns"/>
+</constraint>
+
+</dbmodel>
