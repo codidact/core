@@ -17,8 +17,9 @@
 
 -- object: public."Question" | type: TABLE --
 -- DROP TABLE IF EXISTS public."Question" CASCADE;
-CREATE TABLE public."Question" (
-	"Id" integer NOT NULL GENERATED ALWAYS AS IDENTITY ,
+CREATE TABLE public."Question"
+(
+	"Id" integer NOT NULL GENERATED ALWAYS AS IDENTITY,
 	"CommunityId" integer,
 	"DatetimeCreated" timestamptz NOT NULL DEFAULT NOW(),
 	"Title" varchar(255) NOT NULL,
@@ -32,8 +33,9 @@ CREATE TABLE public."Question" (
 
 -- object: public."Community" | type: TABLE --
 -- DROP TABLE IF EXISTS public."Community" CASCADE;
-CREATE TABLE public."Community" (
-	"Id" integer NOT NULL GENERATED ALWAYS AS IDENTITY ,
+CREATE TABLE public."Community"
+(
+	"Id" integer NOT NULL GENERATED ALWAYS AS IDENTITY,
 	"Name" varchar(50) NOT NULL,
 	CONSTRAINT "Community_pk" PRIMARY KEY ("Id")
 
@@ -51,8 +53,9 @@ ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- object: public."Tag" | type: TABLE --
 -- DROP TABLE IF EXISTS public."Tag" CASCADE;
-CREATE TABLE public."Tag" (
-	"Id" integer NOT NULL GENERATED ALWAYS AS IDENTITY ,
+CREATE TABLE public."Tag"
+(
+	"Id" integer NOT NULL GENERATED ALWAYS AS IDENTITY,
 	"CommunityId" integer,
 	"DatetimeCreated" timestamptz NOT NULL DEFAULT NOW(),
 	"Title" varchar(40) NOT NULL,
@@ -66,7 +69,8 @@ CREATE TABLE public."Tag" (
 
 -- object: public."Question_Tag" | type: TABLE --
 -- DROP TABLE IF EXISTS public."Question_Tag" CASCADE;
-CREATE TABLE public."Question_Tag" (
+CREATE TABLE public."Question_Tag"
+(
 	"QuestionId" integer NOT NULL,
 	"TagId" integer NOT NULL,
 	CONSTRAINT "Question_Tag_pk" PRIMARY KEY ("QuestionId","TagId")
