@@ -1,7 +1,9 @@
 using Codidact.Application;
 using Codidact.Infrastructure;
+using Codidact.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -53,6 +55,30 @@ namespace Codidact.WebUI
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            ApplyDatabaseMigrations(app);
+        }
+
+        // Applies database migrations; won't cause any changes if the database is up-to-date.
+        private void ApplyDatabaseMigrations(IApplicationBuilder app)
+        {
+            using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
+            {
+                using (var context = serviceScope.ServiceProvider.GetService<ApplicationDbContext>())
+                {
+                    try
+                    {
+                        context.Database.Migrate();
+                    }
+                    catch (System.Exception ex)
+                    {
+                        // Don't want to overwrite the original exception, so I store a tip in the ex.Data dictionary
+                        ex.Data["DisplayMessage"] += "Unable to apply database migrations. Check the connection " +
+                            "string in your appsettings file.";
+                        throw ex;
+                    }
+                }
+            }
         }
     }
 }
