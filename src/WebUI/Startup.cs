@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 
 namespace Codidact.WebUI
 {
@@ -30,7 +31,8 @@ namespace Codidact.WebUI
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        // A change in .NET Core 3.0 prevents injection of ILogger anywhere but the Configure method.
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILogger<Startup> logger)
         {
             if (env.IsDevelopment())
             {
@@ -56,11 +58,11 @@ namespace Codidact.WebUI
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
 
-            ApplyDatabaseMigrations(app);
+            ApplyDatabaseMigrations(app, logger);
         }
 
         // Applies database migrations; won't cause any changes if the database is up-to-date.
-        private void ApplyDatabaseMigrations(IApplicationBuilder app)
+        private void ApplyDatabaseMigrations(IApplicationBuilder app, ILogger logger)
         {
             using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
             {
@@ -72,9 +74,8 @@ namespace Codidact.WebUI
                     }
                     catch (System.Exception ex)
                     {
-                        // Don't want to overwrite the original exception, so I store a tip in the ex.Data dictionary
-                        ex.Data["DisplayMessage"] += "Unable to apply database migrations. Check the connection " +
-                            "string in your appsettings file.";
+                        logger.LogError("Unable to apply database migrations. Check the connection string in your " +
+                            "appsettings file.");
                         throw ex;
                     }
                 }
