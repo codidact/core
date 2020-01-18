@@ -29,17 +29,28 @@ We'll be using Visual Studio for this setup.
    [perform a package restore](https://docs.microsoft.com/en-US/nuget/consume-packages/package-restore).*
 6. Once Visual Studio has finished loading, you can run Codidact by setting the WebUI project as the startup project. You'll
    know you're ready to run the project when a Start IIS Express button appears.
+7. See the Database Setup instructions below
 
 Alternatively, if you don't want to run Visual Studio just to start the project, you can navigate to the src/WebUI folder
 (so that `WebUI.csproj` is in your working directory) and issue the command `dotnet run`.
 
-It's time to set up the database. These instructions assume that you don't have a PostgreSQL DB server installed at the moment
+#### Linux
+1. [Download .NET Core SDK](https://docs.microsoft.com/en-us/dotnet/core/install/linux-package-manager-ubuntu-1904). Specifically,
+   from this page, follow the sections labeled "Register Microsoft Key and feed" and "Install the .NET Core SDK"
+2. Once the installation is complete, clone/download the repository and extract it somewhere.
+3. You can run Codidact by navigating to the src/WebUI folder (so that `WebUI.csproj` is in your working directory) and issuing
+   the command `dotnet run`.
+
+#### Database Setup
+These instructions assume that you don't have a PostgreSQL DB server installed at the moment
 and would like to run one locally. These instructions may change heavily depending on your circumstances.
 
-1. [Install PostgreSQL](https://www.enterprisedb.com/downloads/postgres-postgresql-downloads). This will also install pgAdmin.
-2. Open pgAdmin and connect to your local DB server. Create a new database and name it whatever you like.
+1. Install PostgreSQL:
+    * [Windows](https://www.enterprisedb.com/downloads/postgres-postgresql-downloads). This will also install pgAdmin.
+    * Linux users will most likely want to use the PostgreSQL version provided by their package manager.
+2. Create a new database and name it whatever you like. Windows users can do this using pgAdmin.
 3. Open `appsettings.Development.json` in the WebUI project and add a new connection string for your database. It will look
-   something like this:
+   something like this, along with any relevant connection information:
 ```
 "ConnectionStrings": {
     "DefaultConnection": "Server=localhost;Database=YOUR_DATABASE;"
@@ -48,13 +59,6 @@ and would like to run one locally. These instructions may change heavily dependi
 4. Open a terminal at the Codidact solution folder. Run the command `dotnet tool install --global dotnet-ef`.
 5. Navigate to the WebUI project folder and un `dotnet ef database update` to apply the project migrations to the database.
 6. Verify that your database is now populated with new tables.
-
-#### Linux
-1. [Download .NET Core SDK](https://docs.microsoft.com/en-us/dotnet/core/install/linux-package-manager-ubuntu-1904). Specifically,
-   from this page, follow the sections labeled "Register Microsoft Key and feed" and "Install the .NET Core SDK"
-2. Once the installation is complete, clone/download the repository and extract it somewhere.
-3. You can run Codidact by navigating to the src/WebUI folder (so that `WebUI.csproj` is in your working directory) and issuing
-   the command `dotnet run`.
 
 
 ## License
