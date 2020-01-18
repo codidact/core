@@ -16,9 +16,7 @@ namespace Codidact.WebUI.IntegrationTests
         {
             var stringResponse = await response.Content.ReadAsStringAsync();
 
-            var result = JsonConvert.DeserializeObject<T>(stringResponse);
-
-            return result;
+            return JsonConvert.DeserializeObject<T>(stringResponse);
         }
     }
 }
