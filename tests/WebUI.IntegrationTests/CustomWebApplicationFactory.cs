@@ -15,7 +15,7 @@ namespace Codidact.WebUI.IntegrationTests
     /// This factory creates an .net Core server with the configuration provided
     /// for the purpose of testing against it
     /// </summary>
-    public class CustomWebApplicationFactory<TStartup> : WebApplicationFactory<Startup> where TStartup : class
+    public class CustomWebApplicationFactory<TStartup> : WebApplicationFactory<TStartup> where TStartup : class
     {
         protected override void ConfigureWebHost(IWebHostBuilder builder)
         {
