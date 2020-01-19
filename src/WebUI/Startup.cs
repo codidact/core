@@ -1,6 +1,3 @@
-using Codidact.Application;
-using Codidact.Infrastructure;
-using Codidact.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -8,6 +5,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+
+using Codidact.Application;
+using Codidact.Infrastructure;
+using Codidact.Infrastructure.Persistence;
+using Codidact.Infrastructure.Common;
 
 namespace Codidact.WebUI
 {
@@ -28,6 +30,8 @@ namespace Codidact.WebUI
             services
                 .AddControllersWithViews()
                 .AddRazorRuntimeCompilation();
+
+            services.Configure<CodidactOptions>(options => Configuration.GetSection("Codidact").Bind(options));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -74,8 +78,7 @@ namespace Codidact.WebUI
                     }
                     catch (System.Exception ex)
                     {
-                        logger.LogError("Unable to apply database migrations. Check the connection string in your " +
-                            "appsettings file.");
+                        logger.LogError("Unable to apply database migrations. Check the connection string in your appsettings file.");
                         throw ex;
                     }
                 }
