@@ -9,6 +9,7 @@ using Microsoft.Extensions.Logging;
 using Codidact.Application;
 using Codidact.Infrastructure;
 using Codidact.Infrastructure.Persistence;
+using Codidact.Infrastructure.Common;
 using Codidact.WebUI.Middlewares;
 
 namespace Codidact.WebUI

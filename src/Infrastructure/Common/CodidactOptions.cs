@@ -1,4 +1,4 @@
-namespace Codidact.WebUI
+namespace Codidact.Infrastructure.Common
 {
     public class CodidactOptions
     {

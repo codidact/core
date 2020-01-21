@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Xunit;
 
 using Codidact.WebUI.Middlewares;
+using Codidact.Infrastructure.Common;
 
 namespace Codidact.WebUI.IntegrationTests.Middlewares
 {

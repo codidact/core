@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
 
 using Codidact.Domain.Extensions;
+using Codidact.Infrastructure.Common;
 
 namespace Codidact.WebUI.Middlewares
 {
