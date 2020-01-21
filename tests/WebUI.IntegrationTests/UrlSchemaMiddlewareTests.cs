@@ -14,20 +14,24 @@ namespace Codidact.WebUI.IntegrationTests
 {
     public class UrlSchemaMiddlewareTests
     {
-        private async Task DoTest(string original, string expected, Action<CodidactOptions> configure) {
+        private async Task DoTest(string original, string expected, Action<CodidactOptions> configure)
+        {
             var builder = new WebHostBuilder()
-                .ConfigureServices(services => {
+                .ConfigureServices(services =>
+                {
                     services.Configure<CodidactOptions>(configure);
                 })
-                .Configure(app => {
+                .Configure(app =>
+                {
                     app.UseMiddleware<UrlSchemaMiddleware>();
 
-                    app.Use(async (context, next) => {
+                    app.Use(async (context, next) =>
+                    {
                         Assert.Equal(expected, context.Request.GetEncodedUrl());
                         await next();
                     });
                 });
-            
+
             var server = new TestServer(builder);
 
             HttpClient client = server.CreateClient();
@@ -41,11 +45,13 @@ namespace Codidact.WebUI.IntegrationTests
         [InlineData("https://foo.bar.codidact.com", "https://codidact.com/error/404")]
         [InlineData("https://127.0.0.1", "https://codidact.com/")]
         [InlineData("https://foo.codidact.com:8080", "https://codidact.com/community/foo/")]
-        public async Task Test_WithSubdomainSchema(string input, string expected) {
-            await DoTest(input, expected, options => {
+        public async Task Test_WithSubdomainSchema(string original, string expected)
+        {
+            await DoTest(original, expected, options =>
+            {
                 options.UseSubdomainSchema = true;
                 options.Hostname = "codidact.com";
-                options.CommunitySeperator = "community";
+                options.CommunitySeparator = "community";
             });
         }
 
@@ -53,22 +59,26 @@ namespace Codidact.WebUI.IntegrationTests
         [InlineData("https://bar.example.com/meta", "https://example.com/meta")]
         [InlineData("https://127.0.0.1", "https://example.com/")]
         [InlineData("https://example.com:8080", "https://example.com/")]
-        public async Task Test_WithoutSubdomainSchema(string input, string expected) {
-            await DoTest(input, expected, options => {
+        public async Task Test_WithoutSubdomainSchema(string original, string expected)
+        {
+            await DoTest(original, expected, options =>
+            {
                 options.UseSubdomainSchema = false;
                 options.Hostname = "example.com";
-                options.CommunitySeperator = "community";
+                options.CommunitySeparator = "community";
             });
         }
 
         [Theory]
         [InlineData("https://another.co.uk/comunidad/foo", "https://another.co.uk/community/foo")]
         [InlineData("https://another.co.uk/community/bar/meta", "https://another.co.uk/community/bar/meta")]
-        private async Task Test_CommunitySeperator(string input, string expected) {
-            await DoTest(input, expected, options => {
+        private async Task Test_CommunitySeperator(string original, string expected)
+        {
+            await DoTest(original, expected, options =>
+            {
                 options.UseSubdomainSchema = false;
                 options.Hostname = "another.co.uk";
-                options.CommunitySeperator = "comunidad";
+                options.CommunitySeparator = "comunidad";
             });
         }
     }

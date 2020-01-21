@@ -6,8 +6,10 @@ using Microsoft.Extensions.Options;
 
 using Codidact.Domain.Extensions;
 
-namespace Codidact.WebUI {
-    public class UrlSchemaMiddleware {
+namespace Codidact.WebUI
+{
+    public class UrlSchemaMiddleware
+    {
         private RequestDelegate _next;
 
         public UrlSchemaMiddleware(RequestDelegate next)
@@ -20,7 +22,8 @@ namespace Codidact.WebUI {
         {
             HttpRequest request = context.Request;
 
-            if(options.Value.UseSubdomainSchema) {
+            if (options.Value.UseSubdomainSchema)
+            {
                 RewritePathToSubdomainSchema(request, options);
             }
 
@@ -36,17 +39,21 @@ namespace Codidact.WebUI {
             IOptionsSnapshot<CodidactOptions> options)
         {
             // Deal with naughty users that type the IP address directly.
-            if(!request.Host.Host.EndsWith(options.Value.Hostname)) {
+            if (!request.Host.Host.EndsWith(options.Value.Hostname))
+            {
                 return;
             }
 
-            var subdomains = request.Host.Host.TrimSuffix(options.Value.Hostname);
-            var parts = subdomains.Split(".", StringSplitOptions.RemoveEmptyEntries);
+            string subdomains = request.Host.Host.TrimSuffix(options.Value.Hostname);
+            string[] parts = subdomains.Split(".", StringSplitOptions.RemoveEmptyEntries);
 
-            if(parts.Length == 1) {
+            if (parts.Length == 1)
+            {
                 request.Host = new HostString(options.Value.Hostname);
                 request.Path = $"/community/{parts[0]}{request.Path}";
-            } else if(parts.Length > 1) {
+            }
+            else if (parts.Length > 1)
+            {
                 request.Host = new HostString(options.Value.Hostname);
                 request.Path = "/error/404";
             }
@@ -55,8 +62,9 @@ namespace Codidact.WebUI {
         private void RewriteCommunitySeperator(HttpRequest request,
             IOptionsSnapshot<CodidactOptions> options)
         {
-            if(request.Path.StartsWithSegments($"/{options.Value.CommunitySeperator}")) {
-                request.Path = "/community" + request.Path.ToString().Substring($"/{options.Value.CommunitySeperator}".Length);
+            if (request.Path.StartsWithSegments($"/{options.Value.CommunitySeparator}"))
+            {
+                request.Path = "/community" + request.Path.ToString().Substring($"/{options.Value.CommunitySeparator}".Length);
             }
         }
     }
