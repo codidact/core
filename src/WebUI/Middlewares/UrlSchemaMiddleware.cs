@@ -6,7 +6,7 @@ using Microsoft.Extensions.Options;
 
 using Codidact.Domain.Extensions;
 
-namespace Codidact.WebUI
+namespace Codidact.WebUI.Middlewares
 {
     public class UrlSchemaMiddleware
     {

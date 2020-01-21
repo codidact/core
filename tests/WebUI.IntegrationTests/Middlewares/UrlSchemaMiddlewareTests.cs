@@ -10,7 +10,9 @@ using Microsoft.Extensions.DependencyInjection;
 
 using Xunit;
 
-namespace Codidact.WebUI.IntegrationTests
+using Codidact.WebUI.Middlewares;
+
+namespace Codidact.WebUI.IntegrationTests.Middlewares
 {
     public class UrlSchemaMiddlewareTests
     {
