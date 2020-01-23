@@ -83,6 +83,9 @@ ipch/
 *.vspx
 *.sap
 
+# Folder Profiler
+*.DS_Store
+
 # TFS 2012 Local Workspace
 $tf/
 

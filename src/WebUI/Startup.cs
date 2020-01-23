@@ -1,9 +1,13 @@
 using Codidact.Application;
+using Codidact.Infrastructure;
+using Codidact.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 
 namespace Codidact.WebUI
 {
@@ -20,13 +24,15 @@ namespace Codidact.WebUI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddApplication();
+            services.AddInfrastructure(Configuration);
             services
                 .AddControllersWithViews()
                 .AddRazorRuntimeCompilation();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        // A change in .NET Core 3.0 prevents injection of ILogger anywhere but the Configure method.
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILogger<Startup> logger)
         {
             if (env.IsDevelopment())
             {
@@ -51,6 +57,29 @@ namespace Codidact.WebUI
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            ApplyDatabaseMigrations(app, logger);
+        }
+
+        // Applies database migrations; won't cause any changes if the database is up-to-date.
+        private void ApplyDatabaseMigrations(IApplicationBuilder app, ILogger logger)
+        {
+            using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
+            {
+                using (var context = serviceScope.ServiceProvider.GetService<ApplicationDbContext>())
+                {
+                    try
+                    {
+                        context.Database.Migrate();
+                    }
+                    catch (System.Exception ex)
+                    {
+                        logger.LogError("Unable to apply database migrations. Check the connection string in your " +
+                            "appsettings file.");
+                        throw ex;
+                    }
+                }
+            }
         }
     }
 }
