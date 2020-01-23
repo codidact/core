@@ -31,7 +31,7 @@ namespace Codidact.WebUI
                 .AddControllersWithViews()
                 .AddRazorRuntimeCompilation();
 
-            services.Configure<CodidactOptions>(options => Configuration.GetSection("Codidact").Bind(options));
+            services.Configure<CodidactOptions>(Configuration.GetSection("Codidact"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
