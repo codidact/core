@@ -50,11 +50,8 @@ Alternatively, if you don't want to run Visual Studio just to start the project,
 (so that `WebUI.csproj` is in your working directory) and issue the command `dotnet run`.
 
 #### Linux
-1. [Download .NET Core SDK](https://docs.microsoft.com/en-us/dotnet/core/install/linux-package-manager-ubuntu-1904). Specifically,
-   from this page, follow the sections labeled "Register Microsoft Key and feed" and "Install the .NET Core SDK"
-2. Once the installation is complete, clone/download the repository and extract it somewhere.
-3. You can run Codidact by navigating to the src/WebUI folder (so that `WebUI.csproj` is in your working directory) and issuing
-   the command `dotnet run`.
+
+[You can find instructions here][1].
 
 #### Database Setup
 These instructions assume that you don't have a PostgreSQL DB server installed at the moment
@@ -82,3 +79,5 @@ and would like to run one locally. These instructions may change heavily dependi
 ## Contributions
 Very welcome! Please read our [contributing guidelines](https://github.com/codidact/core/blob/develop/CONTRIBUTING.md) before
 you start writing code.
+
+  [1]: docs/linux-instructions.md
