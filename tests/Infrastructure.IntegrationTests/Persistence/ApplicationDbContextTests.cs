@@ -7,7 +7,7 @@ using Codidact.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Xunit;
 
-namespace Infrastructure.IntegrationTests.Persistence
+namespace Codidact.Infrastructure.IntegrationTests.Persistence
 {
     public class ApplicationDbContextTests
     {
