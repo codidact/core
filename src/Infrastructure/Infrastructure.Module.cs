@@ -1,4 +1,5 @@
 ﻿using Codidact.Application.Common.Interfaces;
+using Codidact.Infrastructure.Identity;
 using Codidact.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -24,6 +25,8 @@ namespace Codidact.Infrastructure
                    b => b.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName)));
 
             services.AddScoped<IApplicationDbContext>(provider => provider.GetService<ApplicationDbContext>());
+
+            services.AddScoped<ICurrentUserService, CurrentUserService>();
 
             return services;
         }

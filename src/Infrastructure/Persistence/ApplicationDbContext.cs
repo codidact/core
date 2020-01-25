@@ -16,8 +16,15 @@ namespace Codidact.Infrastructure.Persistence
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplicationDbContext
     {
-        public ApplicationDbContext(DbContextOptions options)
-            : base(options) { }
+        private readonly ICurrentUserService _currentUserService;
+
+        public ApplicationDbContext(
+                DbContextOptions<ApplicationDbContext> options,
+                ICurrentUserService currentUserService
+            ) : base(options)
+        {
+            _currentUserService = currentUserService;
+        }
 
         public DbSet<Member> Members { get; set; }
         public DbSet<Community> Communities { get; set; }
@@ -32,13 +39,11 @@ namespace Codidact.Infrastructure.Persistence
                 {
                     case EntityState.Added:
                         entry.Entity.CreateDateAt = DateTime.UtcNow;
-                        // TODO: Once an identity service is added 
-                        // set the current Member id to CreatedByMemberId
+                        entry.Entity.CreatedByMemberId = _currentUserService.GetMemberId();
                         break;
                     case EntityState.Modified:
                         entry.Entity.LastModifiedAt = DateTime.UtcNow;
-                        // TODO: Once an identity service is added
-                        // set the current Member id to LastModifiedByMemberId
+                        entry.Entity.LastModifiedByMemberId = _currentUserService.GetMemberId();
                         break;
                     case EntityState.Deleted:
                         if (entry.Entity is ISoftDeletable deletable)
@@ -48,8 +53,7 @@ namespace Codidact.Infrastructure.Persistence
 
                             deletable.DeletedAt = DateTime.UtcNow;
                             deletable.IsDeleted = true;
-                            // TODO: Once an identity service is added
-                            // set the current Member id to DeletedByMemberId
+                            deletable.DeletedByMemberId = _currentUserService.GetMemberId();
                         }
                         break;
                 }

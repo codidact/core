@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Codidact.Domain.Entities;
+using Codidact.Infrastructure.IntegrationTests;
 using Codidact.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Xunit;
@@ -14,7 +15,7 @@ namespace Infrastructure.IntegrationTests.Persistence
             = new ApplicationDbContext(
                 new DbContextOptionsBuilder<ApplicationDbContext>()
                 .UseInMemoryDatabase(Guid.NewGuid().ToString())
-                .Options
+                .Options, new CurrentUserServiceMock()
                 );
 
         [Fact]
