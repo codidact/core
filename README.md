@@ -1,5 +1,20 @@
-# Codidact/Core
-The core Codidact Q&amp;A software implementation.
+<!-- Begin header -->
+
+<p align="center">
+   <img src="https://raw.githubusercontent.com/codidact/landing-page/master/source-assets/img/logo-codidact.png" width="500">
+</p>
+
+<h3 align="center">
+   <a href="https://codidact.org">The core Codidact Q&amp;A software implementation.</a>
+</h3>
+
+<p align="center">
+   <a href="https://codidact.org/forum/"><img src="https://img.shields.io/badge/forum-discourse-brightgreen" alt="Website"></a>
+   <a href="https://discord.gg/7jf8UzS/"><img src="https://img.shields.io/badge/chat-on%20discord-7289da.svg" alt="Chat"></a>
+   <a href="https://github.com/codidact/core/blob/develop/CONTRIBUTING.md"><img src="https://img.shields.io/badge/contributions-welcome-brightgreen.svg" alt="Contributing"></a>
+</p>
+
+<!-- End header; begin body -->
 
 ## Huh?
 Codidact is community-driven Q&A software: created, maintained, used, and run by the community, for the community. There's no
