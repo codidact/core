@@ -86,7 +86,10 @@ namespace Codidact.WebUI
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
 
-            ApplyDatabaseMigrations(app, logger);
+            if (env.EnvironmentName != "Test")
+            {
+                ApplyDatabaseMigrations(app, logger);
+            }
         }
 
         // Applies database migrations; won't cause any changes if the database is up-to-date.
