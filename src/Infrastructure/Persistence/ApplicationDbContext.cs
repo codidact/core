@@ -4,6 +4,8 @@ using Codidact.Domain.Common.Interfaces;
 using Codidact.Domain.Entities;
 using Codidact.Domain.Extensions;
 using Codidact.Infrastructure.Identity;
+using Codidact.Infrastructure.Persistence.Configuration;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -14,7 +16,7 @@ using System.Threading.Tasks;
 
 namespace Codidact.Infrastructure.Persistence
 {
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplicationDbContext
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser, IdentityRole<long>, long>, IApplicationDbContext
     {
         private readonly ICurrentUserService _currentUserService;
 
@@ -73,6 +75,8 @@ namespace Codidact.Infrastructure.Persistence
             SetGlobalQueryFiltersToSoftDeletableEntities(modelBuilder);
 
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.ConfigureIdentity();
         }
 
         private static void SetGlobalQueryFiltersToSoftDeletableEntities(ModelBuilder modelBuilder)

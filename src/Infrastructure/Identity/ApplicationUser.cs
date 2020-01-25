@@ -6,7 +6,7 @@ namespace Codidact.Infrastructure.Identity
     /// <summary>
     /// Application user for identity management.
     /// </summary>
-    public class ApplicationUser : IdentityUser
+    public class ApplicationUser : IdentityUser<long>
     {
         /// <summary>
         /// Connected member Id.
