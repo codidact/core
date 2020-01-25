@@ -140,4 +140,5 @@ namespace Codidact.Infrastructure.IntegrationTests.Persistence
             Assert.NotNull(_sutContext.Members.FirstOrDefault(mem => mem.Id == member.Id));
         }
     }
+
 }

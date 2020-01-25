@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using IdentityServer4.Stores;
 
-namespace Codidact.Auth.Quickstart.UI
+namespace Codidact.Auth.Common
 {
     public static class Extensions
     {
