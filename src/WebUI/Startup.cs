@@ -27,6 +27,8 @@ namespace Codidact.WebUI
             services.AddApplication();
             services.AddInfrastructure(Configuration);
 
+            services.AddHttpContextAccessor();
+
             services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = "cookie";
@@ -74,6 +76,7 @@ namespace Codidact.WebUI
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

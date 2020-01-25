@@ -1,12 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Codidact.Application.Common.Interfaces
+﻿namespace Codidact.Application.Common.Interfaces
 {
     public interface ICurrentUserService
     {
-        public string GetUserId();
+        /// <summary>
+        /// Retreives the member id of the current user.
+        /// </summary>
         public long GetMemberId();
+
+        /// <summary>
+        /// Retreives the user id of the current user.
+        /// </summary>
+        public string GetUserId();
     }
 }

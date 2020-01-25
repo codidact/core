@@ -10,7 +10,7 @@ namespace Codidact.Infrastructure
     /// <summary>
     /// Dependency Injection module for the infrastructure
     /// </summary>
-    public static class InfrastructureModule
+    public static class DependencyInjection
     {
         /// <summary>
         /// Adds all of the application services into the service collection

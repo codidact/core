@@ -16,6 +16,5 @@ namespace Codidact.Application
         {
             return services;
         }
-
     }
 }
