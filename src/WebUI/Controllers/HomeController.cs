@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Codidact.WebUI.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Codidact.WebUI.Controllers
 {
@@ -29,5 +30,11 @@ namespace Codidact.WebUI.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+        [Authorize]
+        public IActionResult Login() => View("Index");
+
+        public IActionResult Logout() => SignOut("cookie", "oidc");
+
     }
 }
