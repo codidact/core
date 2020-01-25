@@ -8,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace Codidact.WebUI
 {
@@ -25,6 +26,30 @@ namespace Codidact.WebUI
         {
             services.AddApplication();
             services.AddInfrastructure(Configuration);
+
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = "cookie";
+                options.DefaultSignInScheme = "cookie";
+                options.DefaultChallengeScheme = "oidc";
+            })
+            .AddCookie("cookie")
+            .AddOpenIdConnect("oidc", options =>
+            {
+                options.Authority = "http://localhost:5000";
+                options.RequireHttpsMetadata = false; // dev only
+                options.ClientId = "codidact_client";
+                options.ClientSecret = "acf2ec6fb01a4b698ba240c2b10a0243";
+                options.ResponseType = "code";
+                options.ResponseMode = "form_post";
+                options.CallbackPath = "/signin-oidc";
+
+                // Enable PKCE (authorization code flow only)
+                options.UsePkce = true;
+            });
+
+            JwtSecurityTokenHandler.DefaultMapInboundClaims = false;
+
             services
                 .AddControllersWithViews()
                 .AddRazorRuntimeCompilation();

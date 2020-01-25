@@ -3,6 +3,8 @@ using Codidact.Domain.Common;
 using Codidact.Domain.Common.Interfaces;
 using Codidact.Domain.Entities;
 using Codidact.Domain.Extensions;
+using Codidact.Infrastructure.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq.Expressions;
@@ -12,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace Codidact.Infrastructure.Persistence
 {
-    public class ApplicationDbContext : DbContext, IApplicationDbContext
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplicationDbContext
     {
         public ApplicationDbContext(DbContextOptions options)
             : base(options) { }
