@@ -20,7 +20,6 @@ namespace Codidact.Infrastructure.Identity
         public string GetUserId()
         {
             return _httpContextAccessor.HttpContext?.User?.FindFirstValue(ClaimTypes.NameIdentifier);
-
         }
 
         /// <summary>
