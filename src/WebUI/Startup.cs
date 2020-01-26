@@ -1,6 +1,7 @@
 using Codidact.Application;
 using Codidact.Infrastructure;
 using Codidact.Infrastructure.Persistence;
+using Codidact.WebUI.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -38,13 +39,14 @@ namespace Codidact.WebUI
             .AddCookie("cookie")
             .AddOpenIdConnect("oidc", options =>
             {
-                options.Authority = "http://localhost:5000";
-                options.RequireHttpsMetadata = false; // dev only
-                options.ClientId = "codidact_client";
-                options.ClientSecret = "acf2ec6fb01a4b698ba240c2b10a0243";
-                options.ResponseType = "code";
-                options.ResponseMode = "form_post";
-                options.CallbackPath = "/signin-oidc";
+                var identityOptions = Configuration.GetSection("Identity").Get<IdentityOptions>();
+                options.Authority = identityOptions.Authority;
+                options.RequireHttpsMetadata = identityOptions.RequireHttpsMetadata;
+                options.ClientId = identityOptions.ClientId;
+                options.ClientSecret = identityOptions.ClientSecret;
+                options.ResponseType = identityOptions.ResponseType;
+                options.ResponseMode = identityOptions.ResponseMode;
+                options.CallbackPath = identityOptions.CallbackPath;
 
                 // Enable PKCE (authorization code flow only)
                 options.UsePkce = true;
