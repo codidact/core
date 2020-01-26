@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -21,12 +22,15 @@ namespace Codidact.Auth
             };
             using var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope();
             using var userManager = serviceScope.ServiceProvider.GetService<UserManager<ApplicationUser>>();
-            foreach (var entity in toCreateApplicationUsers)
+            foreach (var user in toCreateApplicationUsers)
             {
-                var exists = await userManager.FindByNameAsync(entity.UserName);
+                var exists = await userManager.FindByNameAsync(user.UserName);
                 if (exists == null)
                 {
-                    await userManager.CreateAsync(entity, "Aa123456!");
+
+                    var randomPassword = Guid.NewGuid().ToString("d").Replace("-", string.Empty);
+                    Console.WriteLine($"User created :{user.UserName}. Password: ${randomPassword}. Please change your password as soon as possible.");
+                    await userManager.CreateAsync(user, randomPassword);
                 }
             }
         }
