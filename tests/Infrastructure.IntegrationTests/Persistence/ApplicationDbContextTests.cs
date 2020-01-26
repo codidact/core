@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Codidact.Domain.Entities;
-using Codidact.Infrastructure.IntegrationTests;
 using Codidact.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Xunit;
@@ -11,12 +10,16 @@ namespace Codidact.Infrastructure.IntegrationTests.Persistence
 {
     public class ApplicationDbContextTests
     {
-        private readonly ApplicationDbContext _sutContext
-            = new ApplicationDbContext(
-                new DbContextOptionsBuilder<ApplicationDbContext>()
+        private readonly ApplicationDbContext _sutContext;
+
+        public ApplicationDbContextTests()
+        {
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
                 .UseInMemoryDatabase(Guid.NewGuid().ToString())
-                .Options, new CurrentUserServiceMock()
-                );
+                .Options;
+            var currentUserService = new CurrentUserServiceMock();
+            _sutContext = new ApplicationDbContext(options, currentUserService);
+        }
 
         [Fact]
         public async Task SaveChangesShouldAssignAnAutoIncrementId()

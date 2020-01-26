@@ -49,8 +49,7 @@ namespace Codidact.Auth
                 .AddInMemoryApiResources(Configuration.GetSection("IdentityServer:ApiResources"))
                 // this adds the operational data from DB (codes, tokens, consents)
                 .AddAspNetIdentity<ApplicationUser>()
-                .AddProfileService<CustomProfileService>()
-                ;
+                .AddProfileService<CustomProfileService>();
 
             services.AddAuthentication();
         }
