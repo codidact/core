@@ -15,13 +15,6 @@ namespace Codidact.Infrastructure.Persistence.Configuration
                 .HasMaxLength(100)
                 .IsRequired();
 
-            builder.Property(t => t.Email)
-                .HasMaxLength(320)
-                .IsRequired();
-
-            builder.HasIndex(t => t.Email)
-                .IsUnique(true);
-
             builder.Property(t => t.IsFromStackExchange)
                 .HasDefaultValue(false);
 

@@ -3,15 +3,17 @@ using System;
 using Codidact.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Codidact.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200126025354_MemberRemoveEmail")]
+    partial class MemberRemoveEmail
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -227,11 +229,9 @@ namespace Codidact.Infrastructure.Persistence.Migrations
 
             modelBuilder.Entity("Codidact.Infrastructure.Identity.ApplicationUser", b =>
                 {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
+                    b.Property<string>("Id")
                         .HasColumnName("id")
-                        .HasColumnType("bigint")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn);
+                        .HasColumnType("text");
 
                     b.Property<int>("AccessFailedCount")
                         .HasColumnName("access_failed_count")
@@ -304,16 +304,14 @@ namespace Codidact.Infrastructure.Persistence.Migrations
                         .IsUnique()
                         .HasName("UserNameIndex");
 
-                    b.ToTable("users");
+                    b.ToTable("User");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<long>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
+                    b.Property<string>("Id")
                         .HasColumnName("id")
-                        .HasColumnType("bigint")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn);
+                        .HasColumnType("text");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
@@ -337,10 +335,10 @@ namespace Codidact.Infrastructure.Persistence.Migrations
                         .IsUnique()
                         .HasName("RoleNameIndex");
 
-                    b.ToTable("roles");
+                    b.ToTable("Roles");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<long>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -356,19 +354,20 @@ namespace Codidact.Infrastructure.Persistence.Migrations
                         .HasColumnName("claim_value")
                         .HasColumnType("text");
 
-                    b.Property<long>("RoleId")
+                    b.Property<string>("RoleId")
+                        .IsRequired()
                         .HasColumnName("role_id")
-                        .HasColumnType("bigint");
+                        .HasColumnType("text");
 
                     b.HasKey("Id")
                         .HasName("pk_role_claims");
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("role_claims");
+                    b.ToTable("RoleClaims");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<long>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -384,19 +383,20 @@ namespace Codidact.Infrastructure.Persistence.Migrations
                         .HasColumnName("claim_value")
                         .HasColumnType("text");
 
-                    b.Property<long>("UserId")
+                    b.Property<string>("UserId")
+                        .IsRequired()
                         .HasColumnName("user_id")
-                        .HasColumnType("bigint");
+                        .HasColumnType("text");
 
                     b.HasKey("Id")
                         .HasName("pk_user_claims");
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("user_claims");
+                    b.ToTable("UserClaims");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<long>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
                     b.Property<string>("LoginProvider")
                         .HasColumnName("login_provider")
@@ -410,39 +410,40 @@ namespace Codidact.Infrastructure.Persistence.Migrations
                         .HasColumnName("provider_display_name")
                         .HasColumnType("text");
 
-                    b.Property<long>("UserId")
+                    b.Property<string>("UserId")
+                        .IsRequired()
                         .HasColumnName("user_id")
-                        .HasColumnType("bigint");
+                        .HasColumnType("text");
 
                     b.HasKey("LoginProvider", "ProviderKey");
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("user_logins");
+                    b.ToTable("UserLogins");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<long>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
                 {
-                    b.Property<long>("UserId")
+                    b.Property<string>("UserId")
                         .HasColumnName("user_id")
-                        .HasColumnType("bigint");
+                        .HasColumnType("text");
 
-                    b.Property<long>("RoleId")
+                    b.Property<string>("RoleId")
                         .HasColumnName("role_id")
-                        .HasColumnType("bigint");
+                        .HasColumnType("text");
 
                     b.HasKey("UserId", "RoleId");
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("user_roles");
+                    b.ToTable("UserRoles");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<long>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.Property<long>("UserId")
+                    b.Property<string>("UserId")
                         .HasColumnName("user_id")
-                        .HasColumnType("bigint");
+                        .HasColumnType("text");
 
                     b.Property<string>("LoginProvider")
                         .HasColumnName("login_provider")
@@ -458,7 +459,7 @@ namespace Codidact.Infrastructure.Persistence.Migrations
 
                     b.HasKey("UserId", "LoginProvider", "Name");
 
-                    b.ToTable("user_tokens");
+                    b.ToTable("UserTokens");
                 });
 
             modelBuilder.Entity("Codidact.Infrastructure.Identity.ApplicationUser", b =>
@@ -469,16 +470,16 @@ namespace Codidact.Infrastructure.Persistence.Migrations
                         .HasConstraintName("fk_users_members_member_id");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<long>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole<long>", null)
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<long>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
                     b.HasOne("Codidact.Infrastructure.Identity.ApplicationUser", null)
                         .WithMany()
@@ -487,7 +488,7 @@ namespace Codidact.Infrastructure.Persistence.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<long>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
                     b.HasOne("Codidact.Infrastructure.Identity.ApplicationUser", null)
                         .WithMany()
@@ -496,9 +497,9 @@ namespace Codidact.Infrastructure.Persistence.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<long>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole<long>", null)
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -511,7 +512,7 @@ namespace Codidact.Infrastructure.Persistence.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<long>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
                     b.HasOne("Codidact.Infrastructure.Identity.ApplicationUser", null)
                         .WithMany()

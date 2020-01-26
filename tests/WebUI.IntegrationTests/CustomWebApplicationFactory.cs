@@ -79,9 +79,9 @@ namespace Codidact.WebUI.IntegrationTests
 
             // Members
             context.Members.AddRange(
-                new Member { Id = 1, DisplayName = "John Doe", Email = "john@gmail.com" },
-                new Member { Id = 2, DisplayName = "Haneen Kayle", Email = "haneen@gmail.com" },
-                new Member { Id = 3, DisplayName = "Olaf Grechkovich", Email = "olaf@gmail.com" }
+                new Member { Id = 1, DisplayName = "John Doe" },
+                new Member { Id = 2, DisplayName = "Haneen Kayle" },
+                new Member { Id = 3, DisplayName = "Olaf Grechkovich" }
             );
 
             context.SaveChanges();

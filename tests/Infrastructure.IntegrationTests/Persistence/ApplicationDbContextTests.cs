@@ -25,7 +25,6 @@ namespace Codidact.Infrastructure.IntegrationTests.Persistence
             {
                 DisplayName = "John Doe",
                 Bio = "Not to be confused with John Galt",
-                Email = "john@gmail.com"
             };
             _sutContext.Add(member);
             await _sutContext.SaveChangesAsync();
@@ -40,7 +39,6 @@ namespace Codidact.Infrastructure.IntegrationTests.Persistence
             {
                 DisplayName = "John Doe",
                 Bio = "Not to be confused with John Galt",
-                Email = "john@gmail.com"
             };
             _sutContext.Add(member);
             _sutContext.SaveChanges();
@@ -65,7 +63,6 @@ namespace Codidact.Infrastructure.IntegrationTests.Persistence
             {
                 DisplayName = "John Doe",
                 Bio = "Not to be confused with John Galt",
-                Email = "john@gmail.com"
             };
             _sutContext.Add(member);
             await _sutContext.SaveChangesAsync();
@@ -80,7 +77,6 @@ namespace Codidact.Infrastructure.IntegrationTests.Persistence
             {
                 DisplayName = "John Doe",
                 Bio = "Not to be confused with John Galt",
-                Email = "john@gmail.com"
             };
             _sutContext.Add(member);
             await _sutContext.SaveChangesAsync();
@@ -102,7 +98,6 @@ namespace Codidact.Infrastructure.IntegrationTests.Persistence
             {
                 DisplayName = "John Doe",
                 Bio = "Not to be confused with John Galt",
-                Email = "john@gmail.com"
             };
             _sutContext.Add(member);
             await _sutContext.SaveChangesAsync();
@@ -123,7 +118,6 @@ namespace Codidact.Infrastructure.IntegrationTests.Persistence
             {
                 DisplayName = "John Doe",
                 Bio = "Not to be confused with John Galt",
-                Email = "john@gmail.com"
             };
             _sutContext.Add(member);
             await _sutContext.SaveChangesAsync();
