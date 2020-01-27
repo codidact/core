@@ -1,7 +1,7 @@
 <!-- Begin header -->
 
 <p align="center">
-   <img src="https://raw.githubusercontent.com/codidact/landing-page/master/source-assets/img/logo-codidact.png" width="500">
+   <img src="https://raw.githubusercontent.com/codidact/landing-page/master/source-assets/img/logo-codidact.png" width="500" alt="Codidact Logo">
 </p>
 
 <h3 align="center">
