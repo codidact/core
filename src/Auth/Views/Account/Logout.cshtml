@@ -1,4 +1,7 @@
-﻿@model LogoutViewModel
+﻿@using IdentityServer4.Extensions
+@using Codidact.Application.Common.Interfaces
+@inject ISettingsService settings
+@model LogoutViewModel
 
 <div class="logout-page">
     <div class="page-header">
@@ -7,9 +10,9 @@
 
     <div class="row">
         <div class="col-sm-6">
-            <p>Would you like to logout of IdentityServer?</p>
+            <p>Would you like to logout of @(settings.GetPlatformName())?</p>
             <form asp-action="Logout">
-                <input type="hidden" name="logoutId" value="@Model.LogoutId"  />
+                <input type="hidden" name="logoutId" value="@Model.LogoutId" />
                 <fieldset>
                     <div class="form-group">
                         <button class="btn btn-primary">Yes</button>
