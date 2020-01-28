@@ -44,11 +44,11 @@
         <div class="header-slide--separator"></div>
         @if (User.Identity.IsAuthenticated)
         {
-            <a class="header-slide--item" asp-area="" asp-controller="Home" asp-action="Login">Sign In</a>
+            <a class="header-slide--item" asp-area="" asp-controller="Home" asp-action="Logout">Sign Out</a>
         }
         else
         {
-            <a class="header-slide--item" asp-area="" asp-controller="Home" asp-action="Logout">Sign Out</a>
+            <a class="header-slide--item" asp-area="" asp-controller="Home" asp-action="Login">Sign In</a>
         }
         <a class="header-slide--item" href="https://github.com/codidact/core">on GitHub</a>
     </aside>
