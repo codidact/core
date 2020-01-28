@@ -19,6 +19,11 @@ namespace Codidact.WebUI.Controllers
             return View();
         }
 
+        public IActionResult Register()
+        {
+            return View();
+        }
+
         public IActionResult Privacy()
         {
             return View();

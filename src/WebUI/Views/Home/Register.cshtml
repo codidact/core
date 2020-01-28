@@ -1,0 +1,32 @@
+@{
+    ViewData["Title"] = "Create an Account";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<form method="post" action="/Home/Register">
+    <div>
+        <label class="form-element" id="label-email" for="input-email">Email</label>
+        <input type="email" class="form-element" id="input-email" name="email" autocomplete="off" required="required" aria-labelledby="label-email" />
+    </div>
+
+    <div>
+        <label class="form-element" id="label-username" for="input-username">Username</label>
+        <input type="text" class="form-element" id="input-username" name="username" autocomplete="off" required="required" aria-labelledby="label-username" />
+    </div>
+
+    <div>
+        <label class="form-element" id="label-password" for="input-password">Password</label>
+        <input type="password" class="form-element" id="input-password" name="password" required="required" aria-labelledby="label-password" />
+    </div>
+
+    <div>
+        <label class="form-element" id="label-confirm-password" for="input-confirm-password">Confirm Password</label>
+        <input type="password" class="form-element" id="input-confirm-password" name="confirm-password" required="required" aria-labelledby="label-confirm-password" />
+    </div>
+
+    <div>
+        <button type="submit" class="button is-filled" id="button-submit">Create Account</button>
+        <p><small id="info-submit">Already have an account?&nbsp;<a href="/Home/Login" class="is-not-underlined">Log in.</a></small></p>
+    </div>
+</form>
