@@ -9,7 +9,7 @@
 </h3>
 
 <p align="center">
-   <a href="https://codidact.org/forum/"><img src="https://img.shields.io/badge/forum-discourse-brightgreen" alt="Website"></a>
+   <a href="https://forum.codidact.org/"><img src="https://img.shields.io/badge/forum-discourse-brightgreen" alt="Website"></a>
    <a href="https://discord.gg/7jf8UzS/"><img src="https://img.shields.io/badge/chat-on%20discord-7289da.svg" alt="Chat"></a>
    <a href="https://github.com/codidact/core/blob/develop/CONTRIBUTING.md"><img src="https://img.shields.io/badge/contributions-welcome-brightgreen.svg" alt="Contributing"></a>
 </p>
