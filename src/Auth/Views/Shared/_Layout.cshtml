@@ -1,4 +1,6 @@
 ﻿@using IdentityServer4.Extensions
+@using Codidact.Application.Common.Interfaces
+@inject ISettingsService settings
 @{
     string name = null;
     if (!true.Equals(ViewData["signed-out"]))
@@ -12,7 +14,7 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>IdentityServer4</title>
+    <title>@settings.GetPlatformName()</title>
     <link rel="icon" type="image/x-icon" href="~/favicon.ico" />
     <link rel="shortcut icon" type="image/x-icon" href="~/favicon.ico" />
     <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.css" />
@@ -31,7 +33,7 @@
                 <a href="~/">
                     <span class="navbar-brand">
                         <img src="~/icon.png" class="icon-banner">
-                        Codidact
+                        @settings.GetPlatformName()
                     </span>
                 </a>
             </div>

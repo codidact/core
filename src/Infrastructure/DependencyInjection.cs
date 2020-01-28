@@ -1,6 +1,7 @@
 ﻿using Codidact.Application.Common.Interfaces;
 using Codidact.Infrastructure.Identity;
 using Codidact.Infrastructure.Persistence;
+using Codidact.Infrastructure.Settings;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -28,6 +29,7 @@ namespace Codidact.Infrastructure
 
             services.AddScoped<ICurrentUserService, CurrentUserService>();
 
+            services.AddScoped<ISettingsService, SettingsService>();
             return services;
         }
     }

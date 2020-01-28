@@ -1,6 +1,9 @@
-﻿@model LoggedOutViewModel
+﻿@using IdentityServer4.Extensions
+@using Codidact.Application.Common.Interfaces
+@inject ISettingsService settings
+@model LoggedOutViewModel
 
-@{ 
+@{
     // set this so the layout rendering sees an anonymous user
     ViewData["signed-out"] = true;
 }
@@ -15,7 +18,7 @@
     {
         <div>
             Click <a class="PostLogoutRedirectUri" href="@Model.PostLogoutRedirectUri">here</a> to return to the
-            <span>@Model.ClientName</span> application.
+            <span>@settings.GetPlatformName()</span> application.
         </div>
     }
 </div>
