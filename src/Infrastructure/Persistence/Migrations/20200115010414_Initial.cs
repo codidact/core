@@ -1,4 +1,5 @@
 ﻿using System;
+using Codidact.Domain.Enums;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -17,7 +18,7 @@ namespace Codidact.Infrastructure.Persistence.Migrations
                     name = table.Column<string>(maxLength: 40, nullable: false),
                     tagline = table.Column<string>(maxLength: 100, nullable: false),
                     url = table.Column<string>(maxLength: 255, nullable: false),
-                    status = table.Column<int>(nullable: false, defaultValue: 1)
+                    status = table.Column<int>(nullable: false, defaultValue: CommunityStatus.Active)
                 },
                 constraints: table =>
                 {
