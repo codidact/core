@@ -6,7 +6,11 @@
 
 <form method="post" action="/Home/Register">
     <div>
-        <label class="form-element" id="label-email" for="input-email">Email</label>
+        <div class="notice" id="notice-email-privacy-information" style="display: none; z-index: 1;">
+            <p>Your email will be used solely for internal purposes, such as account recovery and important communication. We do not share this information with any third parties.</p>
+        </div>
+        
+        <label class="form-element" id="label-email" for="input-email">Email<button type="button" class="button is-icon-only-button" id="button-email-info" onclick="toggleViewEmailPrivacyInfo()">&#63;</button></label>
         <input type="email" class="form-element" id="input-email" name="email" autocomplete="off" required="required" aria-labelledby="label-email" />
     </div>
 

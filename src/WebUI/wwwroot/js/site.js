@@ -23,3 +23,18 @@ for (let i = 0; i < headerSlideTriggers.length; i++) {
         e.preventDefault();
     });
 }
+
+/**
+ * toggleViewEmailPrivacyInfo
+ * 
+ * This function is called from /Home/Register by
+ * Register.cshtml. It displays/hides the email privacy
+ * information dialog by manipulating the notice element's
+ * display style attribute.
+ * 
+ * @author Jose Fernando Lopez Fernandez <jflopezfernandez@gmail.com>
+ */
+const toggleViewEmailPrivacyInfo = () => {
+    const widget = document.getElementById("notice-email-privacy-information");
+    widget.style.display = (widget.style.display === 'none') ? 'block' : 'none';
+};
