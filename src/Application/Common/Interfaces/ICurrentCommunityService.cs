@@ -4,6 +4,6 @@ namespace Codidact.Application.Common.Interfaces
 {
     public interface ICurrentCommunityService
     {
-        public Task<long> GetCurrentCommunityIdAsync();
+        public Task<long?> GetCurrentCommunityIdAsync();
     }
 }

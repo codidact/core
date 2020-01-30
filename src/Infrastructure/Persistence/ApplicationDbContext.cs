@@ -41,7 +41,8 @@ namespace Codidact.Infrastructure.Persistence
                         // set the current Member id to CreatedByMemberId
                         if (entry.Entity is ICommunityable communityable)
                         {
-                            communityable.CommunityId = await _currentCommunityService.GetCurrentCommunityIdAsync();
+                            var communityId = await _currentCommunityService.GetCurrentCommunityIdAsync();
+                            communityable.CommunityId = communityId.Value;
                         }
                         break;
                     case EntityState.Modified:
@@ -102,19 +103,22 @@ namespace Codidact.Infrastructure.Persistence
 
         private async Task SetGlobalQueryFiltersToCommunityEntities(ModelBuilder modelBuilder)
         {
-            var communityId = await _currentCommunityService.GetCurrentCommunityIdAsync();
-            foreach (var entity in modelBuilder.Model.GetEntityTypes())
+            long? communityId = await _currentCommunityService.GetCurrentCommunityIdAsync();
+            if (communityId.HasValue)
             {
-                if (typeof(ICommunityable).IsAssignableFrom(entity.ClrType))
+                foreach (var entity in modelBuilder.Model.GetEntityTypes())
                 {
-                    var isCommunityProperty = entity.FindProperty(nameof(ICommunityable.CommunityId));
-                    var parameter = Expression.Parameter(entity.ClrType, "p");
-                    var equalExpression = Expression.Equal(
-                            Expression.Property(parameter, isCommunityProperty.PropertyInfo),
-                            Expression.Constant(communityId)
-                        );
-                    var filter = Expression.Lambda(equalExpression, parameter);
-                    entity.SetQueryFilter(filter);
+                    if (typeof(ICommunityable).IsAssignableFrom(entity.ClrType))
+                    {
+                        var isCommunityProperty = entity.FindProperty(nameof(ICommunityable.CommunityId));
+                        var parameter = Expression.Parameter(entity.ClrType, "p");
+                        var equalExpression = Expression.Equal(
+                                Expression.Property(parameter, isCommunityProperty.PropertyInfo),
+                                Expression.Constant(communityId.Value)
+                            );
+                        var filter = Expression.Lambda(equalExpression, parameter);
+                        entity.SetQueryFilter(filter);
+                    }
                 }
             }
         }

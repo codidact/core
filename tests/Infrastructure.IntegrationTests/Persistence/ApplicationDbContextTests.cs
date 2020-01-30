@@ -144,7 +144,7 @@ namespace Infrastructure.IntegrationTests.Persistence
         {
             var member = new MemberCommunity
             {
-                CommunityId = TestCurrentCommunityService.CommunityId,
+                CommunityId = TestCurrentCommunityService.CommunityId.Value,
                 DisplayName = "John Doe",
                 Bio = "Not to be confused with John Galt",
             };
@@ -159,7 +159,7 @@ namespace Infrastructure.IntegrationTests.Persistence
         {
             var member = new MemberCommunity
             {
-                CommunityId = TestCurrentCommunityService.CommunityId,
+                CommunityId = TestCurrentCommunityService.CommunityId.Value,
                 DisplayName = "John Doe",
                 Bio = "Not to be confused with John Galt",
             };
@@ -167,7 +167,7 @@ namespace Infrastructure.IntegrationTests.Persistence
 
             var secondMember = new MemberCommunity
             {
-                CommunityId = TestCurrentCommunityService.CommunityId + 1,
+                CommunityId = TestCurrentCommunityService.CommunityId.Value + 1,
                 DisplayName = "John Doe",
                 Bio = "Not to be confused with John Galt",
             };

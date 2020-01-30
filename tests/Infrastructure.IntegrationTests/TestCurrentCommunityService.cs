@@ -8,9 +8,9 @@ namespace Infrastructure.IntegrationTests
     /// </summary>
     public class TestCurrentCommunityService : ICurrentCommunityService
     {
-        public static long CommunityId = 1;
+        public static long? CommunityId = 1;
 
-        public Task<long> GetCurrentCommunityIdAsync()
+        public Task<long?> GetCurrentCommunityIdAsync()
         {
             return Task.FromResult(CommunityId);
         }
