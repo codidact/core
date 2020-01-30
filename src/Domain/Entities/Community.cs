@@ -31,6 +31,7 @@ namespace Codidact.Domain.Entities
         /// The status of the community
         /// </summary>
         public CommunityStatus Status { get; set; }
+
         /// <summary>
         /// Date at which the entity has been deleted
         /// </summary>

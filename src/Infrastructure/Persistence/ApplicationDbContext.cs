@@ -14,15 +14,22 @@ namespace Codidact.Infrastructure.Persistence
 {
     public class ApplicationDbContext : DbContext, IApplicationDbContext
     {
-        public ApplicationDbContext(DbContextOptions options)
-            : base(options) { }
+        private readonly ICurrentCommunityService _currentCommunityService;
+        public ApplicationDbContext(DbContextOptions options,
+            ICurrentCommunityService currentCommunityService)
+            : base(options)
+        {
+            _currentCommunityService = currentCommunityService;
+        }
 
         public DbSet<Member> Members { get; set; }
+        public DbSet<MemberCommunity> MemberCommunities { get; set; }
         public DbSet<Community> Communities { get; set; }
         public DbSet<TrustLevel> TrustLevels { get; set; }
+        public DbSet<TrustLevelCommunity> TrustLevelCommunities { get; set; }
 
 
-        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
+        public async override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
         {
             foreach (var entry in ChangeTracker.Entries<AuditableEntity>())
             {
@@ -32,6 +39,10 @@ namespace Codidact.Infrastructure.Persistence
                         entry.Entity.CreateDateAt = DateTime.UtcNow;
                         // TODO: Once an identity service is added 
                         // set the current Member id to CreatedByMemberId
+                        if (entry.Entity is ICommunityable communityable)
+                        {
+                            communityable.CommunityId = await _currentCommunityService.GetCurrentCommunityIdAsync();
+                        }
                         break;
                     case EntityState.Modified:
                         entry.Entity.LastModifiedAt = DateTime.UtcNow;
@@ -53,10 +64,10 @@ namespace Codidact.Infrastructure.Persistence
                 }
             }
 
-            return base.SaveChangesAsync(cancellationToken);
+            return await base.SaveChangesAsync(cancellationToken);
         }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        protected async override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 
@@ -65,6 +76,8 @@ namespace Codidact.Infrastructure.Persistence
             RenameEntitiesToSnakeCase(modelBuilder);
 
             SetGlobalQueryFiltersToSoftDeletableEntities(modelBuilder);
+
+            await SetGlobalQueryFiltersToCommunityEntities(modelBuilder);
 
             base.OnModelCreating(modelBuilder);
         }
@@ -80,6 +93,25 @@ namespace Codidact.Infrastructure.Persistence
                     var equalExpression = Expression.Equal(
                             Expression.Property(parameter, isDeletableProperty.PropertyInfo),
                             Expression.Constant(false)
+                        );
+                    var filter = Expression.Lambda(equalExpression, parameter);
+                    entity.SetQueryFilter(filter);
+                }
+            }
+        }
+
+        private async Task SetGlobalQueryFiltersToCommunityEntities(ModelBuilder modelBuilder)
+        {
+            var communityId = await _currentCommunityService.GetCurrentCommunityIdAsync();
+            foreach (var entity in modelBuilder.Model.GetEntityTypes())
+            {
+                if (typeof(ICommunityable).IsAssignableFrom(entity.ClrType))
+                {
+                    var isCommunityProperty = entity.FindProperty(nameof(ICommunityable.CommunityId));
+                    var parameter = Expression.Parameter(entity.ClrType, "p");
+                    var equalExpression = Expression.Equal(
+                            Expression.Property(parameter, isCommunityProperty.PropertyInfo),
+                            Expression.Constant(communityId)
                         );
                     var filter = Expression.Lambda(equalExpression, parameter);
                     entity.SetQueryFilter(filter);

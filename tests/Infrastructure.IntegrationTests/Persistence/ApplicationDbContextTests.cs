@@ -14,8 +14,9 @@ namespace Infrastructure.IntegrationTests.Persistence
             = new ApplicationDbContext(
                 new DbContextOptionsBuilder<ApplicationDbContext>()
                 .UseInMemoryDatabase(Guid.NewGuid().ToString())
-                .Options
-                );
+                .Options,
+                new TestCurrentCommunityService()
+                ).Seed();
 
         [Fact]
         public async Task SaveChangesShouldAssignAnAutoIncrementId()
@@ -114,7 +115,6 @@ namespace Infrastructure.IntegrationTests.Persistence
             Assert.Equal(member.DeletedAt.Value.Date, DateTime.UtcNow.Date);
         }
 
-
         [Fact]
         public async Task DeletedEntitiesDontShowUpInQuery()
         {
@@ -137,6 +137,46 @@ namespace Infrastructure.IntegrationTests.Persistence
             await _sutContext.SaveChangesAsync();
 
             Assert.NotNull(_sutContext.Members.FirstOrDefault(mem => mem.Id == member.Id));
+        }
+
+        [Fact]
+        public async Task CommunityIdGetsAddToAddedEntities()
+        {
+            var member = new MemberCommunity
+            {
+                CommunityId = TestCurrentCommunityService.CommunityId,
+                DisplayName = "John Doe",
+                Bio = "Not to be confused with John Galt",
+            };
+            _sutContext.Add(member);
+            await _sutContext.SaveChangesAsync();
+
+            Assert.True(member.CommunityId > 0);
+        }
+
+        [Fact]
+        public async Task CommunityIdGetsAddedToFilters()
+        {
+            var member = new MemberCommunity
+            {
+                CommunityId = TestCurrentCommunityService.CommunityId,
+                DisplayName = "John Doe",
+                Bio = "Not to be confused with John Galt",
+            };
+            _sutContext.Add(member);
+
+            var secondMember = new MemberCommunity
+            {
+                CommunityId = TestCurrentCommunityService.CommunityId + 1,
+                DisplayName = "John Doe",
+                Bio = "Not to be confused with John Galt",
+            };
+            _sutContext.Add(secondMember);
+            await _sutContext.SaveChangesAsync();
+
+            var foundMember = _sutContext.MemberCommunities.FirstOrDefault();
+
+            Assert.Equal(TestCurrentCommunityService.CommunityId, foundMember.CommunityId);
         }
     }
 }

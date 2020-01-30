@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Codidact.Application.Repositories;
+using Codidact.Application.Repositories.Communities;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Codidact.Application
 {
@@ -14,6 +16,7 @@ namespace Codidact.Application
         /// <returns></returns>
         public static IServiceCollection AddApplication(this IServiceCollection services)
         {
+            services.AddTransient<ICommunityRepository, CommunityRepository>();
             return services;
         }
 

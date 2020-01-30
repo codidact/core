@@ -1,8 +1,12 @@
 using Codidact.Application;
+using Codidact.Application.Common.Interfaces;
 using Codidact.Infrastructure;
 using Codidact.Infrastructure.Persistence;
+using Codidact.WebUI.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -25,9 +29,15 @@ namespace Codidact.WebUI
         {
             services.AddApplication();
             services.AddInfrastructure(Configuration);
+
             services
                 .AddControllersWithViews()
                 .AddRazorRuntimeCompilation();
+
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
+            
+            services.AddScoped<ICurrentCommunityService, CurrentCommunityService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -56,6 +66,11 @@ namespace Codidact.WebUI
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+                endpoints.MapControllerRoute(
+                    name: "community",
+                    pattern: "community/{community}/{controller=Home}/{action=Index}/{Id?}"
+                    );
             });
 
             ApplyDatabaseMigrations(app, logger);

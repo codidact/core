@@ -7,9 +7,11 @@ namespace Codidact.Application.Common.Interfaces
 {
     public interface IApplicationDbContext
     {
-        DbSet<Member> Members { get; set; }
-        DbSet<TrustLevel> TrustLevels { get; set; }
-        DbSet<Community> Communities { get; set; }
+        public DbSet<Member> Members { get; set; }
+        public DbSet<MemberCommunity> MemberCommunities { get; set; }
+        public DbSet<Community> Communities { get; set; }
+        public DbSet<TrustLevel> TrustLevels { get; set; }
+        public DbSet<TrustLevelCommunity> TrustLevelCommunities { get; set; }
 
         Task<int> SaveChangesAsync(CancellationToken cancellationToken);
     }
