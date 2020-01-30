@@ -20,6 +20,9 @@ namespace Codidact.WebUI.IntegrationTests.Controllers.Home
         [InlineData("/home")]
         [InlineData("/home/index")]
         [InlineData("/home/privacy")]
+        [InlineData("/community/meta/home/index")]
+        [InlineData("/community/meta/")]
+        [InlineData("/community/meta/home")]
         public async Task GetEndpointsReturnSuccessAndCorrectContentType(string url)
         {
             // Arrange
