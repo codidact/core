@@ -2,7 +2,7 @@
 using Codidact.Domain.Enums;
 using Codidact.Infrastructure.Persistence;
 
-namespace Infrastructure.IntegrationTests.Persistence
+namespace Codidact.Infrastructure.IntegrationTests.Persistence
 {
     public static class SeedInMemoryDatabase
     {

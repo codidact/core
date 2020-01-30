@@ -1,14 +1,14 @@
 ﻿using Codidact.Application.Repositories;
 using Codidact.Application.Repositories.Communities;
 using Codidact.Infrastructure.Persistence;
-using Infrastructure.IntegrationTests;
-using Infrastructure.IntegrationTests.Persistence;
+using Codidact.Infrastructure.IntegrationTests;
+using Codidact.Infrastructure.IntegrationTests.Persistence;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace Application.UnitTests.Repositories
+namespace Codidact.Application.UnitTests.Repositories
 {
     public class CommunityRepositoryTest
     {

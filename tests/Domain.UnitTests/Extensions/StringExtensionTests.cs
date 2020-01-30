@@ -1,7 +1,7 @@
 ﻿using Codidact.Domain.Extensions;
 using Xunit;
 
-namespace Domain.UnitTests.Extensions
+namespace Codidact.Domain.UnitTests.Extensions
 {
 
     public class StringExtensionsTest

@@ -1,7 +1,7 @@
 ﻿using Codidact.Application.Common.Interfaces;
 using System.Threading.Tasks;
 
-namespace Infrastructure.IntegrationTests
+namespace Codidact.Infrastructure.IntegrationTests
 {
     /// <summary>
     /// Mock for the current community service
