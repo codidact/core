@@ -36,7 +36,7 @@ namespace Codidact.WebUI
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
-            
+
             services.AddScoped<ICurrentCommunityService, CurrentCommunityService>();
         }
 
@@ -73,7 +73,10 @@ namespace Codidact.WebUI
                     );
             });
 
-            ApplyDatabaseMigrations(app, logger);
+            if (env.EnvironmentName != "Test")
+            {
+                ApplyDatabaseMigrations(app, logger);
+            }
         }
 
         // Applies database migrations; won't cause any changes if the database is up-to-date.

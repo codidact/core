@@ -1,6 +1,7 @@
 ﻿using Codidact.Application.Common.Interfaces;
 using Codidact.Domain.Entities;
 using Codidact.Infrastructure.Persistence;
+using Infrastructure.IntegrationTests;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
@@ -48,7 +49,8 @@ namespace Codidact.WebUI.IntegrationTests
                     // context (ApplicationDbContext).
                     using var scope = sp.CreateScope();
                     var scopedServices = scope.ServiceProvider;
-                    var context = scopedServices.GetRequiredService<ApplicationDbContext>();
+                    var options = scopedServices.GetRequiredService<DbContextOptions>();
+                    var context = new ApplicationDbContext(options, new TestCurrentCommunityService());
                     var logger = scopedServices.GetRequiredService<ILogger<CustomWebApplicationFactory<TStartup>>>();
 
                     // Ensure the database is created.

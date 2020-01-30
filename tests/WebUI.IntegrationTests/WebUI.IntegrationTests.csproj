@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\WebUI\WebUI.csproj" />
+    <ProjectReference Include="..\Infrastructure.IntegrationTests\Infrastructure.IntegrationTests.csproj" />
   </ItemGroup>
 
 </Project>
