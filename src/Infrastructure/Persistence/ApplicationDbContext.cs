@@ -40,7 +40,7 @@ namespace Codidact.Infrastructure.Persistence
                         entry.Entity.CreateDateAt = DateTime.UtcNow;
                         // TODO: Once an identity service is added 
                         // set the current Member id to CreatedByMemberId
-                        if (entry.Entity is ICommunityable communityable)
+                        if (entry.Entity is ICommunityScopable communityable)
                         {
                             var communityId = await _currentCommunityService
                                                         .GetCurrentCommunityIdAsync()
@@ -111,9 +111,9 @@ namespace Codidact.Infrastructure.Persistence
             {
                 foreach (var entity in modelBuilder.Model.GetEntityTypes())
                 {
-                    if (typeof(ICommunityable).IsAssignableFrom(entity.ClrType))
+                    if (typeof(ICommunityScopable).IsAssignableFrom(entity.ClrType))
                     {
-                        var isCommunityProperty = entity.FindProperty(nameof(ICommunityable.CommunityId));
+                        var isCommunityProperty = entity.FindProperty(nameof(ICommunityScopable.CommunityId));
                         var parameter = Expression.Parameter(entity.ClrType, "p");
                         var equalExpression = Expression.Equal(
                                 Expression.Property(parameter, isCommunityProperty.PropertyInfo),

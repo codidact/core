@@ -6,7 +6,7 @@ namespace Codidact.Domain.Entities
     /// <summary>
     /// Levels of trust for each member in a community
     /// </summary>
-    public class TrustLevelCommunity : AuditableEntity, ICommunityable
+    public class TrustLevelCommunity : AuditableEntity, ICommunityScopable
     {
         /// <summary>
         /// Auto Incremented Identification number

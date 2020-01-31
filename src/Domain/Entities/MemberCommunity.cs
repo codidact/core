@@ -7,7 +7,7 @@ namespace Codidact.Domain.Entities
     /// <summary>
     /// Member of the community
     /// </summary>
-    public class MemberCommunity : AuditableEntity, ICommunityable
+    public class MemberCommunity : AuditableEntity, ICommunityScopable
     {
         /// <summary>
         /// Auto Incremented Identification number
