@@ -33,7 +33,7 @@ namespace Codidact.WebUI.Services
 
             if (actionContextAcessor?.ActionContext == null)
             {
-                //ActionContext needs to exists in order to access community data
+                // ActionContext needs to exists in order to access community data
                 return null;
             }
 

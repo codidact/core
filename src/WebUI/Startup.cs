@@ -69,8 +69,7 @@ namespace Codidact.WebUI
 
                 endpoints.MapControllerRoute(
                     name: "community",
-                    pattern: "community/{community}/{controller=Home}/{action=Index}/{Id?}"
-                    );
+                    pattern: "community/{community}/{controller=Home}/{action=Index}/{Id?}");
             });
 
             if (env.EnvironmentName != "Test")

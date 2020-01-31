@@ -15,6 +15,7 @@ namespace Codidact.Infrastructure.Persistence
     public class ApplicationDbContext : DbContext, IApplicationDbContext
     {
         private readonly ICurrentCommunityService _currentCommunityService;
+
         public ApplicationDbContext(DbContextOptions options,
             ICurrentCommunityService currentCommunityService)
             : base(options)
@@ -41,7 +42,9 @@ namespace Codidact.Infrastructure.Persistence
                         // set the current Member id to CreatedByMemberId
                         if (entry.Entity is ICommunityable communityable)
                         {
-                            var communityId = await _currentCommunityService.GetCurrentCommunityIdAsync();
+                            var communityId = await _currentCommunityService
+                                                        .GetCurrentCommunityIdAsync()
+                                                        .ConfigureAwait(false);
                             communityable.CommunityId = communityId.Value;
                         }
                         break;

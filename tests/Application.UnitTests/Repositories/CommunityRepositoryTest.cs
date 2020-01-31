@@ -17,10 +17,9 @@ namespace Codidact.Application.UnitTests.Repositories
         public CommunityRepositoryTest()
         {
             var _sutContext = new ApplicationDbContext(
-              new DbContextOptionsBuilder<ApplicationDbContext>()
-              .UseInMemoryDatabase(Guid.NewGuid().ToString())
-              .Options,
-              new TestCurrentCommunityService()
+                  new DbContextOptionsBuilder<ApplicationDbContext>()
+                      .UseInMemoryDatabase(Guid.NewGuid().ToString()).Options,
+                  new TestCurrentCommunityService()
               ).Seed();
 
             _communityRepository = new CommunityRepository(_sutContext);

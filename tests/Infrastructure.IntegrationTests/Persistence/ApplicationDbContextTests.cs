@@ -12,10 +12,9 @@ namespace Codidact.Infrastructure.IntegrationTests.Persistence
     {
         private readonly ApplicationDbContext _sutContext
             = new ApplicationDbContext(
-                new DbContextOptionsBuilder<ApplicationDbContext>()
-                .UseInMemoryDatabase(Guid.NewGuid().ToString())
-                .Options,
-                new TestCurrentCommunityService()
+                    new DbContextOptionsBuilder<ApplicationDbContext>()
+                        .UseInMemoryDatabase(Guid.NewGuid().ToString()).Options,
+                    new TestCurrentCommunityService()
                 ).Seed();
 
         [Fact]

@@ -6,6 +6,6 @@ namespace Codidact.WebUI.IntegrationTests.Services
 {
     public class CurrentCommunityServiceTests
     {
-        //TODO: Test CurrentCommunityService with a custom IActionContextAccessor
+        // TODO: Test CurrentCommunityService with a custom IActionContextAccessor.
     }
 }
