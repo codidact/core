@@ -71,7 +71,7 @@ and would like to run one locally. These instructions may change heavily dependi
     "DefaultConnection": "Server=localhost;Database=YOUR_DATABASE;"
 }
 ```
-4. Open a terminal at the Codidact solution folder. Run the command `dotnet tool install --global dotnet-ef`.
+4. Open a terminal at the Codidact solution folder. Run the command `dotnet tool restore`.
 5. Navigate to the WebUI project folder and run `dotnet ef database update` to apply the project migrations to the database.
 6. Verify that your database is now populated with new tables.
 
