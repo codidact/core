@@ -30,6 +30,8 @@
 ## Installation using Visual Studio Code
 
  1. Install the [.NET Core SDK][2] you need version 3.1, some package managers have a package for this.
+    *Note. On Arch Linux you need to install both the `dotnet-sdk` and `aspnet-runtime` packages,
+    other package managers might divide this functionality too.*
 
  2. Install [Visual Studio Code][3]. You need the official version from Microsoft, the debugger
     for C# isn't included in packages from your package manager.
