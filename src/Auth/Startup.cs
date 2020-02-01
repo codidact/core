@@ -75,7 +75,7 @@ namespace Codidact.Auth
                     pattern: "Identity/{controller=Home}/{action=Index}/{id?}");
             });
 
-            await app.InitializeIdentityUsers();
+            await app.InitializeIdentityData();
         }
     }
 }
