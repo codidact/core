@@ -1,10 +1,9 @@
 ﻿using Codidact.Application.Common.Interfaces;
-using Codidact.Application.Repositories.Communities;
 using Codidact.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 
-namespace Codidact.Application.Repositories
+namespace Codidact.Application.Communities
 {
     /// <summary>
     /// Repository for communities

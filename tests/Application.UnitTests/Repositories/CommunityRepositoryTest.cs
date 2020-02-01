@@ -1,5 +1,4 @@
-﻿using Codidact.Application.Repositories;
-using Codidact.Application.Repositories.Communities;
+﻿using Codidact.Application.Communities;
 using Codidact.Infrastructure.Persistence;
 using Codidact.Infrastructure.IntegrationTests;
 using Codidact.Infrastructure.IntegrationTests.Persistence;

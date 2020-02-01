@@ -1,5 +1,4 @@
-﻿using Codidact.Application.Repositories;
-using Codidact.Application.Repositories.Communities;
+﻿using Codidact.Application.Communities;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Codidact.Application

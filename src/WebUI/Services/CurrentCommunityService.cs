@@ -1,5 +1,5 @@
 ﻿using Codidact.Application.Common.Interfaces;
-using Codidact.Application.Repositories.Communities;
+using Codidact.Application.Communities;
 using Codidact.Domain.Exceptions;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.Extensions.DependencyInjection;

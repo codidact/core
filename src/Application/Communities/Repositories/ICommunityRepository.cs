@@ -1,7 +1,7 @@
 ﻿using Codidact.Domain.Entities;
 using System.Threading.Tasks;
 
-namespace Codidact.Application.Repositories.Communities
+namespace Codidact.Application.Communities
 {
     /// <summary>
     /// Repository for communities
