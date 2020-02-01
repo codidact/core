@@ -31,9 +31,8 @@ namespace Codidact.Infrastructure.Persistence.Configuration
             builder.Property(t => t.IsSameAsInstance)
                .HasDefaultValue(true);
 
-            builder.HasIndex(t => new { t.MemberId, t.CommunityId })
+            builder.HasIndex(nameof(MemberCommunity.MemberId), "CommunityId")
                 .IsUnique();
-
         }
     }
 }

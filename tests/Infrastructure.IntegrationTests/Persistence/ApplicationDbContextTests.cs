@@ -143,14 +143,13 @@ namespace Codidact.Infrastructure.IntegrationTests.Persistence
         {
             var member = new MemberCommunity
             {
-                CommunityId = TestCurrentCommunityService.CommunityId.Value,
                 DisplayName = "John Doe",
                 Bio = "Not to be confused with John Galt",
             };
             _sutContext.Add(member);
             await _sutContext.SaveChangesAsync();
 
-            Assert.True(member.CommunityId > 0);
+            Assert.True((long)_sutContext.Entry(member).Property("CommunityId").CurrentValue > 0);
         }
 
         [Fact]
@@ -158,24 +157,38 @@ namespace Codidact.Infrastructure.IntegrationTests.Persistence
         {
             var member = new MemberCommunity
             {
-                CommunityId = TestCurrentCommunityService.CommunityId.Value,
                 DisplayName = "John Doe",
                 Bio = "Not to be confused with John Galt",
             };
             _sutContext.Add(member);
+            _sutContext.Entry(member).Property("CommunityId").CurrentValue = TestCurrentCommunityService.CommunityId.Value;
 
             var secondMember = new MemberCommunity
             {
-                CommunityId = TestCurrentCommunityService.CommunityId.Value + 1,
                 DisplayName = "John Doe",
                 Bio = "Not to be confused with John Galt",
             };
             _sutContext.Add(secondMember);
+            _sutContext.Entry(secondMember).Property("CommunityId").CurrentValue = TestCurrentCommunityService.CommunityId.Value;
             await _sutContext.SaveChangesAsync();
 
             var foundMember = _sutContext.MemberCommunities.FirstOrDefault();
 
-            Assert.Equal(TestCurrentCommunityService.CommunityId, foundMember.CommunityId);
+            Assert.Equal((long)_sutContext.Entry(member).Property("CommunityId").CurrentValue, foundMember.Community.Id);
+        }
+
+        [Fact]
+        public async Task MemberCommunityGetsCommunityInstanceName()
+        {
+            var member = new MemberCommunity
+            {
+                DisplayName = "John Doe",
+                Bio = "Not to be confused with John Galt",
+            };
+            _sutContext.Add(member);
+            await _sutContext.SaveChangesAsync();
+
+            Assert.Equal("Meta", member.Community.Name);
         }
     }
 }

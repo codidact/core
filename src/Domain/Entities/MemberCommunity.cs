@@ -120,11 +120,6 @@ namespace Codidact.Domain.Entities
         public TrustLevelCommunity TrustLevelCommunity { get; set; }
 
         /// <summary>
-        /// CommunityId of the member
-        /// </summary>
-        public long CommunityId { get; set; }
-
-        /// <summary>
         /// Community instance related to the MemberCommunity
         /// </summary>
         public Community Community { get; set; }

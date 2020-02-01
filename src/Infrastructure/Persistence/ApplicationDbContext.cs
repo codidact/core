@@ -45,7 +45,7 @@ namespace Codidact.Infrastructure.Persistence
                             var communityId = await _currentCommunityService
                                                         .GetCurrentCommunityIdAsync()
                                                         .ConfigureAwait(false);
-                            communityable.CommunityId = communityId.Value;
+                            entry.Property("CommunityId").CurrentValue = communityId.Value;
                         }
                         break;
                     case EntityState.Modified:
@@ -113,13 +113,16 @@ namespace Codidact.Infrastructure.Persistence
                 {
                     if (typeof(ICommunityScopable).IsAssignableFrom(entity.ClrType))
                     {
-                        var isCommunityProperty = entity.FindProperty(nameof(ICommunityScopable.CommunityId));
-                        var parameter = Expression.Parameter(entity.ClrType, "p");
-                        var equalExpression = Expression.Equal(
-                                Expression.Property(parameter, isCommunityProperty.PropertyInfo),
-                                Expression.Constant(communityId.Value)
-                            );
-                        var filter = Expression.Lambda(equalExpression, parameter);
+                        var property = modelBuilder.Entity(entity.ClrType).Property<long>("CommunityId");
+                        var parameter = Expression.Parameter(entity.ClrType, "e");
+                        var body = Expression.Equal(
+                            Expression.Call(typeof(EF),
+                            nameof(EF.Property),
+                            new[] { typeof(long) },
+                            parameter,
+                            Expression.Constant("CommunityId")),
+                            Expression.Constant(communityId.Value));
+                        var filter = Expression.Lambda(body, parameter);
                         entity.SetQueryFilter(filter);
                     }
                 }

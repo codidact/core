@@ -24,11 +24,6 @@ namespace Codidact.Domain.Entities
         public string Explanation { get; set; }
 
         /// <summary>
-        /// Community id of related community
-        /// </summary>
-        public long CommunityId { get; set; }
-
-        /// <summary>
         /// Community instance of related community
         /// </summary>
         public Community Community { get; set; }
