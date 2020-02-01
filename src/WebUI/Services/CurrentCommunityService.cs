@@ -14,9 +14,7 @@ namespace Codidact.WebUI.Services
     {
         private readonly IServiceScopeFactory _serviceScopeFactory;
 
-        public CurrentCommunityService(
-            IServiceScopeFactory serviceScopeFactory
-          )
+        public CurrentCommunityService(IServiceScopeFactory serviceScopeFactory)
         {
             _serviceScopeFactory = serviceScopeFactory;
         }
