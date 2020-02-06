@@ -14,5 +14,6 @@ namespace Codidact.WebUI.Models
         public string ResponseType { get; set; }
         public string ResponseMode { get; set; }
         public string CallbackPath { get; set; }
+        public string SignedOutCallbackPath { get; set; }
     }
 }

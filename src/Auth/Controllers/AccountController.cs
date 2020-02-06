@@ -193,6 +193,11 @@ namespace Codidact.Auth.Controllers
                 return SignOut(new AuthenticationProperties { RedirectUri = url }, vm.ExternalAuthenticationScheme);
             }
 
+            if (vm.AutomaticRedirectAfterSignOut && vm.PostLogoutRedirectUri != null)
+            {
+                return Redirect(vm.PostLogoutRedirectUri);
+            }
+
             return View("LoggedOut", vm);
         }
 

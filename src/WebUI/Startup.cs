@@ -47,7 +47,8 @@ namespace Codidact.WebUI
                 options.ResponseType = identityOptions.ResponseType;
                 options.ResponseMode = identityOptions.ResponseMode;
                 options.CallbackPath = identityOptions.CallbackPath;
-
+                options.SignedOutCallbackPath = identityOptions.SignedOutCallbackPath;
+                options.SaveTokens = true;
                 // Enable PKCE (authorization code flow only)
                 options.UsePkce = true;
             });
