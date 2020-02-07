@@ -3,9 +3,8 @@
 
 using Codidact.Auth.Common;
 using Codidact.Auth.Models;
+using Codidact.Auth.Services;
 using Codidact.Infrastructure.Identity;
-using IdentityModel;
-using IdentityServer4;
 using IdentityServer4.Events;
 using IdentityServer4.Extensions;
 using IdentityServer4.Models;
@@ -13,7 +12,6 @@ using IdentityServer4.Services;
 using IdentityServer4.Stores;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -29,7 +27,7 @@ namespace Codidact.Auth.Controllers
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IIdentityServerInteractionService _interaction;
         private readonly IClientStore _clientStore;
-        private readonly IAuthenticationSchemeProvider _schemeProvider;
+        private readonly ModelBuilder _modelBuilder;
         private readonly IEventService _events;
 
         public AccountController(
@@ -37,14 +35,14 @@ namespace Codidact.Auth.Controllers
             SignInManager<ApplicationUser> signInManager,
             IIdentityServerInteractionService interaction,
             IClientStore clientStore,
-            IAuthenticationSchemeProvider schemeProvider,
+            ModelBuilder modelBuilder,
             IEventService events)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _interaction = interaction;
             _clientStore = clientStore;
-            _schemeProvider = schemeProvider;
+            _modelBuilder = modelBuilder;
             _events = events;
         }
 
@@ -55,7 +53,7 @@ namespace Codidact.Auth.Controllers
         public async Task<IActionResult> Login(string returnUrl)
         {
             // build a model so we know what to show on the login page
-            var vm = await BuildLoginViewModelAsync(returnUrl);
+            var vm = await _modelBuilder.BuildLoginViewModelAsync(returnUrl);
             return View(vm);
         }
 
@@ -138,7 +136,7 @@ namespace Codidact.Auth.Controllers
             }
 
             // something went wrong, show form with error
-            var vm = await BuildLoginViewModelAsync(model);
+            var vm = await _modelBuilder.BuildLoginViewModelAsync(model);
             return View(vm);
         }
 
@@ -150,7 +148,7 @@ namespace Codidact.Auth.Controllers
         public async Task<IActionResult> Logout(string logoutId)
         {
             // build a model so the logout page knows what to display
-            var vm = await BuildLogoutViewModelAsync(logoutId);
+            var vm = await _modelBuilder.BuildLogoutViewModelAsync(logoutId);
 
             if (vm.ShowLogoutPrompt == false)
             {
@@ -170,7 +168,7 @@ namespace Codidact.Auth.Controllers
         public async Task<IActionResult> Logout(LogoutInputModel model)
         {
             // build a model so the logged out page knows what to display
-            var vm = await BuildLoggedOutViewModelAsync(model.LogoutId);
+            var vm = await _modelBuilder.BuildLoggedOutViewModelAsync(model.LogoutId);
 
             if (User?.Identity.IsAuthenticated == true)
             {
@@ -205,102 +203,6 @@ namespace Codidact.Auth.Controllers
         public IActionResult AccessDenied()
         {
             return View();
-        }
-
-
-        /*****************************************/
-        /* helper APIs for the AccountController */
-        /*****************************************/
-        private async Task<LoginViewModel> BuildLoginViewModelAsync(string returnUrl)
-        {
-            var context = await _interaction.GetAuthorizationContextAsync(returnUrl);
-            if (context?.IdP != null && await _schemeProvider.GetSchemeAsync(context.IdP) != null)
-            {
-                // this is meant to short circuit the UI and only trigger the one external IdP
-                var vm = new LoginViewModel
-                {
-                    ReturnUrl = returnUrl,
-                    Username = context?.LoginHint,
-                };
-
-                return vm;
-            }
-
-            return new LoginViewModel
-            {
-                AllowRememberLogin = AccountOptions.AllowRememberLogin,
-                ReturnUrl = returnUrl,
-                Username = context?.LoginHint,
-            };
-        }
-
-        private async Task<LoginViewModel> BuildLoginViewModelAsync(LoginInputModel model)
-        {
-            var vm = await BuildLoginViewModelAsync(model.ReturnUrl);
-            vm.Username = model.Username;
-            vm.RememberLogin = model.RememberLogin;
-            return vm;
-        }
-
-        private async Task<LogoutViewModel> BuildLogoutViewModelAsync(string logoutId)
-        {
-            var vm = new LogoutViewModel { LogoutId = logoutId, ShowLogoutPrompt = AccountOptions.ShowLogoutPrompt };
-
-            if (User?.Identity.IsAuthenticated != true)
-            {
-                // if the user is not authenticated, then just show logged out page
-                vm.ShowLogoutPrompt = false;
-                return vm;
-            }
-
-            var context = await _interaction.GetLogoutContextAsync(logoutId);
-            if (context?.ShowSignoutPrompt == false)
-            {
-                // it's safe to automatically sign-out
-                vm.ShowLogoutPrompt = false;
-                return vm;
-            }
-
-            // show the logout prompt. this prevents attacks where the user
-            // is automatically signed out by another malicious web page.
-            return vm;
-        }
-
-        private async Task<LoggedOutViewModel> BuildLoggedOutViewModelAsync(string logoutId)
-        {
-            // get context information (client name, post logout redirect URI and iframe for federated signout)
-            var logout = await _interaction.GetLogoutContextAsync(logoutId);
-
-            var vm = new LoggedOutViewModel
-            {
-                AutomaticRedirectAfterSignOut = AccountOptions.AutomaticRedirectAfterSignOut,
-                PostLogoutRedirectUri = logout?.PostLogoutRedirectUri,
-                ClientName = string.IsNullOrEmpty(logout?.ClientName) ? logout?.ClientId : logout?.ClientName,
-                LogoutId = logoutId
-            };
-
-            if (User?.Identity.IsAuthenticated == true)
-            {
-                var idp = User.FindFirst(JwtClaimTypes.IdentityProvider)?.Value;
-                if (idp != null && idp != IdentityServerConstants.LocalIdentityProvider)
-                {
-                    var providerSupportsSignout = await HttpContext.GetSchemeSupportsSignOutAsync(idp);
-                    if (providerSupportsSignout)
-                    {
-                        if (vm.LogoutId == null)
-                        {
-                            // if there's no current logout context, we need to create one
-                            // this captures necessary info from the current logged in user
-                            // before we signout and redirect away to the external IdP for signout
-                            vm.LogoutId = await _interaction.CreateLogoutContextAsync();
-                        }
-
-                        vm.ExternalAuthenticationScheme = idp;
-                    }
-                }
-            }
-
-            return vm;
         }
     }
 }

@@ -36,6 +36,8 @@ namespace Codidact.Auth
                     .AddDefaultTokenProviders();
 
             services.AddSingleton<IProfileService, CustomProfileService>();
+            services.AddTransient<ModelBuilder>();
+
             var builder = services.AddIdentityServer(options =>
             {
                 options.Events.RaiseErrorEvents = true;
