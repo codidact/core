@@ -6,16 +6,20 @@ using Codidact.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Xunit;
 
-namespace Infrastructure.IntegrationTests.Persistence
+namespace Codidact.Infrastructure.IntegrationTests.Persistence
 {
     public class ApplicationDbContextTests
     {
-        private readonly ApplicationDbContext _sutContext
-            = new ApplicationDbContext(
-                new DbContextOptionsBuilder<ApplicationDbContext>()
+        private readonly ApplicationDbContext _sutContext;
+
+        public ApplicationDbContextTests()
+        {
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
                 .UseInMemoryDatabase(Guid.NewGuid().ToString())
-                .Options
-                );
+                .Options;
+            var currentUserService = new CurrentUserServiceMock();
+            _sutContext = new ApplicationDbContext(options, currentUserService);
+        }
 
         [Fact]
         public async Task SaveChangesShouldAssignAnAutoIncrementId()
@@ -24,7 +28,6 @@ namespace Infrastructure.IntegrationTests.Persistence
             {
                 DisplayName = "John Doe",
                 Bio = "Not to be confused with John Galt",
-                Email = "john@gmail.com"
             };
             _sutContext.Add(member);
             await _sutContext.SaveChangesAsync();
@@ -39,7 +42,6 @@ namespace Infrastructure.IntegrationTests.Persistence
             {
                 DisplayName = "John Doe",
                 Bio = "Not to be confused with John Galt",
-                Email = "john@gmail.com"
             };
             _sutContext.Add(member);
             _sutContext.SaveChanges();
@@ -64,7 +66,6 @@ namespace Infrastructure.IntegrationTests.Persistence
             {
                 DisplayName = "John Doe",
                 Bio = "Not to be confused with John Galt",
-                Email = "john@gmail.com"
             };
             _sutContext.Add(member);
             await _sutContext.SaveChangesAsync();
@@ -79,7 +80,6 @@ namespace Infrastructure.IntegrationTests.Persistence
             {
                 DisplayName = "John Doe",
                 Bio = "Not to be confused with John Galt",
-                Email = "john@gmail.com"
             };
             _sutContext.Add(member);
             await _sutContext.SaveChangesAsync();
@@ -101,7 +101,6 @@ namespace Infrastructure.IntegrationTests.Persistence
             {
                 DisplayName = "John Doe",
                 Bio = "Not to be confused with John Galt",
-                Email = "john@gmail.com"
             };
             _sutContext.Add(member);
             await _sutContext.SaveChangesAsync();
@@ -122,7 +121,6 @@ namespace Infrastructure.IntegrationTests.Persistence
             {
                 DisplayName = "John Doe",
                 Bio = "Not to be confused with John Galt",
-                Email = "john@gmail.com"
             };
             _sutContext.Add(member);
             await _sutContext.SaveChangesAsync();
@@ -139,4 +137,5 @@ namespace Infrastructure.IntegrationTests.Persistence
             Assert.NotNull(_sutContext.Members.FirstOrDefault(mem => mem.Id == member.Id));
         }
     }
+
 }

@@ -3,6 +3,10 @@ using Codidact.Domain.Common;
 using Codidact.Domain.Common.Interfaces;
 using Codidact.Domain.Entities;
 using Codidact.Domain.Extensions;
+using Codidact.Infrastructure.Identity;
+using Codidact.Infrastructure.Persistence.Configuration;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq.Expressions;
@@ -12,10 +16,17 @@ using System.Threading.Tasks;
 
 namespace Codidact.Infrastructure.Persistence
 {
-    public class ApplicationDbContext : DbContext, IApplicationDbContext
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser, IdentityRole<long>, long>, IApplicationDbContext
     {
-        public ApplicationDbContext(DbContextOptions options)
-            : base(options) { }
+        private readonly ICurrentUserService _currentUserService;
+
+        public ApplicationDbContext(
+                DbContextOptions<ApplicationDbContext> options,
+                ICurrentUserService currentUserService
+            ) : base(options)
+        {
+            _currentUserService = currentUserService;
+        }
 
         public DbSet<Member> Members { get; set; }
         public DbSet<Community> Communities { get; set; }
@@ -30,13 +41,11 @@ namespace Codidact.Infrastructure.Persistence
                 {
                     case EntityState.Added:
                         entry.Entity.CreateDateAt = DateTime.UtcNow;
-                        // TODO: Once an identity service is added 
-                        // set the current Member id to CreatedByMemberId
+                        entry.Entity.CreatedByMemberId = _currentUserService.GetMemberId();
                         break;
                     case EntityState.Modified:
                         entry.Entity.LastModifiedAt = DateTime.UtcNow;
-                        // TODO: Once an identity service is added
-                        // set the current Member id to LastModifiedByMemberId
+                        entry.Entity.LastModifiedByMemberId = _currentUserService.GetMemberId();
                         break;
                     case EntityState.Deleted:
                         if (entry.Entity is ISoftDeletable deletable)
@@ -46,8 +55,7 @@ namespace Codidact.Infrastructure.Persistence
 
                             deletable.DeletedAt = DateTime.UtcNow;
                             deletable.IsDeleted = true;
-                            // TODO: Once an identity service is added
-                            // set the current Member id to DeletedByMemberId
+                            deletable.DeletedByMemberId = _currentUserService.GetMemberId();
                         }
                         break;
                 }
@@ -67,6 +75,8 @@ namespace Codidact.Infrastructure.Persistence
             SetGlobalQueryFiltersToSoftDeletableEntities(modelBuilder);
 
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.ConfigureIdentity();
         }
 
         private static void SetGlobalQueryFiltersToSoftDeletableEntities(ModelBuilder modelBuilder)

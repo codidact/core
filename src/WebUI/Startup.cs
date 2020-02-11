@@ -1,6 +1,7 @@
 using Codidact.Application;
 using Codidact.Infrastructure;
 using Codidact.Infrastructure.Persistence;
+using Codidact.WebUI.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -8,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace Codidact.WebUI
 {
@@ -25,6 +27,34 @@ namespace Codidact.WebUI
         {
             services.AddApplication();
             services.AddInfrastructure(Configuration);
+
+            services.AddHttpContextAccessor();
+
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = "cookie";
+                options.DefaultSignInScheme = "cookie";
+                options.DefaultChallengeScheme = "oidc";
+            })
+            .AddCookie("cookie")
+            .AddOpenIdConnect("oidc", options =>
+            {
+                var identityOptions = Configuration.GetSection("Identity").Get<IdentityOptions>();
+                options.Authority = identityOptions.Authority;
+                options.RequireHttpsMetadata = identityOptions.RequireHttpsMetadata;
+                options.ClientId = identityOptions.ClientId;
+                options.ClientSecret = identityOptions.ClientSecret;
+                options.ResponseType = identityOptions.ResponseType;
+                options.ResponseMode = identityOptions.ResponseMode;
+                options.CallbackPath = identityOptions.CallbackPath;
+                options.SignedOutCallbackPath = identityOptions.SignedOutCallbackPath;
+                options.SaveTokens = true;
+                // Enable PKCE (authorization code flow only)
+                options.UsePkce = true;
+            });
+
+            JwtSecurityTokenHandler.DefaultMapInboundClaims = false;
+
             services
                 .AddControllersWithViews()
                 .AddRazorRuntimeCompilation();
@@ -42,13 +72,15 @@ namespace Codidact.WebUI
             {
                 app.UseExceptionHandler("/Home/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
             }
+            app.UseHsts();
             app.UseHttpsRedirection();
+
             app.UseStaticFiles();
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
@@ -58,7 +90,10 @@ namespace Codidact.WebUI
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
 
-            ApplyDatabaseMigrations(app, logger);
+            if (env.EnvironmentName != "Test")
+            {
+                ApplyDatabaseMigrations(app, logger);
+            }
         }
 
         // Applies database migrations; won't cause any changes if the database is up-to-date.

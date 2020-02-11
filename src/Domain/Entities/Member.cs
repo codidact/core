@@ -25,11 +25,6 @@ namespace Codidact.Domain.Entities
         public string Bio { get; set; }
 
         /// <summary>
-        /// The main email of the member
-        /// </summary>
-        public string Email { get; set; }
-
-        /// <summary>
         /// Geographical location of the member
         /// </summary>
         public string Location { get; set; }
@@ -53,11 +48,6 @@ namespace Codidact.Domain.Entities
         /// When was the last time the data was imported from StackExchange
         /// </summary>
         public DateTime? StackExchangeLastImportedAt { get; set; }
-
-        /// <summary>
-        /// Whether the email has been verified for the member
-        /// </summary>
-        public bool IsEmailVerified { get; set; }
 
         /// <summary>
         /// Whether the member is suspended

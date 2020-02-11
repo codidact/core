@@ -2,7 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-
+    <RootNamespace>Codidact.Domain.IntegrationTests</RootNamespace>
+    <AssemblyName>Codidact.Domain.IntegrationTests</AssemblyName>
     <IsPackable>false</IsPackable>
   </PropertyGroup>
 
