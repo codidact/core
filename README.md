@@ -64,17 +64,22 @@ and would like to run one locally. These instructions may change heavily dependi
     * [Windows](https://www.enterprisedb.com/downloads/postgres-postgresql-downloads). This will also install pgAdmin.
     * Linux users will most likely want to use the PostgreSQL version provided by their package manager.
 2. Create a new database and name it whatever you like. Windows users can do this using pgAdmin.
-3. Open `appsettings.Development.json` in the WebUI project and add a new connection string for your database. It will look
-   something like this, along with any relevant connection information:
+3. Open up a terminal at the WebUI project and enter the following command replacing the value with your connection string:
 ```
-"ConnectionStrings": {
-    "DefaultConnection": "Server=localhost;Database=YOUR_DATABASE;"
-}
+dotnet user-secrets set "ConnectionStrings:DefaultConnection" "Server=localhost;Database=YOUR_DATABASE;"
 ```
 4. Open a terminal at the Codidact solution folder. Run the command `dotnet tool restore`.
 5. Navigate to the WebUI project folder and run `dotnet ef database update` to apply the project migrations to the database.
 6. Verify that your database is now populated with new tables.
 
+#### Authentication Setup
+The following instructions tell how to enable a connection to the authentication instance
+
+1. Open up a terminal at the WebUI project and enter the following command replacing the value with your client secret:
+
+```
+dotnet user-secrets set "Identity:ClientSecret" "abcdefghijklmnopqrstuvwxyz123456789"
+```
 
 ## License
 [AGPL v3.0](https://github.com/codidact/core/blob/develop/LICENSE).
