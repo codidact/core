@@ -2,14 +2,14 @@
 using System.Threading.Tasks;
 using Xunit;
 
-namespace Codidact.WebUI.IntegrationTests.Controllers.Home
+namespace Codidact.WebUI.IntegrationTests.Pages
 {
-    public class HomePageTests :
+    public class CommonPagesTests :
       IClassFixture<CustomWebApplicationFactory<Startup>>
     {
         private readonly CustomWebApplicationFactory<Startup> _factory;
 
-        public HomePageTests(
+        public CommonPagesTests(
             CustomWebApplicationFactory<Startup> factory)
         {
             _factory = factory;
@@ -17,9 +17,8 @@ namespace Codidact.WebUI.IntegrationTests.Controllers.Home
 
         [Theory]
         [InlineData("/")]
-        [InlineData("/home")]
-        [InlineData("/home/index")]
-        [InlineData("/home/privacy")]
+        [InlineData("/index")]
+        [InlineData("/privacy")]
         public async Task GetEndpointsReturnSuccessAndCorrectContentType(string url)
         {
             // Arrange
