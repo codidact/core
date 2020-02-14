@@ -36,7 +36,7 @@ namespace Codidact.Infrastructure.Identity
         public long GetMemberId()
         {
             var claimsIdentity = _httpContextAccessor.HttpContext.User.Claims as ClaimsIdentity;
-            Claim memberClaim = _httpContextAccessor.HttpContext?.User.Claims.FirstOrDefault(claim => claim.Type == "MemberId");
+            Claim memberClaim = _httpContextAccessor.HttpContext?.User.Claims.FirstOrDefault(claim => claim.Type == "codidact_member_id");
             if (!string.IsNullOrEmpty(memberClaim.Value))
             {
                 return long.Parse(memberClaim.Value);

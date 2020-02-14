@@ -1,7 +1,9 @@
 using Codidact.Application;
 using Codidact.Infrastructure;
 using Codidact.Infrastructure.Persistence;
+using Codidact.WebUI.Claims;
 using Codidact.WebUI.Models;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -27,6 +29,8 @@ namespace Codidact.WebUI
         {
             services.AddApplication();
             services.AddInfrastructure(Configuration);
+
+            services.AddScoped<IClaimsTransformation, MemberClaimsTransformation>();
 
             services.AddHttpContextAccessor();
 

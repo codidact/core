@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Codidact.Application.Members;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Codidact.Application
 {
@@ -14,6 +15,8 @@ namespace Codidact.Application
         /// <returns></returns>
         public static IServiceCollection AddApplication(this IServiceCollection services)
         {
+            services.AddScoped<IMembersRepository, MembersRepository>();
+
             return services;
         }
     }

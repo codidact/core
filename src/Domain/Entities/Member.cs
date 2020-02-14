@@ -13,7 +13,7 @@ namespace Codidact.Domain.Entities
         /// Auto Incremented Identification number
         /// </summary>
         public long Id { get; set; }
-        
+
         /// <summary>
         /// The display name that is to be displayed for the member
         /// </summary>
@@ -73,5 +73,10 @@ namespace Codidact.Domain.Entities
         /// By which member Id the entity has been deleted
         /// </summary>
         public long? DeletedByMemberId { get; set; }
+
+        /// <summary>
+        /// User Id in the authentication database
+        /// </summary>
+        public long UserId { get; set; }
     }
 }
