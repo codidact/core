@@ -12,15 +12,16 @@ namespace Codidact.Infrastructure.IntegrationTests.Secrets
     {
         private readonly DevelopmentSecretsService _devSecretService;
 
-        private readonly Dictionary<string, string> InMemoryConfiguration = new Dictionary<string, string>
+        private readonly Dictionary<string, string> InMemoryConfiguration =
+            new Dictionary<string, string>
             {
-                {"DefaultConnection", "LocalDb"},
+                { "DefaultConnection", "LocalDb" },
             };
+
         public DevelopmentSecretsServiceTest()
         {
-
             var config = new ConfigurationBuilder()
-              .AddInMemoryCollection(InMemoryConfiguration).Build();
+                .AddInMemoryCollection(InMemoryConfiguration).Build();
             _devSecretService = new DevelopmentSecretsService(config);
         }
 
