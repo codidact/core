@@ -21,10 +21,10 @@ namespace Codidact.Infrastructure
         /// <returns></returns>
         public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddDbContext<ApplicationDbContext>(async (provider, options) =>
+            services.AddDbContext<ApplicationDbContext>((provider, options) =>
             {
                 var secretsService = provider.GetRequiredService<ISecretsService>();
-                var connectionString = await secretsService.Get("ConnectionStrings:DefaultConnection");
+                var connectionString = secretsService.Get("ConnectionStrings:DefaultConnection").GetAwaiter().GetResult();
                 options.UseNpgsql(connectionString,
                    b => b.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName));
             });

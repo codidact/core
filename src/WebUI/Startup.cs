@@ -1,4 +1,5 @@
 using Codidact.Application;
+using Codidact.Application.Common.Interfaces;
 using Codidact.Infrastructure;
 using Codidact.Infrastructure.Persistence;
 using Codidact.WebUI.Models;
@@ -58,8 +59,11 @@ namespace Codidact.WebUI
                 options.UsePkce = true;
             });
 
-            services.AddSingleton<IPostConfigureOptions<OpenIdConnectOptions>, OpenIdConnectPostConfigureOptions>();
-
+            services.AddOptions<OpenIdConnectOptions>("oidc")
+            .Configure<ISecretsService>((options, secretsService) =>
+            {
+                options.ClientSecret = secretsService.Get("Identity:ClientSecret").GetAwaiter().GetResult();
+            }); 
 
             JwtSecurityTokenHandler.DefaultMapInboundClaims = false;
 
