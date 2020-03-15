@@ -5,11 +5,11 @@
         /// <summary>
         /// Retreives the member id of the current user.
         /// </summary>
-        public long GetMemberId();
+        long GetMemberId();
 
         /// <summary>
         /// Retreives the user id of the current user.
         /// </summary>
-        public string GetUserId();
+        string GetUserId();
     }
 }

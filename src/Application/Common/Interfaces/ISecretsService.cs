@@ -7,6 +7,6 @@ namespace Codidact.Application.Common.Interfaces
     /// </summary>
     public interface ISecretsService
     {
-        public Task<string> Get(string key);
+        Task<string> Get(string key);
     }
 }
