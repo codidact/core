@@ -24,7 +24,9 @@
                 }
                 else
                 {
-                    <a class="header--item" asp-page="/Logout">Sign Out</a>
+                    <form method="post">
+                        <button class="header--item" asp-page="/Logout">Sign Out</button>
+                    </form>
                 }
                 <a class="header--item" href="https://github.com/codidact/core">on GitHub</a>
                 <a class="header--item is-mobile-menu is-complex" data-trigger-header-slide="#js-hms" href="#!">

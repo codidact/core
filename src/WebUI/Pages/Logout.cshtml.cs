@@ -13,7 +13,7 @@ namespace Codidact.WebUI.Pages
             _logger = logger;
         }
 
-        public IActionResult OnGet()
+        public IActionResult OnPost()
         {
             return SignOut("cookie", "oidc");
         }
