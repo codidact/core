@@ -11,7 +11,7 @@
     <header class="header">
         <div class="container header--container">
             <div class="header--brand">
-                <a class="header--site-name" asp-area="" asp-controller="Home" asp-action="Index">Codidact</a>
+                <a class="header--site-name" asp-area="" asp-page="/Index">Codidact</a>
             </div>
             <div class="header--menu">
                 <a class="header--item" href="#">Place holder 1</a>
@@ -20,11 +20,13 @@
                 <div class="header--separator"></div>
                 @if (!User.Identity.IsAuthenticated)
                 {
-                    <a class="header--item" asp-area="" asp-controller="Home" asp-action="Login">Sign In</a>
+                    <a class="header--item" asp-page="/Login">Sign In</a>
                 }
                 else
                 {
-                    <a class="header--item" asp-area="" asp-controller="Home" asp-action="Logout">Sign Out</a>
+                    <form method="post" asp-page="/Logout">
+                        <button class="header--item" type="submit">Sign Out</button>
+                    </form>
                 }
                 <a class="header--item" href="https://github.com/codidact/core">on GitHub</a>
                 <a class="header--item is-mobile-menu is-complex" data-trigger-header-slide="#js-hms" href="#!">
@@ -44,11 +46,11 @@
         <div class="header-slide--separator"></div>
         @if (User.Identity.IsAuthenticated)
         {
-            <a class="header-slide--item" asp-area="" asp-controller="Home" asp-action="Logout">Sign Out</a>
+            <a class="header-slide--item" asp-page="/Logout">Sign Out</a>
         }
         else
         {
-            <a class="header-slide--item" asp-area="" asp-controller="Home" asp-action="Login">Sign In</a>
+            <a class="header-slide--item" asp-page="/Login">Sign In</a>
         }
         <a class="header-slide--item" href="https://github.com/codidact/core">on GitHub</a>
     </aside>
@@ -58,7 +60,7 @@
 
     <footer class="has-padding-4 has-border-top-style-solid has-border-top-width-1 has-border-color-tertiary-050">
         <div class="container">
-            &copy; 2020 - Codidact - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2020 - Codidact - <a asp-page="/Privacy">Privacy</a>
         </div>
     </footer>
     <script src="~/js/site.js" asp-append-version="true" async></script>

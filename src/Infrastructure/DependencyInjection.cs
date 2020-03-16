@@ -5,6 +5,7 @@ using Codidact.Infrastructure.Settings;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 
 namespace Codidact.Infrastructure
 {
@@ -20,16 +21,23 @@ namespace Codidact.Infrastructure
         /// <returns></returns>
         public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddDbContext<ApplicationDbContext>(options =>
-               options.UseNpgsql(
-                   configuration.GetConnectionString("DefaultConnection"),
-                   b => b.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName)));
+            services.AddDbContext<ApplicationDbContext>((provider, options) =>
+            {
+                var secretsService = provider.GetRequiredService<ISecretsService>();
+                var connectionString = secretsService.Get("ConnectionStrings:DefaultConnection").GetAwaiter().GetResult();
+                options.UseNpgsql(connectionString,
+                   b => b.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName));
+            });
 
             services.AddScoped<IApplicationDbContext>(provider => provider.GetService<ApplicationDbContext>());
 
             services.AddScoped<ICurrentUserService, CurrentUserService>();
 
             services.AddScoped<ISettingsService, SettingsService>();
+
+            // TODO: Implement a Service for production
+            services.AddSingleton<ISecretsService, DevelopmentSecretsService>();
+
             return services;
         }
     }

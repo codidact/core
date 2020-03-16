@@ -1,9 +1,11 @@
-﻿using Codidact.Application;
+using Codidact.Application;
+using Codidact.Application.Common.Interfaces;
 using Codidact.Infrastructure;
 using Codidact.Infrastructure.Persistence;
 using Codidact.WebUI.Claims;
 using Codidact.WebUI.Models;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -11,18 +13,23 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using System.IdentityModel.Tokens.Jwt;
 
 namespace Codidact.WebUI
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, IWebHostEnvironment environment)
         {
             Configuration = configuration;
+            Environment = environment;
         }
 
         public IConfiguration Configuration { get; }
+
+        public IWebHostEnvironment Environment { get; }
+
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -47,7 +54,6 @@ namespace Codidact.WebUI
                 options.Authority = identityOptions.Authority;
                 options.RequireHttpsMetadata = identityOptions.RequireHttpsMetadata;
                 options.ClientId = identityOptions.ClientId;
-                options.ClientSecret = identityOptions.ClientSecret;
                 options.ResponseType = identityOptions.ResponseType;
                 options.ResponseMode = identityOptions.ResponseMode;
                 options.CallbackPath = identityOptions.CallbackPath;
@@ -57,10 +63,16 @@ namespace Codidact.WebUI
                 options.UsePkce = true;
             });
 
+            services.AddOptions<OpenIdConnectOptions>("oidc")
+            .Configure<ISecretsService>((options, secretsService) =>
+            {
+                options.ClientSecret = secretsService.Get("Identity:ClientSecret").GetAwaiter().GetResult();
+            }); 
+
             JwtSecurityTokenHandler.DefaultMapInboundClaims = false;
 
             services
-                .AddControllersWithViews()
+                .AddRazorPages()
                 .AddRazorRuntimeCompilation();
         }
 
@@ -74,10 +86,11 @@ namespace Codidact.WebUI
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+                app.UseExceptionHandler("/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+                app.UseHsts();
             }
-            app.UseHsts();
+
             app.UseHttpsRedirection();
 
             app.UseStaticFiles();
@@ -87,12 +100,7 @@ namespace Codidact.WebUI
             app.UseAuthentication();
             app.UseAuthorization();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
-            });
+            app.UseEndpoints(endpoints => endpoints.MapRazorPages());
 
             if (env.EnvironmentName != "Test")
             {

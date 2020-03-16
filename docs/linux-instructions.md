@@ -24,8 +24,16 @@
 
  2. Navigate to that directory.
 
- 2. (optional) Add an upstream for the canonical repository this can be done using
+ 3. (optional) Add an upstream for the canonical repository this can be done using
     `git remote add upstream git://github.com/codidact/core`. This can be very helpful for rebasing.
+
+## Setting up Secrets
+
+ 1. Run the following command inside of 'src/WebUI' to install the connection string
+
+  ```
+  dotnet user-secrets set "ConnectionStrings:DefaultConnection" "YOUR_CONNECTION_STRING"
+  ```
 
 ## Installation using Visual Studio Code
 
@@ -56,29 +64,12 @@ shortcuts.
 
  7. More configuration can be done in `src/WebUI/Properties/launchSettings.json`, the defaults work though.
 
- 8. Add your connection string to `src/WebUI/appsettings.Development.json`. This is how it could look like:
+ 8. You can launch the project by going to `Debug > Start Debugging`; a web browser should automatically open.
 
-    ~~~json
-    {
-        "Logging": {
-            "LogLevel": {
-                "Default": "Debug",
-                "Microsoft": "Warning",
-                "Microsoft.Hosting.Lifetime": "Information"
-            }
-        },
-        "ConnectionStrings": {
-            "DefaultConnection": "Host=localhost;Database=codidact;Username=codidact"
-        }
-    }
-    ~~~
-
- 9. You can launch the project by going to `Debug > Start Debugging`; a web browser should automatically open.
-
-10. In order to get IntelliSense (that is code completion as you type), go to `View > Command Palette...` and execute
+ 9. In order to get IntelliSense (that is code completion as you type), go to `View > Command Palette...` and execute
     `.NET: Restore All Projects`.
 
-11. It's currently not possible to run the tests from the editor directly, refer to the instructions without
+ 10. It's currently not possible to run the tests from the editor directly, refer to the instructions without
     Visual Studio Code.
 
 
