@@ -11,7 +11,8 @@ namespace Codidact.Domain.Extensions
         /// <returns></returns>
         public static string ToSnakeCase(this string input)
         {
-            if (string.IsNullOrEmpty(input)) { 
+            if (string.IsNullOrEmpty(input))
+            {
                 return input;
             }
 
