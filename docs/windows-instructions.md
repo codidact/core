@@ -22,6 +22,15 @@
     If you honored the suggestions, you would have the connection string
     `Host=localhost;Database=codidact;Username=codidact;Password=codidact`.
 
+## Setting up Secrets
+
+ 1. Run the following command inside of 'src/WebUI' to install the connection string
+
+  ```
+  dotnet user-secrets set "ConnectionStrings:DefaultConnection" "YOUR_CONNECTION_STRING"
+  ```
+
+
 ## Installation using Visual Studio
 
  1. Install [Visual Studio][1] if you haven't already, the "Community" edition is sufficent.
@@ -41,28 +50,9 @@
     to launch the application in this state. There should be a popup message in the solution explorer
     to "Switch Views", do that.
 
- 6. In `src/WebUI` edit the `appsettings.Development.json` file. Visual Studio likes to hide this file, you
-    can reveal it by pressing the arrow button next to the `appsettings.json` file. Add your connection string,
-    the edited file should look something like this:
+ 6. You can launch the application by clicking `Debug > Start Debugging`.
 
-    ~~~json
-    {
-        "ConnectionStrings": {
-            "DefaultConnection": "Host=localhost;Database=codidact;Username=codidact;Password=codidact"
-        },
-        "Logging": {
-            "LogLevel": {
-                "Default": "Information",
-                "Microsoft": "Warning",
-                "Microsoft.Hosting.Lifetime": "Information"
-            }
-        }
-    }
-    ~~~
-
- 7. You can launch the application by clicking `Debug > Start Debugging`.
-
- 8. You can run the integration tests by clicking `Test > Run all Tests`.
+ 7. You can run the integration tests by clicking `Test > Run all Tests`.
 
 ## Installation without Visual Studio
 
