@@ -1,7 +1,7 @@
 ﻿using Codidact.Application.Common.Interfaces;
-using Codidact.Infrastructure.Identity;
 using Microsoft.AspNetCore.Http;
 using System;
+using System.Linq;
 using System.Security.Claims;
 
 namespace Codidact.Infrastructure.Identity
@@ -19,7 +19,15 @@ namespace Codidact.Infrastructure.Identity
         /// </summary>
         public string GetUserId()
         {
-            return _httpContextAccessor.HttpContext?.User?.FindFirstValue(ClaimTypes.NameIdentifier);
+            var userClaim = _httpContextAccessor.HttpContext?.User?.Claims.FirstOrDefault(claim => claim.Type == ClaimTypes.NameIdentifier);
+            if (!string.IsNullOrEmpty(userClaim.Value))
+            {
+                return userClaim.Value;
+            }
+            else
+            {
+                throw new Exception("Claim for UserId is missing in token");
+            }
         }
 
         /// <summary>
@@ -27,10 +35,11 @@ namespace Codidact.Infrastructure.Identity
         /// </summary>
         public long GetMemberId()
         {
-            string memberId = _httpContextAccessor.HttpContext.User.FindFirstValue(nameof(ApplicationUser.MemberId));
-            if (!string.IsNullOrEmpty(memberId))
+            var claimsIdentity = _httpContextAccessor.HttpContext.User.Claims as ClaimsIdentity;
+            Claim memberClaim = _httpContextAccessor.HttpContext?.User.Claims.FirstOrDefault(claim => claim.Type == "codidact_member_id");
+            if (!string.IsNullOrEmpty(memberClaim.Value))
             {
-                return long.Parse(memberId);
+                return long.Parse(memberClaim.Value);
             }
             else
             {
