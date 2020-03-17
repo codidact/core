@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
-    <RootNamespace>Codidact.Domain</RootNamespace>
-    <AssemblyName>Codidact.Domain</AssemblyName>
+    <RootNamespace>Codidact.Core.Domain</RootNamespace>
+    <AssemblyName>Codidact.Core.Domain</AssemblyName>
   </PropertyGroup>
 
 </Project>

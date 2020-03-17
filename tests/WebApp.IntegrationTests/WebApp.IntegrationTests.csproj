@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <RootNamespace>Codidact.WebUI.IntegrationTests</RootNamespace>
-    <AssemblyName>Codidact.WebUI.IntegrationTests</AssemblyName>
+    <RootNamespace>Codidact.Core.WebApp.IntegrationTests</RootNamespace>
+    <AssemblyName>Codidact.Core.WebApp.IntegrationTests</AssemblyName>
     <IsPackable>false</IsPackable>
   </PropertyGroup>
 
@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\WebUI\WebUI.csproj" />
+    <ProjectReference Include="..\..\src\WebApp\WebApp.csproj" />
   </ItemGroup>
 
 </Project>

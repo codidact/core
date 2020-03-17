@@ -1,7 +1,7 @@
-﻿using Codidact.Domain.Entities;
+﻿using Codidact.Core.Domain.Entities;
 using System.Threading.Tasks;
 
-namespace Codidact.Application.Members
+namespace Codidact.Core.Application.Members
 {
     /// <summary>
     /// Repository for Member Entity

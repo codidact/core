@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 
-namespace Codidact.WebUI.Pages
+namespace Codidact.Core.WebApp.Pages
 {
     public class PrivacyModel : PageModel
     {

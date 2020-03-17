@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Codidact.Domain.Common.Interfaces
+namespace Codidact.Core.Domain.Common.Interfaces
 {
     /// <summary>
     /// Signifies that the entity should be only soft deleted

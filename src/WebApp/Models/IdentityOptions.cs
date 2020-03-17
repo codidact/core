@@ -1,4 +1,4 @@
-﻿namespace Codidact.WebUI.Models
+﻿namespace Codidact.Core.WebApp.Models
 {
     public class IdentityOptions
     {

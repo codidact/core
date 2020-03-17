@@ -1,10 +1,10 @@
-﻿using Codidact.Application.Common.Interfaces;
+﻿using Codidact.Core.Application.Common.Interfaces;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Linq;
 using System.Security.Claims;
 
-namespace Codidact.Infrastructure.Identity
+namespace Codidact.Core.Infrastructure.Identity
 {
     public class CurrentUserService : ICurrentUserService
     {

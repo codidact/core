@@ -1,6 +1,6 @@
-﻿using Codidact.Domain.Common;
+﻿using Codidact.Core.Domain.Common;
 
-namespace Codidact.Domain.Entities
+namespace Codidact.Core.Domain.Entities
 {
     /// <summary>
     /// Levels of trust for each member

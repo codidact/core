@@ -1,11 +1,11 @@
-﻿using Codidact.Application.Common.Interfaces;
-using Codidact.Domain.Entities;
-using Codidact.Infrastructure.Persistence;
+﻿using Codidact.Core.Application.Common.Interfaces;
+using Codidact.Core.Domain.Entities;
+using Codidact.Core.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Moq;
 using System;
 
-namespace Codidact.Application.IntegrationTests
+namespace Codidact.Core.Application.IntegrationTests
 {
 
     public static class ApplicationDbContextFactory

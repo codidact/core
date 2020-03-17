@@ -1,9 +1,9 @@
-﻿using Codidact.Domain.Common;
-using Codidact.Domain.Common.Interfaces;
-using Codidact.Domain.Enums;
+﻿using Codidact.Core.Domain.Common;
+using Codidact.Core.Domain.Common.Interfaces;
+using Codidact.Core.Domain.Enums;
 using System;
 
-namespace Codidact.Domain.Entities
+namespace Codidact.Core.Domain.Entities
 {
     public class Community : AuditableEntity, ISoftDeletable
     {

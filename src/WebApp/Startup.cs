@@ -1,10 +1,8 @@
-using Codidact.Application;
-using Codidact.Application.Common.Interfaces;
-using Codidact.Infrastructure;
-using Codidact.Infrastructure.Persistence;
-using Codidact.WebUI.Claims;
-using Codidact.WebUI.Models;
-using Microsoft.AspNetCore.Authentication;
+﻿using Codidact.Core.Application;
+using Codidact.Core.Application.Common.Interfaces;
+using Codidact.Core.Infrastructure;
+using Codidact.Core.Infrastructure.Persistence;
+using Codidact.Core.WebApp.Models;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -16,7 +14,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System.IdentityModel.Tokens.Jwt;
 
-namespace Codidact.WebUI
+namespace Codidact.Core.WebApp
 {
     public class Startup
     {
@@ -36,8 +34,6 @@ namespace Codidact.WebUI
         {
             services.AddApplication();
             services.AddInfrastructure(Configuration);
-
-            services.AddScoped<IClaimsTransformation, MemberClaimsTransformation>();
 
             services.AddHttpContextAccessor();
 

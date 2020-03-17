@@ -1,4 +1,4 @@
-﻿namespace Codidact.Domain.Enums
+﻿namespace Codidact.Core.Domain.Enums
 {
     /// <summary>
     /// Represents the status of a community

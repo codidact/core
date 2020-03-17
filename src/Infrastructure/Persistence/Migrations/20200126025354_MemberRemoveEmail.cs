@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Codidact.Infrastructure.Persistence.Migrations
+namespace Codidact.Core.Infrastructure.Persistence.Migrations
 {
     public partial class MemberRemoveEmail : Migration
     {

@@ -1,9 +1,9 @@
-﻿using Codidact.Domain.Entities;
+﻿using Codidact.Core.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Codidact.Application.Common.Interfaces
+namespace Codidact.Core.Application.Common.Interfaces
 {
     public interface IApplicationDbContext
     {

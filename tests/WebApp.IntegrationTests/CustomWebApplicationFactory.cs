@@ -1,6 +1,6 @@
-﻿using Codidact.Application.Common.Interfaces;
-using Codidact.Domain.Entities;
-using Codidact.Infrastructure.Persistence;
+﻿using Codidact.Core.Application.Common.Interfaces;
+using Codidact.Core.Domain.Entities;
+using Codidact.Core.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
@@ -9,7 +9,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Linq;
 
-namespace Codidact.WebUI.IntegrationTests
+namespace Codidact.Core.WebApp.IntegrationTests
 {
     /// <summary>
     /// This factory creates an .net Core server with the configuration provided

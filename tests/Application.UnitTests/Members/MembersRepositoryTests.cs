@@ -1,8 +1,8 @@
-﻿using Codidact.Application.Members;
+﻿using Codidact.Core.Application.Members;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace Codidact.Application.IntegrationTests.Members
+namespace Codidact.Core.Application.IntegrationTests.Members
 {
     public class MembersRepositoryTests
     {

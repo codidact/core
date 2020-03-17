@@ -1,8 +1,8 @@
-﻿using Codidact.Application.Common.Interfaces;
-using Codidact.Domain.Common;
-using Codidact.Domain.Common.Interfaces;
-using Codidact.Domain.Entities;
-using Codidact.Domain.Extensions;
+﻿using Codidact.Core.Application.Common.Interfaces;
+using Codidact.Core.Domain.Common;
+using Codidact.Core.Domain.Common.Interfaces;
+using Codidact.Core.Domain.Entities;
+using Codidact.Core.Domain.Extensions;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq.Expressions;
@@ -10,7 +10,7 @@ using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Codidact.Infrastructure.Persistence
+namespace Codidact.Core.Infrastructure.Persistence
 {
     public class ApplicationDbContext : DbContext, IApplicationDbContext
     {

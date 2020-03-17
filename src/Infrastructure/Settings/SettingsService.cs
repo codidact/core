@@ -1,6 +1,6 @@
-﻿using Codidact.Application.Common.Interfaces;
+﻿using Codidact.Core.Application.Common.Interfaces;
 
-namespace Codidact.Infrastructure.Settings
+namespace Codidact.Core.Infrastructure.Settings
 {
     /// <summary>
     /// Gets the settings for the platform

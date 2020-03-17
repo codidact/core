@@ -1,6 +1,6 @@
-﻿using Codidact.Application.Common.Interfaces;
+﻿using Codidact.Core.Application.Common.Interfaces;
 
-namespace Codidact.Infrastructure.IntegrationTests
+namespace Codidact.Core.Infrastructure.IntegrationTests
 {
     public class CurrentUserServiceMock : ICurrentUserService
     {
