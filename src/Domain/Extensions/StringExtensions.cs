@@ -1,6 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace Codidact.Domain.Extensions
+namespace Codidact.Core.Domain.Extensions
 {
     public static class StringExtensions
     {

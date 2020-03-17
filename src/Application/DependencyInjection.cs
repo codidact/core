@@ -1,7 +1,7 @@
-﻿using Codidact.Application.Members;
+﻿using Codidact.Core.Application.Members;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Codidact.Application
+namespace Codidact.Core.Application
 {
     /// <summary>
     /// Dependency Injection module for the application

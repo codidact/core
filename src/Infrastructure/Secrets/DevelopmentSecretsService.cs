@@ -1,9 +1,9 @@
 ﻿
-using Codidact.Application.Common.Interfaces;
+using Codidact.Core.Application.Common.Interfaces;
 using Microsoft.Extensions.Configuration;
 using System.Threading.Tasks;
 
-namespace Codidact.Infrastructure
+namespace Codidact.Core.Infrastructure
 {
     /// <summary>
     /// Developement secrets service that uses appsettings

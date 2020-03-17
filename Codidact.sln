@@ -14,7 +14,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{6ED356A7-8B4
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{664D406C-2F83-48F0-BFC3-408D5CB53C65}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebUI", "src\WebUI\WebUI.csproj", "{A5AEFB21-B060-451F-B905-85EDF562ECA1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApp", "src\WebApp\WebApp.csproj", "{A5AEFB21-B060-451F-B905-85EDF562ECA1}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "src\Application\Application.csproj", "{FC1D3B78-9C5C-403B-BFB9-3D57AF36A592}"
 EndProject
@@ -26,7 +26,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain.UnitTests", "tests\D
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure.IntegrationTests", "tests\Infrastructure.IntegrationTests\Infrastructure.IntegrationTests.csproj", "{54C078A7-BC28-4080-94FF-FD1214CF8F69}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebUI.IntegrationTests", "tests\WebUI.IntegrationTests\WebUI.IntegrationTests.csproj", "{FB50E42B-7CB0-456F-B1B7-C6250BAD8692}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApp.IntegrationTests", "tests\WebApp.IntegrationTests\WebApp.IntegrationTests.csproj", "{FB50E42B-7CB0-456F-B1B7-C6250BAD8692}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application.UnitTests", "tests\Application.UnitTests\Application.UnitTests.csproj", "{595DAD6B-4CC1-4B6D-9CD8-E2381A36983E}"
 EndProject

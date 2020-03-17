@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <RootNamespace>Codidact.WebUI</RootNamespace>
-    <AssemblyName>Codidact.WebUI</AssemblyName>
+    <RootNamespace>Codidact.Core.WebApp</RootNamespace>
+    <AssemblyName>Codidact.Core.WebApp</AssemblyName>
     <UserSecretsId>f900f689-4ff9-48e6-8af2-18840476b43f</UserSecretsId>
   </PropertyGroup>
 

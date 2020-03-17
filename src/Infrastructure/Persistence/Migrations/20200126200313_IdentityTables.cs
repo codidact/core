@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
-namespace Codidact.Infrastructure.Persistence.Migrations
+namespace Codidact.Core.Infrastructure.Persistence.Migrations
 {
     public partial class IdentityTables : Migration
     {

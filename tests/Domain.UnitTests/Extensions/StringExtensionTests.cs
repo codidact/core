@@ -1,4 +1,4 @@
-﻿using Codidact.Domain.Extensions;
+﻿using Codidact.Core.Domain.Extensions;
 using Xunit;
 
 namespace Domain.UnitTests.Extensions

@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace Codidact.Infrastructure.IntegrationTests.Secrets
+namespace Codidact.Core.Infrastructure.IntegrationTests.Secrets
 {
     public class DevelopmentSecretsServiceTest
     {

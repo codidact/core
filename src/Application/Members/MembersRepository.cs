@@ -1,9 +1,9 @@
-﻿using Codidact.Application.Common.Interfaces;
-using Codidact.Domain.Entities;
+﻿using Codidact.Core.Application.Common.Interfaces;
+using Codidact.Core.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 
-namespace Codidact.Application.Members
+namespace Codidact.Core.Application.Members
 {
     public class MembersRepository : IMembersRepository
     {

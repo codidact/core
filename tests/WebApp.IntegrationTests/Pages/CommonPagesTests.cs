@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Xunit;
 
-namespace Codidact.WebUI.IntegrationTests.Pages
+namespace Codidact.Core.WebApp.IntegrationTests.Pages
 {
     public class CommonPagesTests :
       IClassFixture<CustomWebApplicationFactory<Startup>>

@@ -1,8 +1,8 @@
-﻿using Codidact.Domain.Entities;
+﻿using Codidact.Core.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Codidact.Infrastructure.Persistence.Configuration
+namespace Codidact.Core.Infrastructure.Persistence.Configuration
 {
     /// <summary>
     /// Mapping configuration for the Member entity

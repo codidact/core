@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Logging;
 using System.Diagnostics;
 
-namespace Codidact.WebUI.Pages
+namespace Codidact.Core.WebApp.Pages
 {
     public class IndexModel : PageModel
     {

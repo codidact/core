@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Codidact.Domain.Common
+namespace Codidact.Core.Domain.Common
 {
     /// <summary>
     /// Class that all of the entities inherit from

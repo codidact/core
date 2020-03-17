@@ -1,9 +1,9 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <RootNamespace>Codidact.Domain.IntegrationTests</RootNamespace>
-    <AssemblyName>Codidact.Domain.IntegrationTests</AssemblyName>
+    <RootNamespace>Codidact.Core.Domain.IntegrationTests</RootNamespace>
+    <AssemblyName>Codidact.Core.Domain.IntegrationTests</AssemblyName>
     <IsPackable>false</IsPackable>
   </PropertyGroup>
 

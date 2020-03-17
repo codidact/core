@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
-using Codidact.Domain.Entities;
-using Codidact.Infrastructure.Persistence;
+using Codidact.Core.Domain.Entities;
+using Codidact.Core.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Xunit;
 
-namespace Codidact.Infrastructure.IntegrationTests.Persistence
+namespace Codidact.Core.Infrastructure.IntegrationTests.Persistence
 {
     public class ApplicationDbContextTests
     {

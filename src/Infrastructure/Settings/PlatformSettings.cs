@@ -1,4 +1,4 @@
-﻿namespace Codidact.Infrastructure.Settings
+﻿namespace Codidact.Core.Infrastructure.Settings
 {
     /// <summary>
     /// Platform Settings Consts

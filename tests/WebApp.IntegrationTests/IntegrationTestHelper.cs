@@ -3,7 +3,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Codidact.WebUI.IntegrationTests
+namespace Codidact.Core.WebApp.IntegrationTests
 {
     public static class IntegrationTestHelper
     {

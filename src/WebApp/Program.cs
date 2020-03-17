@@ -3,7 +3,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
 
-namespace Codidact.WebUI
+namespace Codidact.Core.WebApp
 {
     public class Program
     {

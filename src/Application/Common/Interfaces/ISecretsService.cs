@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace Codidact.Application.Common.Interfaces
+namespace Codidact.Core.Application.Common.Interfaces
 {
     /// <summary>
     /// Provides secret info

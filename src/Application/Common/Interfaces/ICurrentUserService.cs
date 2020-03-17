@@ -1,4 +1,4 @@
-﻿namespace Codidact.Application.Common.Interfaces
+﻿namespace Codidact.Core.Application.Common.Interfaces
 {
     public interface ICurrentUserService
     {

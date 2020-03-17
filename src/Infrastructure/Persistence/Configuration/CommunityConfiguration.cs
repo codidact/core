@@ -1,9 +1,9 @@
-﻿using Codidact.Domain.Entities;
-using Codidact.Domain.Enums;
+﻿using Codidact.Core.Domain.Entities;
+using Codidact.Core.Domain.Enums;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Codidact.Infrastructure.Persistence.Configuration
+namespace Codidact.Core.Infrastructure.Persistence.Configuration
 {
     public class CommunityConfiguration : IEntityTypeConfiguration<Community>
     {

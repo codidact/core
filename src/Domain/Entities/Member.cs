@@ -1,8 +1,8 @@
-﻿using Codidact.Domain.Common;
-using Codidact.Domain.Common.Interfaces;
+﻿using Codidact.Core.Domain.Common;
+using Codidact.Core.Domain.Common.Interfaces;
 using System;
 
-namespace Codidact.Domain.Entities
+namespace Codidact.Core.Domain.Entities
 {
     /// <summary>
     /// An Entity that represents a member of the community

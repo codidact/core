@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Codidact.Application.Common.Interfaces
+namespace Codidact.Core.Application.Common.Interfaces
 {
     /// <summary>
     /// Provides the settings for the platform
