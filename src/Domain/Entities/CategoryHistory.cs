@@ -13,9 +13,5 @@ namespace Codidact.Core.Domain.Entities
         public string LongExplanation { get; set; }
         public bool? ContributesToTrustLevel { get; set; }
         public long? Calculations { get; set; }
-        public long HistoryId { get; set; }
-        public DateTime HistoryActivityAt { get; set; }
-        public long HistoryActivityMemberId { get; set; }
-        public virtual Member HistoryActivityMember { get; set; }
     }
 }

@@ -34,7 +34,7 @@ namespace Codidact.Core.Infrastructure.Persistence.Configuration
 
             entity.HasOne(d => d.HistoryMember)
                 .WithMany(p => p.TagHistory)
-                .HasForeignKey(d => d.HistoryMemberId)
+                .HasForeignKey(d => d.HistoryActivityMemberId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("tag_history_member_fk");
 
