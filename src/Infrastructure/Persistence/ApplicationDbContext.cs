@@ -24,10 +24,46 @@ namespace Codidact.Core.Infrastructure.Persistence
             _currentUserService = currentUserService;
         }
 
-        public DbSet<Member> Members { get; set; }
-        public DbSet<Community> Communities { get; set; }
-        public DbSet<TrustLevel> TrustLevels { get; set; }
-
+        public virtual DbSet<Category> Categories { get; set; }
+        public virtual DbSet<CategoryHistory> CategoryHistories { get; set; }
+        public virtual DbSet<CategoryPostType> CategoryPostTypes { get; set; }
+        public virtual DbSet<CategoryPostTypeHistory> CategoryPostTypeHistories { get; set; }
+        public virtual DbSet<Comment> Comments { get; set; }
+        public virtual DbSet<CommentHistory> CommentHistories { get; set; }
+        public virtual DbSet<CommentVote> CommentVotes { get; set; }
+        public virtual DbSet<CommentVoteHistory> CommentVoteHistories { get; set; }
+        public virtual DbSet<Member> Members { get; set; }
+        public virtual DbSet<MemberHistory> MemberHistories { get; set; }
+        public virtual DbSet<MemberPrivilege> MemberPrivileges { get; set; }
+        public virtual DbSet<MemberPrivilegeHistory> MemberPrivilegeHistories { get; set; }
+        public virtual DbSet<MemberSocialMediaType> MemberSocialMediaTypes { get; set; }
+        public virtual DbSet<MemberSocialMediaTypeHistory> MemberSocialMediaTypeHistories { get; set; }
+        public virtual DbSet<Post> Posts { get; set; }
+        public virtual DbSet<PostDuplicatePost> PostDuplicatePosts { get; set; }
+        public virtual DbSet<PostDuplicatePostHistory> PostDuplicatePostHistories { get; set; }
+        public virtual DbSet<PostHistory> PostHistories { get; set; }
+        public virtual DbSet<PostStatus> PostStatuss { get; set; }
+        public virtual DbSet<PostStatusHistory> PostStatusHistories { get; set; }
+        public virtual DbSet<PostStatusType> PostStatusTypes { get; set; }
+        public virtual DbSet<PostStatusTypeHistory> PostStatusTypeHistories { get; set; }
+        public virtual DbSet<PostTag> PostTags { get; set; }
+        public virtual DbSet<PostTagHistory> PostTagHistories { get; set; }
+        public virtual DbSet<PostType> PostTypes { get; set; }
+        public virtual DbSet<PostTypeHistory> PostTypeHistories { get; set; }
+        public virtual DbSet<PostVote> PostVotes { get; set; }
+        public virtual DbSet<PostVoteHistory> PostVoteHistories { get; set; }
+        public virtual DbSet<Privilege> Privileges { get; set; }
+        public virtual DbSet<PrivilegeHistory> PrivilegeHistories { get; set; }
+        public virtual DbSet<Setting> Settings { get; set; }
+        public virtual DbSet<SettingHistory> SettingHistories { get; set; }
+        public virtual DbSet<SocialMediaType> SocialMediaTypes { get; set; }
+        public virtual DbSet<SocialMediaTypeHistory> SocialMediaTypeHistories { get; set; }
+        public virtual DbSet<Tag> Tags { get; set; }
+        public virtual DbSet<TagHistory> TagHistories { get; set; }
+        public virtual DbSet<TrustLevel> TrustLevels { get; set; }
+        public virtual DbSet<TrustLevelHistory> TrustLevelHistories { get; set; }
+        public virtual DbSet<VoteType> VoteTypes { get; set; }
+        public virtual DbSet<VoteTypeHistory> VoteTypeHistories { get; set; }
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
         {
@@ -36,7 +72,7 @@ namespace Codidact.Core.Infrastructure.Persistence
                 switch (entry.State)
                 {
                     case EntityState.Added:
-                        entry.Entity.CreateDateAt = DateTime.UtcNow;
+                        entry.Entity.CreatedAt = DateTime.UtcNow;
                         entry.Entity.CreatedByMemberId = _currentUserService.GetMemberId();
                         break;
                     case EntityState.Modified:
@@ -62,15 +98,20 @@ namespace Codidact.Core.Infrastructure.Persistence
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+            {
+                modelBuilder.HasPostgresEnum("audit", "history_activity_type", new[] { "CREATE", "UPDATE_BEFORE", "UPDATE_AFTER", "DELETE" })
+                    .HasPostgresExtension("adminpack");
 
-            modelBuilder.UseSerialColumns();
+                modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 
-            RenameEntitiesToSnakeCase(modelBuilder);
+                modelBuilder.UseSerialColumns();
 
-            SetGlobalQueryFiltersToSoftDeletableEntities(modelBuilder);
+                RenameEntitiesToSnakeCase(modelBuilder);
 
-            base.OnModelCreating(modelBuilder);
+                SetGlobalQueryFiltersToSoftDeletableEntities(modelBuilder);
+
+                base.OnModelCreating(modelBuilder);
+            }
         }
 
         private static void SetGlobalQueryFiltersToSoftDeletableEntities(ModelBuilder modelBuilder)
@@ -96,6 +137,12 @@ namespace Codidact.Core.Infrastructure.Persistence
             foreach (var entity in modelBuilder.Model.GetEntityTypes())
             {
                 entity.SetTableName(entity.GetTableName().ToSnakeCase());
+
+                if (entity.ClrType.BaseType.IsGenericType &&
+                    entity.ClrType.BaseType.GetGenericTypeDefinition() == typeof(AuditEntity<>))
+                {
+                    entity.SetSchema("audit");
+                }
 
                 foreach (var property in entity.GetProperties())
                 {

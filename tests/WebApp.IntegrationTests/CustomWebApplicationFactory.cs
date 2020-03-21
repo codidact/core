@@ -70,13 +70,6 @@ namespace Codidact.Core.WebApp.IntegrationTests
 
         public static void InitializeDbForTests(ApplicationDbContext context)
         {
-            // Communities
-            context.Communities.AddRange(new Community
-            {
-                Id = 1,
-                Name = "Code"
-            });
-
             // Members
             context.Members.AddRange(
                 new Member { Id = 1, DisplayName = "John Doe" },
