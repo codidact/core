@@ -232,3 +232,5 @@ _Pvt_Extensions
 
 # FAKE - F# Make
 .fake/
+/Codidact/wwwroot/lib
+/Codidact/appsettings.Development.json

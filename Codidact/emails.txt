@@ -1,0 +1,4 @@
+To: a@b.com
+Subject: Confirm your email
+Message: Please confirm your account by <a href='https://localhost:44380/Identity/Account/ConfirmEmail?userId=2&amp;code=Q2ZESjhKVzh6WDhhaHBaTms5bEhwRk9qaVgwdFE3T3NrTVdUNU01RFk1eitWSE13Umh0amNhWS9iN3d4NW13Z3R4SjhsN1ZVaVVWbDgzd1ZOcGw1VDhBRmhqazdHbWUycytpZElOQ0hGSTJUcW9FRDhBRHVHa0p2OWhqOWdjM2QvOTM1UlZqeXZSb2t4NmRXbytKWi9IY1B0UHBlUC9JMi9WU0RHckthcmplZUpYVG5rZ21BbEpiSVovblNjakx5czQ2VGZ3PT0'>clicking here</a>.
+

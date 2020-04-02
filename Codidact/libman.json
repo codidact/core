@@ -1,0 +1,50 @@
+{
+	"version": "1.0",
+	"defaultProvider": "cdnjs",
+	"libraries": [
+		{
+			"provider": "unpkg",
+			"library": "@aspnet/signalr@1.1.4",
+			"destination": "wwwroot/lib/signalr/",
+			"files": [
+				"dist/browser/signalr.js",
+				"dist/browser/signalr.min.js"
+			]
+		},
+		{
+			"library": "twitter-bootstrap@4.4.1",
+			"destination": "wwwroot/lib/bootstrap/"
+		},
+		{
+			"library": "font-awesome@5.13.0",
+			"destination": "wwwroot/lib/font-awesome/"
+		},
+		{
+			"library": "jquery@3.4.1",
+			"destination": "wwwroot/lib/jquery/"
+		},
+		/*		{
+			"library": "jqueryui@1.12.1",
+			"destination": "wwwroot/lib/jqueryui/"
+		},*/
+		{
+			"library": "jquery-validate@1.19.1",
+			"destination": "wwwroot/lib/jquery-validation/"
+		},
+		{
+			"library": "jquery-validation-unobtrusive@3.2.11",
+			"destination": "wwwroot/lib/jquery-validation-unobtrusive/"
+		},
+		{
+			"library": "js-cookie@2.2.1",
+			"destination": "wwwroot/lib/js-cookie/"
+		},
+		{
+			"library": "popper.js@1.16.1",
+			"destination": "wwwroot/lib/popper.js/"
+		}
+	]
+}
+
+// generate integrity links: https://www.srihash.org/
+// jqueryui custom: https://jqueryui.com/download/#!version=1.12.1&themeParams=none&components=101101111100111110011110010001000000000000000000
