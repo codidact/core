@@ -33,7 +33,7 @@ namespace Codidact.Core.Infrastructure.Persistence.Configuration
                 .HasConstraintName("vote_type_created_by_member_fk");
 
             entity.HasOne(d => d.LastModifiedByMember)
-                .WithMany(p => p.VoteTypeLastModifeidByMember)
+                .WithMany(p => p.VoteTypeLastModifiedByMember)
                 .HasForeignKey(d => d.LastModifiedByMemberId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("vote_type_last_modified_by_member_fk");

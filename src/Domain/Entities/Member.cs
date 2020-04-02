@@ -74,7 +74,7 @@ namespace Codidact.Core.Domain.Entities
             TrustLevelLastModifiedByMember = new HashSet<TrustLevel>();
             VoteTypeCreatedByMember = new HashSet<VoteType>();
             VoteTypeHistory = new HashSet<VoteTypeHistory>();
-            VoteTypeLastModifeidByMember = new HashSet<VoteType>();
+            VoteTypeLastModifiedByMember = new HashSet<VoteType>();
         }
 
         public long Id { get; set; }
@@ -164,6 +164,6 @@ namespace Codidact.Core.Domain.Entities
         public virtual ICollection<TrustLevel> TrustLevelLastModifiedByMember { get; set; }
         public virtual ICollection<VoteType> VoteTypeCreatedByMember { get; set; }
         public virtual ICollection<VoteTypeHistory> VoteTypeHistory { get; set; }
-        public virtual ICollection<VoteType> VoteTypeLastModifeidByMember { get; set; }
+        public virtual ICollection<VoteType> VoteTypeLastModifiedByMember { get; set; }
     }
 }
