@@ -35,15 +35,18 @@ namespace Codidact.Core.Infrastructure.Identity
         /// </summary>
         public long GetMemberId()
         {
+            var context = _httpContextAccessor.HttpContext;
             var claimsIdentity = _httpContextAccessor.HttpContext.User.Claims as ClaimsIdentity;
             Claim memberClaim = _httpContextAccessor.HttpContext?.User.Claims.FirstOrDefault(claim => claim.Type == "codidact_member_id");
-            if (!string.IsNullOrEmpty(memberClaim.Value))
+            if (!string.IsNullOrEmpty(memberClaim?.Value))
             {
                 return long.Parse(memberClaim.Value);
             }
             else
             {
-                throw new Exception("Claim for memberId is missing in token");
+                // TODO: remove this hack. Currently 0, maybe don't set memberId if its not existant.;
+                return 0;
+                // throw new Exception("Claim for memberId is missing in token");
             }
         }
     }
