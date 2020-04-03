@@ -27,6 +27,8 @@ namespace Codidact.Core.WebApp.Controllers
         [HttpPost("create")]
         public async Task<EntityResult<Member>> Create([FromBody]MemberRequest request)
         {
+            // Todo. Authenticate the request.
+
             _logger.LogDebug(@$"{DateTime.Now.ToString()}: 
                 Received Request for Create User:
                 {nameof(request.DisplayName)} {request.DisplayName}
