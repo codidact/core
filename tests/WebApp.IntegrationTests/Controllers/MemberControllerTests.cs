@@ -42,8 +42,7 @@ namespace Codidact.Core.WebApp.IntegrationTests.Controllers
 
             Assert.True(result.Success);
 
-            var context = _factory.Services.GetService(typeof(IApplicationDbContext))
-                as IApplicationDbContext;
+            var context = _factory.Services.GetService<IApplicationDbContext>();
 
             var createdMember = context.Members.FirstOrDefault(member => member.Id == result.Id);
 
