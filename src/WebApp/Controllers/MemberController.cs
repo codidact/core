@@ -25,7 +25,7 @@ namespace Codidact.Core.WebApp.Controllers
         }
 
         [HttpPost("create")]
-        public async Task<EntityResult<Member>> Create([FromBody]MemberRequest request)
+        public async Task<EntityResult> Create([FromBody]MemberRequest request)
         {
             // Todo. Authenticate the request.
 

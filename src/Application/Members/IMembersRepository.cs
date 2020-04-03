@@ -21,6 +21,6 @@ namespace Codidact.Core.Application.Members
         /// </summary>
         /// <param name="member"></param>
         /// <returns></returns>
-        Task<EntityResult<Member>> Create(Member member);
+        Task<EntityResult> Create(Member member);
     }
 }

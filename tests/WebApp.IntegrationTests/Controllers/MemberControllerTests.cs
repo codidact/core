@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using Codidact.Core.Application.Common.Interfaces;
 using Codidact.Core.Domain.Common;
-using Codidact.Core.Domain.Entities;
 using Codidact.Core.WebApp.Models;
 using Xunit;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Codidact.Core.WebApp.IntegrationTests.Controllers
 {
@@ -38,7 +35,7 @@ namespace Codidact.Core.WebApp.IntegrationTests.Controllers
 
             response.EnsureSuccessStatusCode();
 
-            var result = await IntegrationTestHelper.GetResponseContent<EntityResult<Member>>(response);
+            var result = await IntegrationTestHelper.GetResponseContent<EntityResult>(response);
 
             Assert.True(result.Success);
 

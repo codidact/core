@@ -3,18 +3,19 @@ using System.Linq;
 
 namespace Codidact.Core.Domain.Common
 {
-    public class EntityResult<T>
+    public class EntityResult
     {
         public List<string> Errors { get; set; } = new List<string>();
 
         public bool Success { get; set; }
 
-        public long Id { get; set; }
+        public long? Id { get; set; }
 
         public EntityResult()
         {
 
         }
+
         public EntityResult(bool success)
         {
             Success = success;

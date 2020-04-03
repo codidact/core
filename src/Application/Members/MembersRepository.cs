@@ -20,13 +20,13 @@ namespace Codidact.Core.Application.Members
             return await _context.Members.SingleAsync(member => member.UserId == userId).ConfigureAwait(false);
         }
 
-        public async Task<EntityResult<Member>> Create(Member member)
+        public async Task<EntityResult> Create(Member member)
         {
             _context.Members.Add(member);
 
             await _context.SaveChangesAsync(CancellationToken.None);
 
-            return new EntityResult<Member>(member.Id);
+            return new EntityResult(member.Id);
         }
     }
 }
