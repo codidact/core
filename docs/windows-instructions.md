@@ -68,6 +68,11 @@
  5. You can launch the appliation by executing `dotnet run` in the `src/WebUI` directory.
 
  6. You can run the integration tests using `dotnet test` in the root directory.
+ 
+  
+ ## Setting up the auth provider
+ 
+ You'll also need to set up the auth provider. See [this instructions](https://github.com/codidact/authentication/blob/develop/docs/development.md) for more information.
 
   [1]: https://visualstudio.microsoft.com/downloads/
   [2]: https://dotnet.microsoft.com/download
