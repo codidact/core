@@ -88,6 +88,10 @@ shortcuts.
  3. You can launch the application by executing `dotnet run` in the `src/WebUI` directory.
 
  4. You can run the tests by executing `dotnet test` in the root directory.
+ 
+ ## Setting up the auth provider
+ 
+ You'll also need to set up the auth provider. See [this instructions](https://github.com/codidact/authentication/blob/develop/docs/development.md) for more information.
 
   [1]: https://stackoverflow.com/q/55683834/8746648
   [2]: https://dotnet.microsoft.com/download/dotnet-core/3.1
