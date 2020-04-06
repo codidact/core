@@ -7,11 +7,11 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
-namespace Codidact.Core.Infrastructure.Persistence.Migrations
+namespace Codidact.Core.Infrastructure.Persistance.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200116003547_AuditableColumns")]
-    partial class AuditableColumns
+    [Migration("20200403182007_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -37,25 +37,25 @@ namespace Codidact.Core.Infrastructure.Persistence.Migrations
                         .HasColumnName("created_by_member_id")
                         .HasColumnType("bigint");
 
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnName("deleted_at")
+                        .HasColumnType("timestamp without time zone");
+
                     b.Property<long?>("DeletedByMemberId")
                         .HasColumnName("deleted_by_member_id")
                         .HasColumnType("bigint");
-
-                    b.Property<DateTime?>("DeletedDateAt")
-                        .HasColumnName("deleted_date_at")
-                        .HasColumnType("timestamp without time zone");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnName("is_deleted")
                         .HasColumnType("boolean");
 
+                    b.Property<DateTime?>("LastModifiedAt")
+                        .HasColumnName("last_modified_at")
+                        .HasColumnType("timestamp without time zone");
+
                     b.Property<long?>("LastModifiedByMemberId")
                         .HasColumnName("last_modified_by_member_id")
                         .HasColumnType("bigint");
-
-                    b.Property<DateTime?>("LastModifiedDate")
-                        .HasColumnName("last_modified_date")
-                        .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -88,10 +88,6 @@ namespace Codidact.Core.Infrastructure.Persistence.Migrations
                         .IsUnique()
                         .HasName("ix_communities_name");
 
-                    b.HasIndex("Tagline")
-                        .IsUnique()
-                        .HasName("ix_communities_tagline");
-
                     b.HasIndex("Url")
                         .IsUnique()
                         .HasName("ix_communities_url");
@@ -119,13 +115,13 @@ namespace Codidact.Core.Infrastructure.Persistence.Migrations
                         .HasColumnName("created_by_member_id")
                         .HasColumnType("bigint");
 
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnName("deleted_at")
+                        .HasColumnType("timestamp without time zone");
+
                     b.Property<long?>("DeletedByMemberId")
                         .HasColumnName("deleted_by_member_id")
                         .HasColumnType("bigint");
-
-                    b.Property<DateTime?>("DeletedDateAt")
-                        .HasColumnName("deleted_date_at")
-                        .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("DisplayName")
                         .IsRequired()
@@ -133,18 +129,8 @@ namespace Codidact.Core.Infrastructure.Persistence.Migrations
                         .HasColumnType("character varying(100)")
                         .HasMaxLength(100);
 
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnName("email")
-                        .HasColumnType("character varying(255)")
-                        .HasMaxLength(255);
-
                     b.Property<bool>("IsDeleted")
                         .HasColumnName("is_deleted")
-                        .HasColumnType("boolean");
-
-                    b.Property<bool>("IsEmailVerified")
-                        .HasColumnName("is_email_verified")
                         .HasColumnType("boolean");
 
                     b.Property<bool>("IsFromStackExchange")
@@ -159,13 +145,13 @@ namespace Codidact.Core.Infrastructure.Persistence.Migrations
                         .HasColumnType("boolean")
                         .HasDefaultValue(false);
 
+                    b.Property<DateTime?>("LastModifiedAt")
+                        .HasColumnName("last_modified_at")
+                        .HasColumnType("timestamp without time zone");
+
                     b.Property<long?>("LastModifiedByMemberId")
                         .HasColumnName("last_modified_by_member_id")
                         .HasColumnType("bigint");
-
-                    b.Property<DateTime?>("LastModifiedDate")
-                        .HasColumnName("last_modified_date")
-                        .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("Location")
                         .HasColumnName("location")
@@ -175,24 +161,24 @@ namespace Codidact.Core.Infrastructure.Persistence.Migrations
                         .HasColumnName("stack_exchange_id")
                         .HasColumnType("bigint");
 
-                    b.Property<DateTime?>("StackExchangeLastImported")
-                        .HasColumnName("stack_exchange_last_imported")
+                    b.Property<DateTime?>("StackExchangeLastImportedAt")
+                        .HasColumnName("stack_exchange_last_imported_at")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<DateTime?>("StackExchangeValidated")
-                        .HasColumnName("stack_exchange_validated")
+                    b.Property<DateTime?>("StackExchangeValidatedAt")
+                        .HasColumnName("stack_exchange_validated_at")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<DateTime?>("SuspensionEndDate")
-                        .HasColumnName("suspension_end_date")
+                    b.Property<DateTime?>("SuspensionEndAt")
+                        .HasColumnName("suspension_end_at")
                         .HasColumnType("timestamp without time zone");
+
+                    b.Property<long>("UserId")
+                        .HasColumnName("user_id")
+                        .HasColumnType("bigint");
 
                     b.HasKey("Id")
                         .HasName("pk_members");
-
-                    b.HasIndex("Email")
-                        .IsUnique()
-                        .HasName("ix_members_email");
 
                     b.ToTable("members");
                 });
@@ -204,12 +190,6 @@ namespace Codidact.Core.Infrastructure.Persistence.Migrations
                         .HasColumnName("id")
                         .HasColumnType("bigint")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn);
-
-                    b.Property<string>("Content")
-                        .IsRequired()
-                        .HasColumnName("content")
-                        .HasColumnType("character varying(100)")
-                        .HasMaxLength(100);
 
                     b.Property<DateTime>("CreateDateAt")
                         .HasColumnName("create_date_at")
@@ -223,24 +203,30 @@ namespace Codidact.Core.Infrastructure.Persistence.Migrations
                         .HasColumnName("explanation")
                         .HasColumnType("text");
 
+                    b.Property<DateTime?>("LastModifiedAt")
+                        .HasColumnName("last_modified_at")
+                        .HasColumnType("timestamp without time zone");
+
                     b.Property<long?>("LastModifiedByMemberId")
                         .HasColumnName("last_modified_by_member_id")
                         .HasColumnType("bigint");
 
-                    b.Property<DateTime?>("LastModifiedDate")
-                        .HasColumnName("last_modified_date")
-                        .HasColumnType("timestamp without time zone");
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnName("name")
+                        .HasColumnType("character varying(100)")
+                        .HasMaxLength(100);
 
                     b.HasKey("Id")
                         .HasName("pk_trust_levels");
 
-                    b.HasIndex("Content")
-                        .IsUnique()
-                        .HasName("ix_trust_levels_content");
-
                     b.HasIndex("Explanation")
                         .IsUnique()
                         .HasName("ix_trust_levels_explanation");
+
+                    b.HasIndex("Name")
+                        .IsUnique()
+                        .HasName("ix_trust_levels_name");
 
                     b.ToTable("trust_levels");
                 });
