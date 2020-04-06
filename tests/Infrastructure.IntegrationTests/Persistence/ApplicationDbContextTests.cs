@@ -70,7 +70,14 @@ namespace Codidact.Core.Infrastructure.IntegrationTests.Persistence
             _sutContext.Add(member);
             await _sutContext.SaveChangesAsync();
 
-            Assert.Equal(member.CreateDateAt.Date, DateTime.UtcNow.Date);
+            Assert.Equal(member.CreatedAt.Date, DateTime.UtcNow.Date);
+        }
+
+        [Fact]
+        public void AuditTablesGoToAuditSchem()
+        {
+            var schema = _sutContext.Model.FindRuntimeEntityType(typeof(MemberHistory)).GetSchema();
+            Assert.Equal("audit", schema);
         }
 
         [Fact]

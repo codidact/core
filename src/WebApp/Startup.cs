@@ -62,7 +62,7 @@ namespace Codidact.Core.WebApp
             .Configure<ISecretsService>((options, secretsService) =>
             {
                 options.ClientSecret = secretsService.Get("Identity:ClientSecret").GetAwaiter().GetResult();
-            }); 
+            });
 
             JwtSecurityTokenHandler.DefaultMapInboundClaims = false;
 

@@ -1,25 +1,24 @@
-﻿using Codidact.Core.Domain.Common;
+﻿using System;
+using System.Collections.Generic;
+using Codidact.Core.Domain.Common;
 
 namespace Codidact.Core.Domain.Entities
 {
-    /// <summary>
-    /// Levels of trust for each member
-    /// </summary>
-    public class TrustLevel : AuditableEntity
+    public partial class TrustLevel : AuditableEntity
     {
-        /// <summary>
-        /// Auto Incremented Identification number
-        /// </summary>
+        public TrustLevel()
+        {
+            Category = new HashSet<Category>();
+            Member = new HashSet<Member>();
+        }
+
         public long Id { get; set; }
-
-        /// <summary>
-        /// Name of the trust level
-        /// </summary>
-        public string Name { get; set; }
-
-        /// <summary>
-        /// A short explaination of this trust level and its meaning
-        /// </summary>
+        public string DisplayName { get; set; }
         public string Explanation { get; set; }
+        public virtual Member CreatedByMember { get; set; }
+        public virtual Member LastModifiedByMember { get; set; }
+
+        public virtual ICollection<Category> Category { get; set; }
+        public virtual ICollection<Member> Member { get; set; }
     }
 }
