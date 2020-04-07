@@ -14,7 +14,7 @@ namespace Codidact.Core.Infrastructure.Persistence.Configuration
                 .IsUnique();
 
             entity.Property(e => e.Id)
-                .UseIdentityAlwaysColumn();
+                .HasColumnType<Domain.Enums.PostType>("postType");
 
             entity.Property(e => e.CreatedAt)
                 .HasDefaultValueSql("now()");

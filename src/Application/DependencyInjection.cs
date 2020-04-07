@@ -1,4 +1,5 @@
 ﻿using Codidact.Core.Application.Members;
+using Codidact.Core.Application.Questions.Queries.QuestionsQuery;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Codidact.Core.Application
@@ -16,6 +17,8 @@ namespace Codidact.Core.Application
         public static IServiceCollection AddApplication(this IServiceCollection services)
         {
             services.AddScoped<IMembersRepository, MembersRepository>();
+
+            services.AddScoped<QuestionsQuery>();
 
             return services;
         }

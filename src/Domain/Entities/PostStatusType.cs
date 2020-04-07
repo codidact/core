@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Codidact.Core.Domain.Common;
 
 namespace Codidact.Core.Domain.Entities

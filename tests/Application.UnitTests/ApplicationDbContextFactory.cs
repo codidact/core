@@ -14,6 +14,7 @@ namespace Codidact.Core.Application.IntegrationTests
         {
             var options = new DbContextOptionsBuilder<ApplicationDbContext>()
                 .UseInMemoryDatabase(Guid.NewGuid().ToString())
+                .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking)
                 .Options;
 
             var currentUserServiceMock = new Mock<ICurrentUserService>();
