@@ -1,0 +1,66 @@
+﻿@page
+@model Codidact.Core.WebApp.Pages.Posts.QuestionsModel
+@{
+    ViewData["Title"] = "Questions";
+}
+
+<partial name="_ValidationSummary" />
+
+
+<div class="grid has-margin-4">
+    <div class="grid--cell is-flexible">
+        <h1 class="has-margin-0">Q&amp;A posts</h1>
+    </div>
+    <div class="grid--cell">
+        <a href="newpost.html" class="button is-medium has-margin-4 is-filled">New question</a>
+    </div>
+</div>
+<div class="button-list is-gutterless has-margin-top-4 has-float-right">
+    <button class="button is-muted is-outlined is-active">best</button>
+    <button class="button is-muted is-outlined">oldest</button>
+    <button class="button is-muted is-outlined">active</button>
+</div>
+<div class="has-clear-clear"></div>
+
+
+<div class="item-list">
+    @foreach (var post in Model.Result.Items)
+    {
+    <div class="item-list--item">
+        <div class="item-list--number-value">
+            <div class="item-list--number">
+                @post.Id
+            </div>
+            <div class="item-list--number-label">answers</div>
+        </div>
+        <div class="item-list--number-value">
+            <div class="item-list--number">
+                120
+            </div>
+            <div class="item-list--number-label">votes</div>
+        </div>
+        <div class="item-list--text-value is-primary">
+            <div><a href="question.html" class="has-font-size-larger">What is Codidact?</a></div>
+            <div class="has-padding-top-2">
+                <a href="tag-page.html" class="badge is-tag">support</a>
+                <a href="tag-page.html" class="badge is-tag">codidact</a>
+            </div>
+        </div>
+        <div class="item-list--image-value">
+            <a href="user-other.html"><img src="profilepic.jpg" alt="placeholder image"></a>
+        </div>
+        <div class="item-list--image-value">
+            <a href="user-other.html"><img src="profilepic.jpg" alt="placeholder image"></a>
+        </div>
+        <div class="item-list--image-value">
+            <a href="user-other.html"><img src="profilepic.jpg" alt="placeholder image"></a>
+        </div>
+        <div class="item-list--number-value">
+            <div class="item-list--number-label">last active</div>
+            <div class="item-list--number">
+                1d
+            </div>
+        </div>
+    </div>
+    }
+</div>

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Codidact.Core.Application.Common.Contracts;
+﻿using Codidact.Core.Application.Common.Contracts;
 using Codidact.Core.Application.Questions.Queries.QuestionsQuery;
 
 namespace Codidact.Core.Application.Questions.Queries

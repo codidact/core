@@ -26,7 +26,7 @@ namespace Codidact.Core.Application.Questions.Queries.QuestionsQuery
 
             return Task.FromResult(new QuestionsQueryResult
             {
-                Questions = questionsQuery
+                Items = questionsQuery
                             .Take(request.Take)
                             .Skip(request.Skip)
                             .AsEnumerable(),

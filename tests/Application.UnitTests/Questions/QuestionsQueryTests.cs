@@ -28,19 +28,19 @@ namespace Codidact.Core.Application.IntegrationTests.Questions
 
             var result = await _questionsQuery.Handle(new QuestionsQueryRequest());
 
-            Assert.NotNull(result.Questions);
-            Assert.True(result.Questions.Any());
+            Assert.NotNull(result.Items);
+            Assert.True(result.Items.Any());
 
             // date is default sort
             // Max date is more closest to now
-            var minimumResultDate = result.Questions.Max(question => question.CreatedAt);
+            var minimumResultDate = result.Items.Max(question => question.CreatedAt);
             var actualMinimumDate = _applicationDbContext.Posts
                 .Where(post => post.PostTypeId == Domain.Enums.PostType.Question)
                 .Max(post => post.CreatedAt);
             Assert.Equal(DateTime.Compare(minimumResultDate, actualMinimumDate), -1);
 
             // take 20 is default
-            Assert.Equal(20, result.Questions.Count());
+            Assert.Equal(20, result.Items.Count());
         }
 
         public async Task SetupQuestions()
