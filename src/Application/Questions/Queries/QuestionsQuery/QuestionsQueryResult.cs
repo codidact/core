@@ -6,10 +6,9 @@ namespace Codidact.Core.Application.Questions.Queries.QuestionsQuery
 {
     public class QuestionsQueryResult
     {
-        public IEnumerable<Post> Items { get; set; } = new List<Post>();
+        public IEnumerable<QuestionsQueryDto> Items { get; set; } = new List<QuestionsQueryDto>();
 
         public int Total { get; set; }
 
-        public List<string> Errors { get; set; } = new List<string>();
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Codidact.Core.Application.Common.Contracts;
 using Codidact.Core.Application.Common.Interfaces;
@@ -18,7 +19,8 @@ namespace Codidact.Core.Application.Questions.Queries.QuestionsQuery
         public Task<QuestionsQueryResult> Handle(QuestionsQueryRequest request)
         {
             var questionsQuery = _context.Posts
-                .Where(post => post.PostTypeId == Domain.Enums.PostType.Question);
+                .Where(post => post.PostTypeId == Domain.Enums.PostType.Question)
+                .Where(post => post.IsDeleted == false);
 
             AddSortToQuery(request, questionsQuery);
 
@@ -29,9 +31,23 @@ namespace Codidact.Core.Application.Questions.Queries.QuestionsQuery
                 Items = questionsQuery
                             .Take(request.Take)
                             .Skip(request.Skip)
-                            .AsEnumerable(),
+                            .Select(MapToQuestion),
                 Total = questionsQuery.Count()
             });
+        }
+
+        private QuestionsQueryDto MapToQuestion(Post post)
+        {
+            return new QuestionsQueryDto
+            {
+                Answers = post.InverseParentPost.Count,
+                CreatedAt = post.CreatedAt,
+                LastModifiedAt = post.LastModifiedAt,
+                Score = post.Upvotes - (post.Downvotes),
+                Title = post.Title,
+                Tags = post.PostTag.Select(posttag =>
+                    new QuestionTag { Id = posttag.Tag.Id, Name = posttag.Tag.Body })
+            };
         }
 
         private void AddFiltersToQuery(QuestionsQueryRequest request, IQueryable<Post> questionsQuery)
