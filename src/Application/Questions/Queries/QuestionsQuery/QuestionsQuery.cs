@@ -46,7 +46,8 @@ namespace Codidact.Core.Application.Questions.Queries.QuestionsQuery
                 Answers = post.InverseParentPost.Count,
                 CreatedAt = post.CreatedAt,
                 LastModifiedAt = post.LastModifiedAt,
-                Score = post.Upvotes - (post.Downvotes),
+                // Votes are not score
+                Votes = post.Upvotes + (post.Downvotes),
                 Title = post.Title,
                 Tags = post.PostTag.Select(posttag =>
                     new QuestionTag { Id = posttag.Tag.Id, Name = posttag.Tag.Body })

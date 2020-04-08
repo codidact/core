@@ -4,8 +4,6 @@
     ViewData["Title"] = "Questions";
 }
 
-<partial name="_ValidationSummary" />
-
 
 <div class="grid has-margin-4">
     <div class="grid--cell is-flexible">
@@ -29,21 +27,27 @@
     <div class="item-list--item">
         <div class="item-list--number-value">
             <div class="item-list--number">
-                @post.Id
+                @post.Answers
             </div>
             <div class="item-list--number-label">answers</div>
         </div>
         <div class="item-list--number-value">
             <div class="item-list--number">
-                120
+                @post.Votes
             </div>
             <div class="item-list--number-label">votes</div>
         </div>
+
         <div class="item-list--text-value is-primary">
-            <div><a href="question.html" class="has-font-size-larger">What is Codidact?</a></div>
+            <div>
+                <a href="question.html" class="has-font-size-larger"> @post.Title</a>
+            </div>
             <div class="has-padding-top-2">
-                <a href="tag-page.html" class="badge is-tag">support</a>
-                <a href="tag-page.html" class="badge is-tag">codidact</a>
+                @foreach (var tag in post.Tags)
+                {
+                <a href="tag-page.html" class="badge is-tag">@tag.Name</a>
+                <a href="tag-page.html" class="badge is-tag">@tag.Name</a>
+                }
             </div>
         </div>
         <div class="item-list--image-value">
@@ -58,9 +62,9 @@
         <div class="item-list--number-value">
             <div class="item-list--number-label">last active</div>
             <div class="item-list--number">
-                1d
+                @(post.LastModifiedAt ?? post.CreatedAt)
             </div>
         </div>
     </div>
-    }
+        }
 </div>

@@ -23,7 +23,7 @@ namespace Codidact.Core.Application.Questions.Queries.QuestionsQuery
         /// <summary>
         /// The overall score
         /// </summary>
-        public long Score { get; set; }
+        public long Votes { get; set; }
 
         /// <summary>
         /// List of tags associated with question
