@@ -7,6 +7,9 @@ using Codidact.Core.Domain.Entities;
 
 namespace Codidact.Core.Application.Questions.Queries.QuestionsQuery
 {
+    /// <summary>
+    /// Returns a sets of questions based on the request
+    /// </summary>
     public class QuestionsQuery : IRequestHandler<QuestionsQueryRequest, QuestionsQueryResult>
     {
         private readonly IApplicationDbContext _context;
