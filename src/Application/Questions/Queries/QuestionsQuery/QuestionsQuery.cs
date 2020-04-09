@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Codidact.Core.Application.Common.Contracts;
 using Codidact.Core.Application.Common.Interfaces;
 using Codidact.Core.Domain.Entities;
+using Microsoft.Extensions.Logging;
 
 namespace Codidact.Core.Application.Questions.Queries.QuestionsQuery
 {
@@ -13,14 +14,17 @@ namespace Codidact.Core.Application.Questions.Queries.QuestionsQuery
     public class QuestionsQuery : IRequestHandler<QuestionsQueryRequest, QuestionsQueryResult>
     {
         private readonly IApplicationDbContext _context;
+        private readonly ILogger<QuestionsQuery> _logger;
 
-        public QuestionsQuery(IApplicationDbContext context)
+        public QuestionsQuery(IApplicationDbContext context, ILogger<QuestionsQuery> logger)
         {
             _context = context;
+            _logger = logger;
         }
 
         public Task<QuestionsQueryResult> Handle(QuestionsQueryRequest request)
         {
+            _logger.LogInformation($"{DateTime.UtcNow.ToString("g")} - Starting to handle request for Questions List");
             var questionsQuery = _context.Posts
                 .Where(post => post.PostTypeId == Domain.Enums.PostType.Question)
                 .Where(post => post.IsDeleted == false);
