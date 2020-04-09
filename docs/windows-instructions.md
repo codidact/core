@@ -70,9 +70,9 @@
  6. You can run the integration tests using `dotnet test` in the root directory.
  
   
- ## Setting up the auth provider
+ ## Setting up the Authentication Provider
  
- You'll also need to set up the auth provider. See [this instructions](https://github.com/codidact/authentication/blob/develop/docs/development.md) for more information.
+ You'll also need to set up the auth provider. See [these instructions](https://github.com/codidact/authentication/blob/develop/docs/development.md) for more information.
 
   [1]: https://visualstudio.microsoft.com/downloads/
   [2]: https://dotnet.microsoft.com/download
