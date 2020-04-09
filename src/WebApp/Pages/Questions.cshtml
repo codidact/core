@@ -50,19 +50,10 @@
                 }
             </div>
         </div>
-        <div class="item-list--image-value">
-            <a href="user-other.html"><img src="profilepic.jpg" alt="placeholder image"></a>
-        </div>
-        <div class="item-list--image-value">
-            <a href="user-other.html"><img src="profilepic.jpg" alt="placeholder image"></a>
-        </div>
-        <div class="item-list--image-value">
-            <a href="user-other.html"><img src="profilepic.jpg" alt="placeholder image"></a>
-        </div>
         <div class="item-list--number-value">
             <div class="item-list--number-label">last active</div>
             <div class="item-list--number">
-                @(post.LastModifiedAt ?? post.CreatedAt)
+                @((post.LastModifiedAt ?? post.CreatedAt).ToString("g"))
             </div>
         </div>
     </div>
