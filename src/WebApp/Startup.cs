@@ -4,6 +4,7 @@ using Codidact.Core.Domain.Entities;
 using Codidact.Core.Infrastructure;
 using Codidact.Core.Infrastructure.Persistence;
 using Codidact.Core.WebApp.Models;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -72,7 +73,8 @@ namespace Codidact.Core.WebApp
 
             services
                 .AddRazorPages()
-                .AddRazorRuntimeCompilation();
+                .AddRazorRuntimeCompilation()
+                .AddFluentValidation();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

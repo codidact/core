@@ -25,7 +25,10 @@ namespace Codidact.Core.Application.Questions.Queries
         /// </summary>
         public QuestionsQuerySortType Sort { get; set; } = QuestionsQuerySortType.Date;
 
-
+        /// <summary>
+        /// The category of the questions
+        /// </summary>
+        public string Category { get; set; }
     }
 
     public enum QuestionsQuerySortType

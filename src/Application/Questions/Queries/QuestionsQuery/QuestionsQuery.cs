@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Codidact.Core.Application.Common.Contracts;
 using Codidact.Core.Application.Common.Interfaces;
 using Codidact.Core.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 namespace Codidact.Core.Application.Questions.Queries.QuestionsQuery
@@ -61,6 +62,12 @@ namespace Codidact.Core.Application.Questions.Queries.QuestionsQuery
         private void AddFiltersToQuery(QuestionsQueryRequest request, IQueryable<Post> questionsQuery)
         {
             // TODO: Implement filters
+            var category = _context.Categories.FirstOrDefault(cat => cat.DisplayName == request.Category);
+            if(category == null)
+            {
+                throw new Exception($"Category not found: {request.Category}");
+            }
+            questionsQuery.Where(q => q.CategoryId == category.Id);
         }
 
         private void AddSortToQuery(QuestionsQueryRequest request, IQueryable<Post> questionsQuery)

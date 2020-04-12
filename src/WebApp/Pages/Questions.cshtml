@@ -1,8 +1,10 @@
-﻿@page
+﻿@page "/{category}/questions"
 @model Codidact.Core.WebApp.Pages.Posts.QuestionsModel
 @{
     ViewData["Title"] = "Questions";
 }
+
+<partial name="_ValidationSummary" />
 
 
 <div class="grid has-margin-4">
@@ -24,38 +26,38 @@
 <div class="item-list">
     @foreach (var post in Model.Result.Items)
     {
-    <div class="item-list--item">
-        <div class="item-list--number-value">
-            <div class="item-list--number">
-                @post.Answers
+        <div class="item-list--item">
+            <div class="item-list--number-value">
+                <div class="item-list--number">
+                    @post.Answers
+                </div>
+                <div class="item-list--number-label">answers</div>
             </div>
-            <div class="item-list--number-label">answers</div>
-        </div>
-        <div class="item-list--number-value">
-            <div class="item-list--number">
-                @post.Votes
+            <div class="item-list--number-value">
+                <div class="item-list--number">
+                    @post.Votes
+                </div>
+                <div class="item-list--number-label">votes</div>
             </div>
-            <div class="item-list--number-label">votes</div>
-        </div>
 
-        <div class="item-list--text-value is-primary">
-            <div>
-                <a href="question.html" class="has-font-size-larger"> @post.Title</a>
+            <div class="item-list--text-value is-primary">
+                <div>
+                    <a href="question.html" class="has-font-size-larger"> @post.Title</a>
+                </div>
+                <div class="has-padding-top-2">
+                    @foreach (var tag in post.Tags)
+                    {
+                        <a href="tag-page.html" class="badge is-tag">@tag.Name</a>
+                        <a href="tag-page.html" class="badge is-tag">@tag.Name</a>
+                    }
+                </div>
             </div>
-            <div class="has-padding-top-2">
-                @foreach (var tag in post.Tags)
-                {
-                <a href="tag-page.html" class="badge is-tag">@tag.Name</a>
-                <a href="tag-page.html" class="badge is-tag">@tag.Name</a>
-                }
+            <div class="item-list--number-value">
+                <div class="item-list--number-label">last active</div>
+                <div class="item-list--number">
+                    @((post.LastModifiedAt ?? post.CreatedAt))
+                </div>
             </div>
         </div>
-        <div class="item-list--number-value">
-            <div class="item-list--number-label">last active</div>
-            <div class="item-list--number">
-                @((post.LastModifiedAt ?? post.CreatedAt).ToString("g"))
-            </div>
-        </div>
-    </div>
-        }
+    }
 </div>

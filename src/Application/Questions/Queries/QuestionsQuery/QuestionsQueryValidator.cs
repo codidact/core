@@ -11,6 +11,10 @@ namespace Codidact.Core.Application.Questions.Queries.QuestionsQuery
 
             RuleFor(request => request.Skip)
                 .GreaterThanOrEqualTo(0);
+
+            RuleFor(request => request.Category)
+                       .NotNull()
+                       .NotEmpty();
         }
     }
 }
