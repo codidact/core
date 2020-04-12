@@ -7,6 +7,7 @@ using Codidact.Core.Application.Common.Interfaces;
 using Codidact.Core.Application.Questions.Queries;
 using Codidact.Core.Application.Questions.Queries.QuestionsQuery;
 using Codidact.Core.Domain.Entities;
+using Microsoft.Extensions.Logging.Abstractions;
 using Xunit;
 
 namespace Codidact.Core.Application.IntegrationTests.Questions
@@ -18,7 +19,7 @@ namespace Codidact.Core.Application.IntegrationTests.Questions
         public QuestionsQueryTests()
         {
             _applicationDbContext = ApplicationDbContextFactory.Create();
-            _questionsQuery = new QuestionsQuery(_applicationDbContext);
+            _questionsQuery = new QuestionsQuery(_applicationDbContext, NullLogger<QuestionsQuery>.Instance);
         }
         [Fact]
         public async Task QueryShouldReturnResultsByDefaults()
