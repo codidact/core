@@ -23,3 +23,18 @@ for (let i = 0; i < headerSlideTriggers.length; i++) {
         e.preventDefault();
     });
 }
+
+
+/*
+ * Date/Time functions
+ ----------------
+ * Utilities to handle dates
+*/
+function utcDateToLocalDisplay(date) {
+    var dateInstance = new Date(date);
+    var dateOptions = { year: "numeric", month: "numeric", day: "numeric" };
+    var timeOptions = { hour12: false };
+    var locale = navigator.language;
+
+    return dateInstance.toLocaleDateString(locale, dateOptions) + " " + dateInstance.toLocaleTimeString(locale, timeOptions);
+}
