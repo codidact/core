@@ -23,12 +23,15 @@ namespace Codidact.Core.WebApp.Pages.Posts
 
         public QuestionsQueryResult Result { get; set; } = new QuestionsQueryResult();
 
-        public async Task<IActionResult> OnGetAsync(QuestionsQueryRequest request, string category)
+        public QuestionsQueryRequest Query { get; set; } = new QuestionsQueryRequest();
+
+        public async Task<IActionResult> OnGetAsync(QuestionsQueryRequest query, string category)
         {
             _logger.LogInformation($"{DateTime.UtcNow.ToString("g")} - Received request for Questions List");
+            Query = query;
             if (ModelState.IsValid)
             {
-                Result = await _questionsQuery.Handle(request)
+                Result = await _questionsQuery.Handle(query)
                       .ConfigureAwait(false);
             }
 

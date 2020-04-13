@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using Codidact.Core.Application.Common.Contracts;
 using Codidact.Core.Application.Common.Interfaces;
 using Codidact.Core.Domain.Entities;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 namespace Codidact.Core.Application.Questions.Queries.QuestionsQuery
