@@ -27,7 +27,7 @@ namespace Codidact.Core.WebApp.Pages.Posts
 
         public async Task<IActionResult> OnGetAsync(QuestionsQueryRequest query, string category)
         {
-            _logger.LogInformation($"{DateTime.UtcNow.ToString("g")} - Received request for Questions List");
+            _logger.LogInformation($"{DateTime.UtcNow.ToString("u")} - Received request for Questions List");
             Query = query;
             if (ModelState.IsValid)
             {

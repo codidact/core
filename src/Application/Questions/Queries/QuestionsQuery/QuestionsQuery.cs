@@ -25,7 +25,7 @@ namespace Codidact.Core.Application.Questions.Queries.QuestionsQuery
 
         public async Task<QuestionsQueryResult> Handle(QuestionsQueryRequest request)
         {
-            _logger.LogInformation($"{DateTime.UtcNow.ToString("g")} - Starting to handle request for Questions List");
+            _logger.LogInformation($"{DateTime.UtcNow.ToString("u")} - Starting to handle request for Questions List");
 
             var category = await _context.Categories
                 .FirstOrDefaultAsync(category => category.DisplayName.ToLower() == request.Category.ToLower())
