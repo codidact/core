@@ -53,7 +53,7 @@
             </div>
             <div class="item-list--number-value">
                 <div class="item-list--number-label">last active</div>
-                <div class="item-list--number live-date">
+                <div class="item-list--number live-date" data-date="@((post.LastModifiedAt ?? post.CreatedAt).ToString("u"))">
                     @((post.LastModifiedAt ?? post.CreatedAt).ToString("u"))
                 </div>
             </div>

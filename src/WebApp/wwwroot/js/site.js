@@ -44,7 +44,10 @@ function utcDateTimeToLocalDisplay(date) {
 window.addEventListener("load", function () {
     var questions = document.querySelectorAll(".live-date");
     for (var i = 0; i < questions.length; i++) {
-        var dateValue = questions[i].innerHTML;
-        questions[i].innerHTML = utcDateTimeToLocalDisplay(dateValue);
+        var dateAttribue = questions[i].attributes.getNamedItem('data-date');
+        if (dateAttribue) {
+            var date = dateAttribue.value;
+            questions[i].innerHTML = utcDateTimeToLocalDisplay(date);
+        }
     }
 });
