@@ -23,7 +23,7 @@ namespace Codidact.Core.Application.Questions.Queries
         /// <summary>
         /// The sort that is applied on the query 
         /// </summary>
-        public QuestionsQuerySortType Sort { get; set; } = QuestionsQuerySortType.Date;
+        public QuestionsQuerySortType Sort { get; set; } = QuestionsQuerySortType.Newest;
 
         /// <summary>
         /// The category of the questions
@@ -33,7 +33,8 @@ namespace Codidact.Core.Application.Questions.Queries
 
     public enum QuestionsQuerySortType
     {
-        Date = 1,
-        Popularity = 2,
+        Newest = 1,
+        Best = 2,
+        Oldest = 3
     }
 }

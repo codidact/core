@@ -74,14 +74,19 @@ namespace Codidact.Core.Application.Questions.Queries.QuestionsQuery
         {
             switch (request.Sort)
             {
-                case QuestionsQuerySortType.Date:
+                case QuestionsQuerySortType.Newest:
                 default:
                     questionsQuery
                         .OrderByDescending(question => question.LastModifiedAt)
                         .ThenByDescending(question => question.CreatedAt);
                     break;
-                case QuestionsQuerySortType.Popularity:
+                case QuestionsQuerySortType.Best:
                     // TODO: implement popularity
+                    break;
+                case QuestionsQuerySortType.Oldest:
+                    questionsQuery
+                        .OrderBy(question => question.LastModifiedAt)
+                        .ThenBy(questions => questions.CreatedAt);
                     break;
             }
         }

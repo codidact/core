@@ -12,13 +12,13 @@
         <h1 class="has-margin-0">Q&amp;A posts</h1>
     </div>
     <div class="grid--cell">
-        <a href="newpost.html" class="button is-medium has-margin-4 is-filled">New question</a>
+        <a asp-page="questions/new" class="button is-medium has-margin-4 is-filled">New question</a>
     </div>
 </div>
 <div class="button-list is-gutterless has-margin-top-4 has-float-right">
-    <button class="button is-muted is-outlined is-active">best</button>
-    <button class="button is-muted is-outlined">oldest</button>
-    <button class="button is-muted is-outlined">active</button>
+    <a asp-page="questions" asp-route-sort="1" class="button is-muted is-outlined is-active">best</a>
+    <a asp-page="questions" asp-route-sort="3" class="button is-muted is-outlined">oldest</a>
+    <a asp-page="questions" asp-route-sort="2" class="button is-muted is-outlined">active</a>
 </div>
 <div class="has-clear-clear"></div>
 
@@ -42,12 +42,12 @@
 
             <div class="item-list--text-value is-primary">
                 <div>
-                    <a href="question.html" class="has-font-size-larger"> @post.Title</a>
+                    <a class="has-font-size-larger"> @post.Title</a>
                 </div>
                 <div class="has-padding-top-2">
                     @foreach (var tag in post.Tags)
                     {
-                        <a href="tag-page.html" class="badge is-tag">@tag.Name</a>
+                        <a asp-page="tag" asp-route-id="@tag.Id" class="badge is-tag">@tag.Name</a>
                     }
                 </div>
             </div>
