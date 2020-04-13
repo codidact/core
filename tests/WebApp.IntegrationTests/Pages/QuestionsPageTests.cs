@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Net;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -18,8 +16,8 @@ namespace Codidact.Core.WebApp.IntegrationTests.Pages
         }
 
         [Theory]
-        [InlineData("/questions")]
-        [InlineData("/questions?skip=0&take=20")]
+        [InlineData("main/questions")]
+        [InlineData("main/questions?skip=0&take=20")]
         public async Task ReturnsQuestionsByQueryParams(string url)
         {
             // Arrange
@@ -32,6 +30,20 @@ namespace Codidact.Core.WebApp.IntegrationTests.Pages
             response.EnsureSuccessStatusCode(); // Status Code 200-299
             Assert.Equal("text/html",
                 response.Content.Headers.ContentType.MediaType);
+        }
+
+        [Theory]
+        [InlineData("wrong-category/questions")]
+        public async Task IncorrectCategoryThrowsServerError(string url)
+        {
+            // Arrange
+            var client = _factory.CreateClient();
+
+            // Act
+            var response = await client.GetAsync(url);
+
+            // Assert
+            Assert.Equal(HttpStatusCode.InternalServerError, response.StatusCode);
         }
     }
 }

@@ -30,7 +30,7 @@ for (let i = 0; i < headerSlideTriggers.length; i++) {
  ----------------
  * Utilities to handle dates
 */
-function utcDateToLocalDisplay(date) {
+function utcDateTimeToLocalDisplay(date) {
     var dateInstance = new Date(date);
     var dateOptions = { year: "numeric", month: "numeric", day: "numeric" };
     var timeOptions = { hour12: false };
@@ -38,3 +38,5 @@ function utcDateToLocalDisplay(date) {
 
     return dateInstance.toLocaleDateString(locale, dateOptions) + " " + dateInstance.toLocaleTimeString(locale, timeOptions);
 }
+
+function 
