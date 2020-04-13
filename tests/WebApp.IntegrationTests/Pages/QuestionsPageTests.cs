@@ -4,22 +4,21 @@ using Xunit;
 
 namespace Codidact.Core.WebApp.IntegrationTests.Pages
 {
-    public class CommonPagesTests :
+    public class QuestionsPageTests :
       IClassFixture<CustomWebApplicationFactory<Startup>>
     {
         private readonly CustomWebApplicationFactory<Startup> _factory;
 
-        public CommonPagesTests(
+        public QuestionsPageTests(
             CustomWebApplicationFactory<Startup> factory)
         {
             _factory = factory;
         }
 
         [Theory]
-        [InlineData("/")]
-        [InlineData("/index")]
-        [InlineData("/privacy")]
-        public async Task GetEndpointsReturnSuccessAndCorrectContentType(string url)
+        [InlineData("main/questions")]
+        [InlineData("main/questions?skip=0&take=20")]
+        public async Task ReturnsQuestionsByQueryParams(string url)
         {
             // Arrange
             var client = _factory.CreateClient();
@@ -34,8 +33,8 @@ namespace Codidact.Core.WebApp.IntegrationTests.Pages
         }
 
         [Theory]
-        [InlineData("/invalid-url")]
-        public async Task EnsureInvalidUrlsRedirectTo404(string url)
+        [InlineData("wrong-category/questions")]
+        public async Task IncorrectCategoryThrowsServerError(string url)
         {
             // Arrange
             var client = _factory.CreateClient();
@@ -44,7 +43,7 @@ namespace Codidact.Core.WebApp.IntegrationTests.Pages
             var response = await client.GetAsync(url);
 
             // Assert
-            Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
+            Assert.Equal(HttpStatusCode.InternalServerError, response.StatusCode);
         }
     }
 }

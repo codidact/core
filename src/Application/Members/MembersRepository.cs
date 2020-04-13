@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace Codidact.Core.Application.Members
 {
+    /// <inheritdoc />
     public class MembersRepository : IMembersRepository
     {
         private readonly IApplicationDbContext _context;

@@ -27,7 +27,7 @@ namespace Codidact.Core.Domain.Entities
         public long? NetVotes { get; set; }
         public decimal Score { get; set; }
         public long Views { get; set; }
-        public long PostTypeId { get; set; }
+        public Enums.PostType PostTypeId { get; set; }
         public bool IsAccepted { get; set; }
         public bool IsClosed { get; set; }
         public bool IsProtected { get; set; }

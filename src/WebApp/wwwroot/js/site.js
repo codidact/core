@@ -23,3 +23,31 @@ for (let i = 0; i < headerSlideTriggers.length; i++) {
         e.preventDefault();
     });
 }
+
+/*
+ * Date/Time functions
+ ----------------
+ * Utilities to handle dates
+*/
+function utcDateTimeToLocalDisplay(date) {
+    var dateInstance = new Date(date);
+    var dateOptions = { year: "numeric", month: "numeric", day: "numeric" };
+    var timeOptions = { hour12: false };
+    var locale = navigator.language;
+
+    return dateInstance.toLocaleDateString(locale, dateOptions) + " " + dateInstance.toLocaleTimeString(locale, timeOptions);
+}
+
+/**
+ * Switches all dates from UTC to local client date
+ */
+window.addEventListener("load", function () {
+    var questions = document.querySelectorAll(".live-date");
+    for (var i = 0; i < questions.length; i++) {
+        var dateAttribue = questions[i].attributes.getNamedItem('data-date');
+        if (dateAttribue) {
+            var date = dateAttribue.value;
+            questions[i].innerHTML = utcDateTimeToLocalDisplay(date);
+        }
+    }
+});

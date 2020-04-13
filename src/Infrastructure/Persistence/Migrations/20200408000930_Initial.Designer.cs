@@ -3,15 +3,17 @@ using System;
 using Codidact.Core.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Codidact.Core.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200408000930_Initial")]
+    partial class Initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -49,7 +51,7 @@ namespace Codidact.Core.Infrastructure.Persistence.Migrations
                         .HasColumnType("timestamp without time zone")
                         .HasDefaultValueSql("now()");
 
-                    b.Property<long?>("CreatedByMemberId")
+                    b.Property<long>("CreatedByMemberId")
                         .HasColumnName("created_by_member_id")
                         .HasColumnType("bigint");
 
@@ -143,7 +145,7 @@ namespace Codidact.Core.Infrastructure.Persistence.Migrations
                         .HasColumnType("timestamp without time zone")
                         .HasDefaultValueSql("now()");
 
-                    b.Property<long?>("CreatedByMemberId")
+                    b.Property<long>("CreatedByMemberId")
                         .HasColumnName("created_by_member_id")
                         .HasColumnType("bigint");
 
@@ -220,7 +222,7 @@ namespace Codidact.Core.Infrastructure.Persistence.Migrations
                         .HasColumnType("timestamp without time zone")
                         .HasDefaultValueSql("now()");
 
-                    b.Property<long?>("CreatedByMemberId")
+                    b.Property<long>("CreatedByMemberId")
                         .HasColumnName("created_by_member_id")
                         .HasColumnType("bigint");
 
@@ -281,7 +283,7 @@ namespace Codidact.Core.Infrastructure.Persistence.Migrations
                         .HasColumnType("timestamp without time zone")
                         .HasDefaultValueSql("now()");
 
-                    b.Property<long?>("CreatedByMemberId")
+                    b.Property<long>("CreatedByMemberId")
                         .HasColumnName("created_by_member_id")
                         .HasColumnType("bigint");
 
@@ -350,7 +352,7 @@ namespace Codidact.Core.Infrastructure.Persistence.Migrations
                         .HasColumnType("timestamp without time zone")
                         .HasDefaultValueSql("now()");
 
-                    b.Property<long?>("CreatedByMemberId")
+                    b.Property<long>("CreatedByMemberId")
                         .HasColumnName("created_by_member_id")
                         .HasColumnType("bigint");
 
@@ -451,7 +453,7 @@ namespace Codidact.Core.Infrastructure.Persistence.Migrations
                         .HasColumnType("timestamp without time zone")
                         .HasDefaultValueSql("now()");
 
-                    b.Property<long?>("CreatedByMemberId")
+                    b.Property<long>("CreatedByMemberId")
                         .HasColumnName("created_by_member_id")
                         .HasColumnType("bigint");
 
@@ -551,7 +553,7 @@ namespace Codidact.Core.Infrastructure.Persistence.Migrations
                         .HasColumnType("timestamp without time zone")
                         .HasDefaultValueSql("now()");
 
-                    b.Property<long?>("CreatedByMemberId")
+                    b.Property<long>("CreatedByMemberId")
                         .HasColumnName("created_by_member_id")
                         .HasColumnType("bigint");
 
@@ -613,7 +615,7 @@ namespace Codidact.Core.Infrastructure.Persistence.Migrations
                         .HasColumnType("timestamp without time zone")
                         .HasDefaultValueSql("now()");
 
-                    b.Property<long?>("CreatedByMemberId")
+                    b.Property<long>("CreatedByMemberId")
                         .HasColumnName("created_by_member_id")
                         .HasColumnType("bigint");
 
@@ -676,7 +678,7 @@ namespace Codidact.Core.Infrastructure.Persistence.Migrations
                         .HasColumnType("timestamp without time zone")
                         .HasDefaultValueSql("now()");
 
-                    b.Property<long?>("CreatedByMemberId")
+                    b.Property<long>("CreatedByMemberId")
                         .HasColumnName("created_by_member_id")
                         .HasColumnType("bigint");
 
@@ -786,7 +788,7 @@ namespace Codidact.Core.Infrastructure.Persistence.Migrations
                         .HasColumnType("timestamp without time zone")
                         .HasDefaultValueSql("now()");
 
-                    b.Property<long?>("CreatedByMemberId")
+                    b.Property<long>("CreatedByMemberId")
                         .HasColumnName("created_by_member_id")
                         .HasColumnType("bigint");
 
@@ -884,7 +886,7 @@ namespace Codidact.Core.Infrastructure.Persistence.Migrations
                         .HasColumnType("timestamp without time zone")
                         .HasDefaultValueSql("now()");
 
-                    b.Property<long?>("CreatedByMemberId")
+                    b.Property<long>("CreatedByMemberId")
                         .HasColumnName("created_by_member_id")
                         .HasColumnType("bigint");
 
@@ -953,7 +955,7 @@ namespace Codidact.Core.Infrastructure.Persistence.Migrations
                         .HasColumnType("timestamp without time zone")
                         .HasDefaultValueSql("now()");
 
-                    b.Property<long?>("CreatedByMemberId")
+                    b.Property<long>("CreatedByMemberId")
                         .HasColumnName("created_by_member_id")
                         .HasColumnType("bigint");
 
@@ -1030,7 +1032,7 @@ namespace Codidact.Core.Infrastructure.Persistence.Migrations
                         .HasColumnType("timestamp without time zone")
                         .HasDefaultValueSql("now()");
 
-                    b.Property<long?>("CreatedByMemberId")
+                    b.Property<long>("CreatedByMemberId")
                         .HasColumnName("created_by_member_id")
                         .HasColumnType("bigint");
 
@@ -1091,7 +1093,7 @@ namespace Codidact.Core.Infrastructure.Persistence.Migrations
                         .HasColumnType("timestamp without time zone")
                         .HasDefaultValueSql("now()");
 
-                    b.Property<long?>("CreatedByMemberId")
+                    b.Property<long>("CreatedByMemberId")
                         .HasColumnName("created_by_member_id")
                         .HasColumnType("bigint");
 
@@ -1161,7 +1163,7 @@ namespace Codidact.Core.Infrastructure.Persistence.Migrations
                         .HasColumnType("timestamp without time zone")
                         .HasDefaultValueSql("now()");
 
-                    b.Property<long?>("CreatedByMemberId")
+                    b.Property<long>("CreatedByMemberId")
                         .HasColumnName("created_by_member_id")
                         .HasColumnType("bigint");
 
@@ -1276,7 +1278,7 @@ namespace Codidact.Core.Infrastructure.Persistence.Migrations
                         .HasColumnType("timestamp without time zone")
                         .HasDefaultValueSql("now()");
 
-                    b.Property<long?>("CreatedByMemberId")
+                    b.Property<long>("CreatedByMemberId")
                         .HasColumnName("created_by_member_id")
                         .HasColumnType("bigint");
 
@@ -1331,7 +1333,7 @@ namespace Codidact.Core.Infrastructure.Persistence.Migrations
                         .HasColumnType("timestamp without time zone")
                         .HasDefaultValueSql("now()");
 
-                    b.Property<long?>("CreatedByMemberId")
+                    b.Property<long>("CreatedByMemberId")
                         .HasColumnName("created_by_member_id")
                         .HasColumnType("bigint");
 
@@ -1399,7 +1401,7 @@ namespace Codidact.Core.Infrastructure.Persistence.Migrations
                         .HasColumnType("timestamp without time zone")
                         .HasDefaultValueSql("now()");
 
-                    b.Property<long?>("CreatedByMemberId")
+                    b.Property<long>("CreatedByMemberId")
                         .HasColumnName("created_by_member_id")
                         .HasColumnType("bigint");
 
@@ -1505,7 +1507,7 @@ namespace Codidact.Core.Infrastructure.Persistence.Migrations
                         .HasColumnType("timestamp without time zone")
                         .HasDefaultValueSql("now()");
 
-                    b.Property<long?>("CreatedByMemberId")
+                    b.Property<long>("CreatedByMemberId")
                         .HasColumnName("created_by_member_id")
                         .HasColumnType("bigint");
 
@@ -1560,7 +1562,7 @@ namespace Codidact.Core.Infrastructure.Persistence.Migrations
                         .HasColumnType("timestamp without time zone")
                         .HasDefaultValueSql("now()");
 
-                    b.Property<long?>("CreatedByMemberId")
+                    b.Property<long>("CreatedByMemberId")
                         .HasColumnName("created_by_member_id")
                         .HasColumnType("bigint");
 
@@ -1619,7 +1621,7 @@ namespace Codidact.Core.Infrastructure.Persistence.Migrations
                         .HasColumnType("timestamp without time zone")
                         .HasDefaultValueSql("now()");
 
-                    b.Property<long?>("CreatedByMemberId")
+                    b.Property<long>("CreatedByMemberId")
                         .HasColumnName("created_by_member_id")
                         .HasColumnType("bigint");
 
@@ -1674,7 +1676,7 @@ namespace Codidact.Core.Infrastructure.Persistence.Migrations
                         .HasColumnType("timestamp without time zone")
                         .HasDefaultValueSql("now()");
 
-                    b.Property<long?>("CreatedByMemberId")
+                    b.Property<long>("CreatedByMemberId")
                         .HasColumnName("created_by_member_id")
                         .HasColumnType("bigint");
 
@@ -1736,7 +1738,7 @@ namespace Codidact.Core.Infrastructure.Persistence.Migrations
                         .HasColumnType("timestamp without time zone")
                         .HasDefaultValueSql("now()");
 
-                    b.Property<long?>("CreatedByMemberId")
+                    b.Property<long>("CreatedByMemberId")
                         .HasColumnName("created_by_member_id")
                         .HasColumnType("bigint");
 
@@ -1803,7 +1805,7 @@ namespace Codidact.Core.Infrastructure.Persistence.Migrations
                         .HasColumnType("timestamp without time zone")
                         .HasDefaultValueSql("now()");
 
-                    b.Property<long?>("CreatedByMemberId")
+                    b.Property<long>("CreatedByMemberId")
                         .HasColumnName("created_by_member_id")
                         .HasColumnType("bigint");
 
@@ -1860,7 +1862,7 @@ namespace Codidact.Core.Infrastructure.Persistence.Migrations
                         .HasColumnType("timestamp without time zone")
                         .HasDefaultValueSql("now()");
 
-                    b.Property<long?>("CreatedByMemberId")
+                    b.Property<long>("CreatedByMemberId")
                         .HasColumnName("created_by_member_id")
                         .HasColumnType("bigint");
 
@@ -1915,7 +1917,7 @@ namespace Codidact.Core.Infrastructure.Persistence.Migrations
                         .HasColumnType("timestamp without time zone")
                         .HasDefaultValueSql("now()");
 
-                    b.Property<long?>("CreatedByMemberId")
+                    b.Property<long>("CreatedByMemberId")
                         .HasColumnName("created_by_member_id")
                         .HasColumnType("bigint");
 
@@ -1977,7 +1979,7 @@ namespace Codidact.Core.Infrastructure.Persistence.Migrations
                         .HasColumnType("timestamp without time zone")
                         .HasDefaultValueSql("now()");
 
-                    b.Property<long?>("CreatedByMemberId")
+                    b.Property<long>("CreatedByMemberId")
                         .HasColumnName("created_by_member_id")
                         .HasColumnType("bigint");
 
@@ -2053,7 +2055,7 @@ namespace Codidact.Core.Infrastructure.Persistence.Migrations
                         .HasColumnType("timestamp without time zone")
                         .HasDefaultValueSql("now()");
 
-                    b.Property<long?>("CreatedByMemberId")
+                    b.Property<long>("CreatedByMemberId")
                         .HasColumnName("created_by_member_id")
                         .HasColumnType("bigint");
 
@@ -2118,7 +2120,7 @@ namespace Codidact.Core.Infrastructure.Persistence.Migrations
                         .HasColumnType("timestamp without time zone")
                         .HasDefaultValueSql("now()");
 
-                    b.Property<long?>("CreatedByMemberId")
+                    b.Property<long>("CreatedByMemberId")
                         .HasColumnName("created_by_member_id")
                         .HasColumnType("bigint");
 
@@ -2173,7 +2175,7 @@ namespace Codidact.Core.Infrastructure.Persistence.Migrations
                         .HasColumnType("timestamp without time zone")
                         .HasDefaultValueSql("now()");
 
-                    b.Property<long?>("CreatedByMemberId")
+                    b.Property<long>("CreatedByMemberId")
                         .HasColumnName("created_by_member_id")
                         .HasColumnType("bigint");
 
@@ -2235,7 +2237,7 @@ namespace Codidact.Core.Infrastructure.Persistence.Migrations
                         .HasColumnType("timestamp without time zone")
                         .HasDefaultValueSql("now()");
 
-                    b.Property<long?>("CreatedByMemberId")
+                    b.Property<long>("CreatedByMemberId")
                         .HasColumnName("created_by_member_id")
                         .HasColumnType("bigint");
 
@@ -2275,7 +2277,7 @@ namespace Codidact.Core.Infrastructure.Persistence.Migrations
                         .HasColumnType("timestamp without time zone")
                         .HasDefaultValueSql("now()");
 
-                    b.Property<long?>("CreatedByMemberId")
+                    b.Property<long>("CreatedByMemberId")
                         .HasColumnName("created_by_member_id")
                         .HasColumnType("bigint");
 
@@ -2331,7 +2333,7 @@ namespace Codidact.Core.Infrastructure.Persistence.Migrations
                         .HasColumnType("timestamp without time zone")
                         .HasDefaultValueSql("now()");
 
-                    b.Property<long?>("CreatedByMemberId")
+                    b.Property<long>("CreatedByMemberId")
                         .HasColumnName("created_by_member_id")
                         .HasColumnType("bigint");
 
@@ -2391,7 +2393,7 @@ namespace Codidact.Core.Infrastructure.Persistence.Migrations
                         .HasColumnType("timestamp without time zone")
                         .HasDefaultValueSql("now()");
 
-                    b.Property<long?>("CreatedByMemberId")
+                    b.Property<long>("CreatedByMemberId")
                         .HasColumnName("created_by_member_id")
                         .HasColumnType("bigint");
 
@@ -2454,7 +2456,7 @@ namespace Codidact.Core.Infrastructure.Persistence.Migrations
                         .HasColumnType("timestamp without time zone")
                         .HasDefaultValueSql("now()");
 
-                    b.Property<long?>("CreatedByMemberId")
+                    b.Property<long>("CreatedByMemberId")
                         .HasColumnName("created_by_member_id")
                         .HasColumnType("bigint");
 
@@ -2547,7 +2549,7 @@ namespace Codidact.Core.Infrastructure.Persistence.Migrations
                         .HasColumnType("timestamp without time zone")
                         .HasDefaultValueSql("now()");
 
-                    b.Property<long?>("CreatedByMemberId")
+                    b.Property<long>("CreatedByMemberId")
                         .HasColumnName("created_by_member_id")
                         .HasColumnType("bigint");
 
@@ -2634,7 +2636,7 @@ namespace Codidact.Core.Infrastructure.Persistence.Migrations
                         .HasColumnType("timestamp without time zone")
                         .HasDefaultValueSql("now()");
 
-                    b.Property<long?>("CreatedByMemberId")
+                    b.Property<long>("CreatedByMemberId")
                         .HasColumnName("created_by_member_id")
                         .HasColumnType("bigint");
 
@@ -2694,7 +2696,7 @@ namespace Codidact.Core.Infrastructure.Persistence.Migrations
                         .HasColumnType("timestamp without time zone")
                         .HasDefaultValueSql("now()");
 
-                    b.Property<long?>("CreatedByMemberId")
+                    b.Property<long>("CreatedByMemberId")
                         .HasColumnName("created_by_member_id")
                         .HasColumnType("bigint");
 
@@ -2757,7 +2759,7 @@ namespace Codidact.Core.Infrastructure.Persistence.Migrations
                         .HasColumnType("timestamp without time zone")
                         .HasDefaultValueSql("now()");
 
-                    b.Property<long?>("CreatedByMemberId")
+                    b.Property<long>("CreatedByMemberId")
                         .HasColumnName("created_by_member_id")
                         .HasColumnType("bigint");
 
@@ -2808,7 +2810,7 @@ namespace Codidact.Core.Infrastructure.Persistence.Migrations
                         .HasColumnType("timestamp without time zone")
                         .HasDefaultValueSql("now()");
 
-                    b.Property<long?>("CreatedByMemberId")
+                    b.Property<long>("CreatedByMemberId")
                         .HasColumnName("created_by_member_id")
                         .HasColumnType("bigint");
 
@@ -2857,7 +2859,8 @@ namespace Codidact.Core.Infrastructure.Persistence.Migrations
                     b.HasOne("Codidact.Core.Domain.Entities.Member", "CreatedByMember")
                         .WithMany("CategoryCreatedByMember")
                         .HasForeignKey("CreatedByMemberId")
-                        .HasConstraintName("category_created_by_member_fk");
+                        .HasConstraintName("category_created_by_member_fk")
+                        .IsRequired();
 
                     b.HasOne("Codidact.Core.Domain.Entities.Member", "LastModifiedByMember")
                         .WithMany("CategoryLastModifiedByMember")
@@ -2885,7 +2888,8 @@ namespace Codidact.Core.Infrastructure.Persistence.Migrations
                     b.HasOne("Codidact.Core.Domain.Entities.Member", "CreatedByMember")
                         .WithMany("CategoryPostTypeCreatedByMember")
                         .HasForeignKey("CreatedByMemberId")
-                        .HasConstraintName("category_post_type_created_by_member_fk");
+                        .HasConstraintName("category_post_type_created_by_member_fk")
+                        .IsRequired();
 
                     b.HasOne("Codidact.Core.Domain.Entities.Member", "LastModifiedByMember")
                         .WithMany("CategoryPostTypeLastModifiedByMember")
@@ -2907,7 +2911,8 @@ namespace Codidact.Core.Infrastructure.Persistence.Migrations
                     b.HasOne("Codidact.Core.Domain.Entities.Member", "CreatedByMember")
                         .WithMany("CommentCreatedByMember")
                         .HasForeignKey("CreatedByMemberId")
-                        .HasConstraintName("comment_created_by_member_fk");
+                        .HasConstraintName("comment_created_by_member_fk")
+                        .IsRequired();
 
                     b.HasOne("Codidact.Core.Domain.Entities.Member", "DeletedByMember")
                         .WithMany()
@@ -2962,7 +2967,8 @@ namespace Codidact.Core.Infrastructure.Persistence.Migrations
                     b.HasOne("Codidact.Core.Domain.Entities.Member", "CreatedByMember")
                         .WithMany("CommentVoteCreatedByMember")
                         .HasForeignKey("CreatedByMemberId")
-                        .HasConstraintName("comment_vote_created_by_member_fk");
+                        .HasConstraintName("comment_vote_created_by_member_fk")
+                        .IsRequired();
 
                     b.HasOne("Codidact.Core.Domain.Entities.Member", "LastModifiedByMember")
                         .WithMany("CommentVoteLastModifiedByMember")
@@ -2996,7 +3002,8 @@ namespace Codidact.Core.Infrastructure.Persistence.Migrations
                     b.HasOne("Codidact.Core.Domain.Entities.Member", "CreatedByMember")
                         .WithMany("InverseCreatedByMember")
                         .HasForeignKey("CreatedByMemberId")
-                        .HasConstraintName("member_created_by_member_fk");
+                        .HasConstraintName("member_created_by_member_fk")
+                        .IsRequired();
 
                     b.HasOne("Codidact.Core.Domain.Entities.Member", "LastModifiedByMember")
                         .WithMany("InverseLastModifiedByMember")
@@ -3024,7 +3031,8 @@ namespace Codidact.Core.Infrastructure.Persistence.Migrations
                     b.HasOne("Codidact.Core.Domain.Entities.Member", "CreatedByMember")
                         .WithMany("MemberPrivilegeCreatedByMember")
                         .HasForeignKey("CreatedByMemberId")
-                        .HasConstraintName("member_privilege_created_by_member_fk");
+                        .HasConstraintName("member_privilege_created_by_member_fk")
+                        .IsRequired();
 
                     b.HasOne("Codidact.Core.Domain.Entities.Member", "LastModifiedByMember")
                         .WithMany("MemberPrivilegeLastModifiedByMember")
@@ -3058,7 +3066,8 @@ namespace Codidact.Core.Infrastructure.Persistence.Migrations
                     b.HasOne("Codidact.Core.Domain.Entities.Member", "CreatedByMember")
                         .WithMany("MemberSocialMediaTypeCreatedByMember")
                         .HasForeignKey("CreatedByMemberId")
-                        .HasConstraintName("member_social_media_created_by_member_fk");
+                        .HasConstraintName("member_social_media_created_by_member_fk")
+                        .IsRequired();
 
                     b.HasOne("Codidact.Core.Domain.Entities.Member", "LastModifiedByMember")
                         .WithMany("MemberSocialMediaTypeLastModifiedByMember")
@@ -3098,7 +3107,8 @@ namespace Codidact.Core.Infrastructure.Persistence.Migrations
                     b.HasOne("Codidact.Core.Domain.Entities.Member", "CreatedByMember")
                         .WithMany("PostCreatedByMember")
                         .HasForeignKey("CreatedByMemberId")
-                        .HasConstraintName("post_created_by_member_fk");
+                        .HasConstraintName("post_created_by_member_fk")
+                        .IsRequired();
 
                     b.HasOne("Codidact.Core.Domain.Entities.Member", "LastModifiedByMember")
                         .WithMany("PostLastModifiedByMember")
@@ -3128,7 +3138,8 @@ namespace Codidact.Core.Infrastructure.Persistence.Migrations
                     b.HasOne("Codidact.Core.Domain.Entities.Member", "CreatedByMember")
                         .WithMany("PostDuplicatePostCreatedByMember")
                         .HasForeignKey("CreatedByMemberId")
-                        .HasConstraintName("post_duplicate_post_created_by_member_fk");
+                        .HasConstraintName("post_duplicate_post_created_by_member_fk")
+                        .IsRequired();
 
                     b.HasOne("Codidact.Core.Domain.Entities.Post", "DuplicatePost")
                         .WithMany("PostDuplicatePostDuplicatePost")
@@ -3171,7 +3182,8 @@ namespace Codidact.Core.Infrastructure.Persistence.Migrations
                     b.HasOne("Codidact.Core.Domain.Entities.Member", "CreatedByMember")
                         .WithMany("PostStatusCreatedByMember")
                         .HasForeignKey("CreatedByMemberId")
-                        .HasConstraintName("post_status_created_by_member_fk");
+                        .HasConstraintName("post_status_created_by_member_fk")
+                        .IsRequired();
 
                     b.HasOne("Codidact.Core.Domain.Entities.Member", "LastModifiedByMember")
                         .WithMany("PostStatusLastModifiedByMember")
@@ -3205,7 +3217,8 @@ namespace Codidact.Core.Infrastructure.Persistence.Migrations
                     b.HasOne("Codidact.Core.Domain.Entities.Member", "CreatedByMember")
                         .WithMany("PostStatusTypeCreatedByMember")
                         .HasForeignKey("CreatedByMemberId")
-                        .HasConstraintName("post_status_created_by_member_fk");
+                        .HasConstraintName("post_status_created_by_member_fk")
+                        .IsRequired();
 
                     b.HasOne("Codidact.Core.Domain.Entities.Member", "LastModifiedByMember")
                         .WithMany("PostStatusTypeLastModifiedByMember")
@@ -3227,7 +3240,8 @@ namespace Codidact.Core.Infrastructure.Persistence.Migrations
                     b.HasOne("Codidact.Core.Domain.Entities.Member", "CreatedByMember")
                         .WithMany("PostTagCreatedByMember")
                         .HasForeignKey("CreatedByMemberId")
-                        .HasConstraintName("post_tag_created_by_member_fk");
+                        .HasConstraintName("post_tag_created_by_member_fk")
+                        .IsRequired();
 
                     b.HasOne("Codidact.Core.Domain.Entities.Member", "LastModifiedByMember")
                         .WithMany("PostTagLastModifiedByMember")
@@ -3261,7 +3275,8 @@ namespace Codidact.Core.Infrastructure.Persistence.Migrations
                     b.HasOne("Codidact.Core.Domain.Entities.Member", "CreatedByMember")
                         .WithMany("PostTypeCreatedByMember")
                         .HasForeignKey("CreatedByMemberId")
-                        .HasConstraintName("post_type_created_by_member_fk");
+                        .HasConstraintName("post_type_created_by_member_fk")
+                        .IsRequired();
 
                     b.HasOne("Codidact.Core.Domain.Entities.Member", "LastModifiedByMember")
                         .WithMany("PostTypeLastModifiedByMember")
@@ -3283,7 +3298,8 @@ namespace Codidact.Core.Infrastructure.Persistence.Migrations
                     b.HasOne("Codidact.Core.Domain.Entities.Member", "CreatedByMember")
                         .WithMany("PostVoteCreatedByMember")
                         .HasForeignKey("CreatedByMemberId")
-                        .HasConstraintName("post_vote_created_by_member_fk");
+                        .HasConstraintName("post_vote_created_by_member_fk")
+                        .IsRequired();
 
                     b.HasOne("Codidact.Core.Domain.Entities.Member", "LastModifiedByMember")
                         .WithMany("PostVoteLastModifiedByMember")
@@ -3323,7 +3339,8 @@ namespace Codidact.Core.Infrastructure.Persistence.Migrations
                     b.HasOne("Codidact.Core.Domain.Entities.Member", "CreatedByMember")
                         .WithMany("PrivilegeCreatedByMember")
                         .HasForeignKey("CreatedByMemberId")
-                        .HasConstraintName("privilege_created_by_member_fk");
+                        .HasConstraintName("privilege_created_by_member_fk")
+                        .IsRequired();
 
                     b.HasOne("Codidact.Core.Domain.Entities.Member", "LastModifiedByMember")
                         .WithMany("PrivilegeLastModifiedByMember")
@@ -3345,7 +3362,8 @@ namespace Codidact.Core.Infrastructure.Persistence.Migrations
                     b.HasOne("Codidact.Core.Domain.Entities.Member", "CreatedByMember")
                         .WithMany("SettingCreatedByMember")
                         .HasForeignKey("CreatedByMemberId")
-                        .HasConstraintName("setting_created_by_member_fk");
+                        .HasConstraintName("setting_created_by_member_fk")
+                        .IsRequired();
 
                     b.HasOne("Codidact.Core.Domain.Entities.Member", "LastModifiedByMember")
                         .WithMany("SettingLastModifiedByMember")
@@ -3367,7 +3385,8 @@ namespace Codidact.Core.Infrastructure.Persistence.Migrations
                     b.HasOne("Codidact.Core.Domain.Entities.Member", "CreatedByMember")
                         .WithMany("SocialMediaTypeCreatedByMember")
                         .HasForeignKey("CreatedByMemberId")
-                        .HasConstraintName("social_media_created_by_member_fk");
+                        .HasConstraintName("social_media_created_by_member_fk")
+                        .IsRequired();
 
                     b.HasOne("Codidact.Core.Domain.Entities.Member", "LastModifiedByMember")
                         .WithMany("SocialMediaTypeLastModifiedByMember")
@@ -3389,7 +3408,8 @@ namespace Codidact.Core.Infrastructure.Persistence.Migrations
                     b.HasOne("Codidact.Core.Domain.Entities.Member", "CreatedByMember")
                         .WithMany("TagCreatedByMember")
                         .HasForeignKey("CreatedByMemberId")
-                        .HasConstraintName("tag_created_by_member_fk");
+                        .HasConstraintName("tag_created_by_member_fk")
+                        .IsRequired();
 
                     b.HasOne("Codidact.Core.Domain.Entities.Member", "LastModifiedByMember")
                         .WithMany("TagLastModifiedByMember")
@@ -3421,7 +3441,8 @@ namespace Codidact.Core.Infrastructure.Persistence.Migrations
                     b.HasOne("Codidact.Core.Domain.Entities.Member", "CreatedByMember")
                         .WithMany("TrustLevelCreatedByMember")
                         .HasForeignKey("CreatedByMemberId")
-                        .HasConstraintName("created_by_member_fk");
+                        .HasConstraintName("created_by_member_fk")
+                        .IsRequired();
 
                     b.HasOne("Codidact.Core.Domain.Entities.Member", "LastModifiedByMember")
                         .WithMany("TrustLevelLastModifiedByMember")
@@ -3443,7 +3464,8 @@ namespace Codidact.Core.Infrastructure.Persistence.Migrations
                     b.HasOne("Codidact.Core.Domain.Entities.Member", "CreatedByMember")
                         .WithMany("VoteTypeCreatedByMember")
                         .HasForeignKey("CreatedByMemberId")
-                        .HasConstraintName("vote_type_created_by_member_fk");
+                        .HasConstraintName("vote_type_created_by_member_fk")
+                        .IsRequired();
 
                     b.HasOne("Codidact.Core.Domain.Entities.Member", "LastModifiedByMember")
                         .WithMany("VoteTypeLastModifiedByMember")

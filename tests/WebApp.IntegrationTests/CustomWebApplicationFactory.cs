@@ -77,6 +77,11 @@ namespace Codidact.Core.WebApp.IntegrationTests
                 new Member { Id = 3, DisplayName = "Olaf Grechkovich" }
             );
 
+            context.Categories.Add(new Category
+            {
+                DisplayName = "main",
+            });
+
             context.SaveChanges();
         }
     }

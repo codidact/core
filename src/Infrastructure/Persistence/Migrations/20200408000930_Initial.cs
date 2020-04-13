@@ -13,6 +13,7 @@ namespace Codidact.Core.Infrastructure.Persistence.Migrations
 
             migrationBuilder.AlterDatabase()
                 .Annotation("Npgsql:Enum:audit.history_activity_type", "CREATE,UPDATE_BEFORE,UPDATE_AFTER,DELETE")
+                .Annotation("Npgsql:Enum:post_type", "question,answer,blog")
                 .Annotation("Npgsql:PostgresExtension:adminpack", ",,");
 
             migrationBuilder.CreateTable(
@@ -33,7 +34,7 @@ namespace Codidact.Core.Infrastructure.Persistence.Migrations
                     net_votes = table.Column<long>(nullable: true, computedColumnSql: "(upvotes - downvotes)"),
                     score = table.Column<decimal>(type: "numeric", nullable: false),
                     views = table.Column<long>(nullable: false),
-                    post_type_id = table.Column<long>(nullable: false),
+                    post_type_id = table.Column<int>(nullable: false),
                     is_accepted = table.Column<bool>(nullable: false),
                     is_closed = table.Column<bool>(nullable: false),
                     is_protected = table.Column<bool>(nullable: false),
@@ -312,8 +313,7 @@ namespace Codidact.Core.Infrastructure.Persistence.Migrations
                 name: "post_types",
                 columns: table => new
                 {
-                    id = table.Column<long>(nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityAlwaysColumn),
+                    id = table.Column<int>(nullable: false),
                     created_at = table.Column<DateTime>(nullable: false, defaultValueSql: "now()"),
                     last_modified_at = table.Column<DateTime>(nullable: true, defaultValueSql: "now()"),
                     created_by_member_id = table.Column<long>(nullable: false),

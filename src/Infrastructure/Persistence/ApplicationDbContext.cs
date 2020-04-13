@@ -102,6 +102,8 @@ namespace Codidact.Core.Infrastructure.Persistence
                 modelBuilder.HasPostgresEnum("audit", "history_activity_type", new[] { "CREATE", "UPDATE_BEFORE", "UPDATE_AFTER", "DELETE" })
                     .HasPostgresExtension("adminpack");
 
+                modelBuilder.HasPostgresEnum<Domain.Enums.PostType>();
+
                 modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 
                 modelBuilder.UseSerialColumns();

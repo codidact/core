@@ -11,7 +11,7 @@ namespace Codidact.Core.Domain.Entities
             Post = new HashSet<Post>();
         }
 
-        public long Id { get; set; }
+        public Enums.PostType Id { get; set; }
         public string DisplayName { get; set; }
         public string Description { get; set; }
         public virtual Member CreatedByMember { get; set; }

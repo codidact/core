@@ -1,0 +1,66 @@
+﻿@page "/{category}/questions"
+@model Codidact.Core.WebApp.Pages.Posts.QuestionsModel
+@using Codidact.Core.Application.Questions.Queries
+
+@{
+    ViewData["Title"] = "Questions";
+    var query = Model.Query;
+}
+
+<partial name="_ValidationSummary" />
+
+
+<div class="grid has-margin-4">
+    <div class="grid--cell is-flexible">
+        <h1 class="has-margin-0">@Model.Result.Category.DisplayName Questions</h1>
+        <h3>@Model.Result.Category.ShortExplanation</h3>
+    </div>
+    <div class="grid--cell">
+        <a asp-page="questions/new" class="button is-medium has-margin-4 is-filled">New question</a>
+    </div>
+</div>
+<div class="button-list is-gutterless has-margin-top-4 has-float-right">
+    <a asp-page="questions" asp-route-sort="@QuestionsQuerySortType.Best" class="button is-muted is-outlined @(query.Sort == QuestionsQuerySortType.Best ? "is-active" : "")">best</a>
+    <a asp-page="questions" asp-route-sort="@QuestionsQuerySortType.Oldest" class="button is-muted is-outlined @(query.Sort == QuestionsQuerySortType.Oldest ? "is-active" : "")">oldest</a>
+    <a asp-page="questions" asp-route-sort="@QuestionsQuerySortType.Newest" class="button is-muted is-outlined @(query.Sort == QuestionsQuerySortType.Newest ? "is-active" : "")">active</a>
+</div>
+<div class="has-clear-clear"></div>
+
+
+<div class="item-list">
+    @foreach (var post in Model.Result.Items)
+    {
+        <div class="item-list--item">
+            <div class="item-list--number-value">
+                <div class="item-list--number">
+                    @post.Answers
+                </div>
+                <div class="item-list--number-label">answers</div>
+            </div>
+            <div class="item-list--number-value">
+                <div class="item-list--number">
+                    @post.Votes
+                </div>
+                <div class="item-list--number-label">votes</div>
+            </div>
+
+            <div class="item-list--text-value is-primary">
+                <div>
+                    <a asp-page="question" asp-route-id="@post.Id" class="has-font-size-larger"> @post.Title</a>
+                </div>
+                <div class="has-padding-top-2">
+                    @foreach (var tag in post.Tags)
+                    {
+                        <a asp-page="tag" asp-route-id="@tag.Id" class="badge is-tag">@tag.Name</a>
+                    }
+                </div>
+            </div>
+            <div class="item-list--number-value">
+                <div class="item-list--number-label">last active</div>
+                <div class="item-list--number live-date" data-date="@((post.LastModifiedAt ?? post.CreatedAt).ToString("u"))">
+                    @((post.LastModifiedAt ?? post.CreatedAt).ToString("u"))
+                </div>
+            </div>
+        </div>
+    }
+</div>

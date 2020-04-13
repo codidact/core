@@ -21,7 +21,7 @@ namespace Codidact.Core.Domain.Common
         /// <summary>
         /// The member id which created this entity
         /// </summary>
-        public long CreatedByMemberId { get; set; }
+        public long? CreatedByMemberId { get; set; }
 
         /// <summary>
         /// The member id which last modified this entity

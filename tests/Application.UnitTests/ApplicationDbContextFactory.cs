@@ -14,6 +14,7 @@ namespace Codidact.Core.Application.IntegrationTests
         {
             var options = new DbContextOptionsBuilder<ApplicationDbContext>()
                 .UseInMemoryDatabase(Guid.NewGuid().ToString())
+                .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking)
                 .Options;
 
             var currentUserServiceMock = new Mock<ICurrentUserService>();
@@ -43,6 +44,12 @@ namespace Codidact.Core.Application.IntegrationTests
                 UserId = 1
             };
             context.Add(member);
+
+            var category = new Category
+            {
+                DisplayName = "main",
+            };
+            context.Add(category);
 
             context.SaveChanges();
         }
