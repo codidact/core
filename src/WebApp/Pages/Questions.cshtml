@@ -20,9 +20,9 @@
     </div>
 </div>
 <div class="button-list is-gutterless has-margin-top-4 has-float-right">
-    <a asp-page="questions" asp-route-sort="@QuestionsQuerySortType.Best" class="button is-muted is-outlined @(query.Sort == QuestionsQuerySortType.Best?"is-active":"")">best</a>
-    <a asp-page="questions" asp-route-sort="@QuestionsQuerySortType.Oldest" class="button is-muted is-outlined @(query.Sort == QuestionsQuerySortType.Oldest?"is-active":"")">oldest</a>
-    <a asp-page="questions" asp-route-sort="@QuestionsQuerySortType.Newest" class="button is-muted is-outlined @(query.Sort == QuestionsQuerySortType.Newest?"is-active":"")">active</a>
+    <a asp-page="questions" asp-route-sort="@QuestionsQuerySortType.Best" class="button is-muted is-outlined @(query.Sort == QuestionsQuerySortType.Best ? "is-active" : "")">best</a>
+    <a asp-page="questions" asp-route-sort="@QuestionsQuerySortType.Oldest" class="button is-muted is-outlined @(query.Sort == QuestionsQuerySortType.Oldest ? "is-active" : "")">oldest</a>
+    <a asp-page="questions" asp-route-sort="@QuestionsQuerySortType.Newest" class="button is-muted is-outlined @(query.Sort == QuestionsQuerySortType.Newest ? "is-active" : "")">active</a>
 </div>
 <div class="has-clear-clear"></div>
 
