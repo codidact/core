@@ -28,11 +28,11 @@ namespace Codidact.Core.Application.Questions.Queries.QuestionsQuery
             _logger.LogInformation($"{DateTime.UtcNow.ToString("g")} - Starting to handle request for Questions List");
             var questionsQuery = _context.Posts
                 .Where(post => post.PostTypeId == Domain.Enums.PostType.Question)
-                .Where(post => post.IsDeleted == false);
+                .Where(post => post.IsDeleted == false).AsQueryable();
 
-            AddSortToQuery(request, questionsQuery);
+            questionsQuery = AddSortToQuery(request, questionsQuery);
 
-            AddFiltersToQuery(request, questionsQuery);
+            questionsQuery = AddFiltersToQuery(request, questionsQuery);
 
             return Task.FromResult(new QuestionsQueryResult
             {
@@ -59,36 +59,38 @@ namespace Codidact.Core.Application.Questions.Queries.QuestionsQuery
             };
         }
 
-        private void AddFiltersToQuery(QuestionsQueryRequest request, IQueryable<Post> questionsQuery)
+        private IQueryable<Post> AddFiltersToQuery(QuestionsQueryRequest request, IQueryable<Post> questionsQuery)
         {
             // TODO: Implement filters
             var category = _context.Categories.FirstOrDefault(cat => cat.DisplayName == request.Category);
-            if(category == null)
+            if (category == null)
             {
                 throw new Exception($"Category not found: {request.Category}");
             }
-            questionsQuery.Where(q => q.CategoryId == category.Id);
+            questionsQuery = questionsQuery.Where(q => q.CategoryId == category.Id);
+            return questionsQuery;
         }
 
-        private void AddSortToQuery(QuestionsQueryRequest request, IQueryable<Post> questionsQuery)
+        private IQueryable<Post> AddSortToQuery(QuestionsQueryRequest request, IQueryable<Post> questionsQuery)
         {
             switch (request.Sort)
             {
                 case QuestionsQuerySortType.Newest:
                 default:
-                    questionsQuery
-                        .OrderByDescending(question => question.LastModifiedAt)
-                        .ThenByDescending(question => question.CreatedAt);
+                    questionsQuery = questionsQuery
+                          .OrderByDescending(question => question.LastModifiedAt)
+                          .ThenByDescending(question => question.CreatedAt);
                     break;
                 case QuestionsQuerySortType.Best:
                     // TODO: implement popularity
                     break;
                 case QuestionsQuerySortType.Oldest:
-                    questionsQuery
-                        .OrderBy(question => question.LastModifiedAt)
-                        .ThenBy(questions => questions.CreatedAt);
+                    questionsQuery = questionsQuery
+                          .OrderBy(question => question.LastModifiedAt)
+                          .ThenBy(questions => questions.CreatedAt);
                     break;
             }
+            return questionsQuery;
         }
     }
 }
