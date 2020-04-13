@@ -27,7 +27,7 @@ namespace Codidact.Core.Application.IntegrationTests.Questions
             await SetupQuestions()
                 .ConfigureAwait(false);
 
-            var result = await _questionsQuery.Handle(new QuestionsQueryRequest());
+            var result = await _questionsQuery.Handle(new QuestionsQueryRequest { Category = "main" });
 
             Assert.NotNull(result.Items);
             Assert.True(result.Items.Any());
@@ -38,19 +38,24 @@ namespace Codidact.Core.Application.IntegrationTests.Questions
             var actualMinimumDate = _applicationDbContext.Posts
                 .Where(post => post.PostTypeId == Domain.Enums.PostType.Question)
                 .Max(post => post.CreatedAt);
-            Assert.Equal(DateTime.Compare(minimumResultDate, actualMinimumDate), -1);
+            Assert.Equal(minimumResultDate.Ticks, actualMinimumDate.Ticks);
 
             // take 20 is default
             Assert.Equal(20, result.Items.Count());
+
+            Assert.NotNull(result.Category);
         }
 
         public async Task SetupQuestions()
         {
+            var category = _applicationDbContext.Categories.FirstOrDefault();
+
             var postsTypeA = Enumerable.Repeat(new Post
             {
                 Title = "Test Question A",
                 Body = "Body Question",
                 PostTypeId = Domain.Enums.PostType.Question,
+                CategoryId = category.Id,
                 CreatedAt = DateTime.Now.AddDays(-1),
             }, 15).Select((question, i) =>
             {
@@ -64,12 +69,13 @@ namespace Codidact.Core.Application.IntegrationTests.Questions
                     Body = "Body Question",
                     PostTypeId = Domain.Enums.PostType.Question,
                     CreatedAt = DateTime.Now,
+                    CategoryId = category.Id,
                 }, 15).Select((question, i) =>
                 {
                     question.Title += i;
                     return question;
                 });
-            for(int i =0;i < 15; i++)
+            for (int i = 0; i < 15; i++)
             {
                 var postA = postsTypeA.ElementAt(i);
                 postA.Id = 0;

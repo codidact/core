@@ -10,5 +10,7 @@ namespace Codidact.Core.Application.Questions.Queries.QuestionsQuery
 
         public int Total { get; set; }
 
+        public Category Category { get; set; }
+
     }
 }

@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Codidact.Core.Application.Common.Contracts;
 using Codidact.Core.Application.Common.Interfaces;
 using Codidact.Core.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 namespace Codidact.Core.Application.Questions.Queries.QuestionsQuery
@@ -22,25 +23,35 @@ namespace Codidact.Core.Application.Questions.Queries.QuestionsQuery
             _logger = logger;
         }
 
-        public Task<QuestionsQueryResult> Handle(QuestionsQueryRequest request)
+        public async Task<QuestionsQueryResult> Handle(QuestionsQueryRequest request)
         {
             _logger.LogInformation($"{DateTime.UtcNow.ToString("g")} - Starting to handle request for Questions List");
+
+            var category = await _context.Categories
+                .FirstOrDefaultAsync(category => category.DisplayName.ToLower() == request.Category.ToLower())
+                .ConfigureAwait(false);
+            if (category == null)
+            {
+                throw new Exception($"Category not found: {request.Category}");
+            }
             var questionsQuery = _context.Posts
                 .Where(post => post.PostTypeId == Domain.Enums.PostType.Question)
-                .Where(post => post.IsDeleted == false).AsQueryable();
+                .Where(post => post.IsDeleted == false)
+                .Where(post => post.CategoryId == category.Id).AsQueryable();
 
             questionsQuery = AddSortToQuery(request, questionsQuery);
 
             questionsQuery = AddFiltersToQuery(request, questionsQuery);
 
-            return Task.FromResult(new QuestionsQueryResult
+            return new QuestionsQueryResult
             {
                 Items = questionsQuery
                             .Take(request.Take)
                             .Skip(request.Skip)
                             .Select(MapToQuestion),
-                Total = questionsQuery.Count()
-            });
+                Total = questionsQuery.Count(),
+                Category = category
+            };
         }
 
         private QuestionsQueryDto MapToQuestion(Post post)
@@ -61,12 +72,6 @@ namespace Codidact.Core.Application.Questions.Queries.QuestionsQuery
         private IQueryable<Post> AddFiltersToQuery(QuestionsQueryRequest request, IQueryable<Post> questionsQuery)
         {
             // TODO: Implement filters
-            var category = _context.Categories.FirstOrDefault(cat => cat.DisplayName == request.Category);
-            if (category == null)
-            {
-                throw new Exception($"Category not found: {request.Category}");
-            }
-            questionsQuery = questionsQuery.Where(q => q.CategoryId == category.Id);
             return questionsQuery;
         }
 

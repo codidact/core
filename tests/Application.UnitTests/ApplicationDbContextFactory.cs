@@ -45,6 +45,12 @@ namespace Codidact.Core.Application.IntegrationTests
             };
             context.Add(member);
 
+            var category = new Category
+            {
+                DisplayName = "main",
+            };
+            context.Add(category);
+
             context.SaveChanges();
         }
 

@@ -12,7 +12,8 @@
 
 <div class="grid has-margin-4">
     <div class="grid--cell is-flexible">
-        <h1 class="has-margin-0">Q&amp;A posts</h1>
+        <h1 class="has-margin-0">@Model.Result.Category.DisplayName Questions</h1>
+        <h3>@Model.Result.Category.ShortExplanation</h3>
     </div>
     <div class="grid--cell">
         <a asp-page="questions/new" class="button is-medium has-margin-4 is-filled">New question</a>

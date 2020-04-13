@@ -169,7 +169,7 @@ namespace Codidact.Core.WebApp
 
                             category = new Category
                             {
-                                DisplayName = "main",
+                                DisplayName = "Main",
                                 ParticipationMinimumTrustLevelId = adminTrustLevel.Id,
                                 ShortExplanation = "Codidact Questions",
                                 LongExplanation = "Main Category for Codidact where all the codidact related questions go to"
