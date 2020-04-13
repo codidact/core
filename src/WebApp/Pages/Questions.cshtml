@@ -42,7 +42,7 @@
 
             <div class="item-list--text-value is-primary">
                 <div>
-                    <a class="has-font-size-larger"> @post.Title</a>
+                    <a asp-page="question" asp-route-id="@post.Id" class="has-font-size-larger"> @post.Title</a>
                 </div>
                 <div class="has-padding-top-2">
                     @foreach (var tag in post.Tags)
