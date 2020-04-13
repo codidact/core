@@ -53,11 +53,10 @@
             </div>
             <div class="item-list--number-value">
                 <div class="item-list--number-label">last active</div>
-                <div class="item-list--number question-date" data-date="@((post.LastModifiedAt ?? post.CreatedAt).ToString("u"))">
+                <div class="item-list--number live-date">
+                    @((post.LastModifiedAt ?? post.CreatedAt).ToString("u"))
                 </div>
             </div>
         </div>
     }
 </div>
-
-<script async src="~/js/questions.js"></script>

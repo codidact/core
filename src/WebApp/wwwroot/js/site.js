@@ -24,7 +24,6 @@ for (let i = 0; i < headerSlideTriggers.length; i++) {
     });
 }
 
-
 /*
  * Date/Time functions
  ----------------
@@ -39,4 +38,13 @@ function utcDateTimeToLocalDisplay(date) {
     return dateInstance.toLocaleDateString(locale, dateOptions) + " " + dateInstance.toLocaleTimeString(locale, timeOptions);
 }
 
-function 
+/**
+ * Switches all dates from UTC to local client date
+ */
+window.addEventListener("load", function () {
+    var questions = document.querySelectorAll(".live-date");
+    for (var i = 0; i < questions.length; i++) {
+        var dateValue = questions[i].innerHTML;
+        questions[i].innerHTML = utcDateTimeToLocalDisplay(dateValue);
+    }
+});
