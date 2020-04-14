@@ -14,6 +14,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -82,12 +83,18 @@ namespace Codidact.Core.WebApp
             services.Configure<RequestLocalizationOptions>(
              opts =>
             {
-                var supportedCultures = new List<CultureInfo>
+                var settingSupportedCultures = Configuration.GetSection("Localization:Cultures")
+                                                .GetChildren().Select(child => child.Value);
+                if (settingSupportedCultures == null || !settingSupportedCultures.Any())
                 {
-                    new CultureInfo("en"),
-                };
+                    throw new CultureNotFoundException("No supported cultures found in settings");
+                }
 
-                opts.DefaultRequestCulture = new RequestCulture("en");
+                var supportedCultures = settingSupportedCultures
+                   .Select(culture => new CultureInfo(culture))
+                   .ToList();
+
+                opts.DefaultRequestCulture = new RequestCulture(supportedCultures.First());
                 // Formatting numbers, dates, etc.
                 opts.SupportedCultures = supportedCultures;
                 // UI strings that we have localized.
@@ -115,6 +122,9 @@ namespace Codidact.Core.WebApp
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            var localizationOptions = app.ApplicationServices.GetService<IOptions<RequestLocalizationOptions>>().Value;
+            app.UseRequestLocalization(localizationOptions);
 
             app.UseAuthentication();
             app.UseAuthorization();
