@@ -83,8 +83,7 @@ namespace Codidact.Core.WebApp
             services.Configure<RequestLocalizationOptions>(
              opts =>
             {
-                var settingSupportedCultures = Configuration.GetSection("Localization:Cultures")
-                                                .GetChildren().Select(child => child.Value);
+                var settingSupportedCultures = Configuration.GetSection("Localization:Cultures").Get<string[]>();
                 if (settingSupportedCultures == null || !settingSupportedCultures.Any())
                 {
                     throw new CultureNotFoundException("No supported cultures found in settings");
