@@ -3,6 +3,7 @@ using Codidact.Core.Application.Members;
 using Codidact.Core.Application.Questions.Queries.QuestionsQuery;
 using Microsoft.Extensions.DependencyInjection;
 using FluentValidation;
+using Codidact.Core.Application.Categories.Queries.ShortCategoriesListQuery;
 
 namespace Codidact.Core.Application
 {
@@ -23,6 +24,7 @@ namespace Codidact.Core.Application
             services.AddScoped<IMembersRepository, MembersRepository>();
 
             services.AddScoped<QuestionsQuery>();
+            services.AddScoped<ShortCategoriesListQuery>();
 
             return services;
         }

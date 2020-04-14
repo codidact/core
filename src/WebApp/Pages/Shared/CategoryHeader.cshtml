@@ -1,0 +1,13 @@
+﻿@model Codidact.Core.WebApp.Pages.Shared.CategoryHeaderModel
+
+<header class="header">
+    <div class="container header--container">
+        <div class="header--menu">
+            @foreach (var category in Model.Categories)
+            {
+                <a class="header--item" href="#">@category.Name</a>
+            }
+            <div class="header--separator"></div>
+        </div>
+    </div>
+</header>
