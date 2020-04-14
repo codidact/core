@@ -1,9 +1,10 @@
 ﻿@page "/{category}/questions"
-@model Codidact.Core.WebApp.Pages.Posts.QuestionsModel
+@inject IStringLocalizer<QuestionsModel> localizer
+@model QuestionsModel
 @using Codidact.Core.Application.Questions.Queries
 
 @{
-    ViewData["Title"] = "Questions";
+    ViewData["Title"] = localizer["Questions_page_title"];
     var query = Model.Query;
 }
 
@@ -12,17 +13,17 @@
 
 <div class="grid has-margin-4">
     <div class="grid--cell is-flexible">
-        <h1 class="has-margin-0">@Model.Result.Category.DisplayName Questions</h1>
+        <h1 class="has-margin-0">@Model.Result.Category.DisplayName @localizer["Questions_title"]</h1>
         <h3>@Model.Result.Category.ShortExplanation</h3>
     </div>
     <div class="grid--cell">
-        <a asp-page="questions/new" class="button is-medium has-margin-4 is-filled">New question</a>
+        <a asp-page="questions/new" class="button is-medium has-margin-4 is-filled">@localizer["New_question_button"]</a>
     </div>
 </div>
 <div class="button-list is-gutterless has-margin-top-4 has-float-right">
-    <a asp-page="questions" asp-route-sort="@QuestionsQuerySortType.Best" class="button is-muted is-outlined @(query.Sort == QuestionsQuerySortType.Best ? "is-active" : "")">best</a>
-    <a asp-page="questions" asp-route-sort="@QuestionsQuerySortType.Oldest" class="button is-muted is-outlined @(query.Sort == QuestionsQuerySortType.Oldest ? "is-active" : "")">oldest</a>
-    <a asp-page="questions" asp-route-sort="@QuestionsQuerySortType.Newest" class="button is-muted is-outlined @(query.Sort == QuestionsQuerySortType.Newest ? "is-active" : "")">active</a>
+    <a asp-page="questions" asp-route-sort="@QuestionsQuerySortType.Best" class="button is-muted is-outlined @(query.Sort == QuestionsQuerySortType.Best ? "is-active" : "")">@localizer["Best_sort"]</a>
+    <a asp-page="questions" asp-route-sort="@QuestionsQuerySortType.Oldest" class="button is-muted is-outlined @(query.Sort == QuestionsQuerySortType.Oldest ? "is-active" : "")">@localizer["Oldest_sort"]</a>
+    <a asp-page="questions" asp-route-sort="@QuestionsQuerySortType.Newest" class="button is-muted is-outlined @(query.Sort == QuestionsQuerySortType.Newest ? "is-active" : "")">@localizer["Active_sort"]</a>
 </div>
 <div class="has-clear-clear"></div>
 
@@ -35,13 +36,13 @@
                 <div class="item-list--number">
                     @post.Answers
                 </div>
-                <div class="item-list--number-label">answers</div>
+                <div class="item-list--number-label">@localizer["Answers_span"]</div>
             </div>
             <div class="item-list--number-value">
                 <div class="item-list--number">
                     @post.Votes
                 </div>
-                <div class="item-list--number-label">votes</div>
+                <div class="item-list--number-label">@localizer["Votes_span"]</div>
             </div>
 
             <div class="item-list--text-value is-primary">
@@ -56,7 +57,7 @@
                 </div>
             </div>
             <div class="item-list--number-value">
-                <div class="item-list--number-label">last active</div>
+                <div class="item-list--number-label">@localizer["Question_date"]</div>
                 <div class="item-list--number live-date" data-date="@((post.LastModifiedAt ?? post.CreatedAt).ToString("u"))">
                     @((post.LastModifiedAt ?? post.CreatedAt).ToString("u"))
                 </div>
