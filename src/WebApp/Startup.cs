@@ -123,8 +123,7 @@ namespace Codidact.Core.WebApp
 
             app.UseRouting();
 
-            var localizationOptions = app.ApplicationServices.GetService<IOptions<RequestLocalizationOptions>>().Value;
-            app.UseRequestLocalization(localizationOptions);
+            app.UseRequestLocalization();
 
             app.UseAuthentication();
             app.UseAuthorization();
