@@ -232,3 +232,9 @@ _Pvt_Extensions
 
 # FAKE - F# Make
 .fake/
+
+# TypeScript result files
+**/wwwroot/scripts/**/*.js
+**/wwwroot/scripts/**/*.js.map
+
+**/node_modules
