@@ -1,26 +1,9 @@
 {
-  "name": "codidact.core",
-  "version": "1.0.0",
-  "description": "Codidact Platform",
   "scripts": {
-    "tsc": "tsc",
+    "tsc": "npx tsc",
     "serve": "tsc && dotnet run",
     "build": "tsc && dotnet build"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/codidact/core.git"
-  },
-  "keywords": [
-    "codidact",
-    "qa"
-  ],
-  "author": "",
-  "license": "AGPL-3.0",
-  "bugs": {
-    "url": "https://github.com/codidact/core/issues"
-  },
-  "homepage": "https://github.com/codidact/core#readme",
   "devDependencies": {
     "typescript": "3.8.3"
   }
