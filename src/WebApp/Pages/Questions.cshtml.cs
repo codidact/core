@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 
-namespace Codidact.Core.WebApp.Pages.Posts
+namespace Codidact.Core.WebApp.Pages
 {
 
     public class QuestionsModel : PageModel

@@ -8,12 +8,16 @@ using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using System;
+using System.Collections.Generic;
+using System.Globalization;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 
@@ -73,7 +77,28 @@ namespace Codidact.Core.WebApp
             services
                 .AddRazorPages()
                 .AddRazorRuntimeCompilation()
-                .AddFluentValidation();
+                .AddFluentValidation()
+                .AddViewLocalization(options => options.ResourcesPath = "Resources");
+
+            services.Configure<RequestLocalizationOptions>(
+             opts =>
+            {
+                var settingSupportedCultures = Configuration.GetSection("Localization:Cultures").Get<string[]>();
+                if (settingSupportedCultures == null || !settingSupportedCultures.Any())
+                {
+                    throw new CultureNotFoundException("No supported cultures found in settings");
+                }
+
+                var supportedCultures = settingSupportedCultures
+                   .Select(culture => new CultureInfo(culture))
+                   .ToList();
+
+                opts.DefaultRequestCulture = new RequestCulture(supportedCultures.First());
+                // Formatting numbers, dates, etc.
+                opts.SupportedCultures = supportedCultures;
+                // UI strings that we have localized.
+                opts.SupportedUICultures = supportedCultures;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -96,6 +121,8 @@ namespace Codidact.Core.WebApp
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseRequestLocalization();
 
             app.UseAuthentication();
             app.UseAuthorization();
