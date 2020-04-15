@@ -1,24 +1,26 @@
-﻿<header class="header">
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer LayoutLocalizer
+<header class="header">
     <div class="container header--container">
         <div class="header--brand">
             <a class="header--site-name" asp-area="" asp-page="/Index">Codidact</a>
         </div>
         <div class="header--menu">
-            <a class="header--item" href="#">Place holder 1</a>
-            <a class="header--item" href="#">Place holder 2</a>
-            <a class="header--item" href="#">Place holder 3</a>
+            <a class="header--item" href="#">@LayoutLocalizer["Questions_title"]</a>
+            <a class="header--item" href="#">@LayoutLocalizer["Tags_title"]</a>
+            <a class="header--item" href="#">@LayoutLocalizer["Users_title"]</a>
             <div class="header--separator"></div>
             @if (!User.Identity.IsAuthenticated)
             {
-                <a class="header--item" asp-page="/Login">Sign In</a>
+                <a class="header--item" asp-page="/Login">@LayoutLocalizer["Sign_in_button"]</a>
             }
             else
             {
                 <form method="post" asp-page="/Logout">
-                    <button class="header--item" type="submit">Sign Out</button>
+                    <button class="header--item" type="submit">@LayoutLocalizer["Sign_out_button"]</button>
                 </form>
             }
-            <a class="header--item" href="https://github.com/codidact/core">on GitHub</a>
+            <a class="header--item" href="https://github.com/codidact/core">@LayoutLocalizer["On_github_button"]</a>
             <a class="header--item is-mobile-menu is-complex" data-trigger-header-slide="#js-hms" href="#!">
                 <span class="header--menu-bars">
                     <span></span>
@@ -30,19 +32,19 @@
     </div>
 </header>
 <aside class="header-slide" id="js-hms">
-    <a class="header-slide--item" href="#">Placeholder 1</a>
-    <a class="header-slide--item" href="#">Placeholder 2</a>
-    <a class="header-slide--item" href="#">Placeholder 3</a>
+    <a class="header-slide--item" href="#">@LayoutLocalizer["Questions_title"]</a>
+    <a class="header-slide--item" href="#">@LayoutLocalizer["Tags_title"]</a>
+    <a class="header-slide--item" href="#">@LayoutLocalizer["Users_title"]</a>
     <div class="header-slide--separator"></div>
     @if (User.Identity.IsAuthenticated)
     {
-        <a class="header-slide--item" asp-page="/Logout">Sign Out</a>
+        <a class="header-slide--item" asp-page="/Logout">@LayoutLocalizer["Sign_out_button"]</a>
     }
     else
     {
-        <a class="header-slide--item" asp-page="/Login">Sign In</a>
+        <a class="header-slide--item" asp-page="/Login">>@LayoutLocalizer["Sign_in_button"]</a>
     }
-    <a class="header-slide--item" href="https://github.com/codidact/core">on GitHub</a>
+    <a class="header-slide--item" href="https://github.com/codidact/core">@LayoutLocalizer["On_github_button"]</a>
 </aside>
 
 <partial name="CategoryHeader" />

@@ -1,21 +1,25 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer LayoutLocalizer
+
+<!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>@ViewData["Title"]</title>
+    <title>Codidact - @ViewData["Title"]</title>
     <link rel="stylesheet" href="https://unpkg.com/@@codidact/co-design@@0.5.0/dist/codidact.css" />
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
     <partial name="_Header" />
+
     <main class="container has-padding-4">
         @RenderBody()
     </main>
 
     <footer class="has-padding-4 has-border-top-style-solid has-border-top-width-1 has-border-color-tertiary-050">
         <div class="container">
-            &copy; 2020 - Codidact - <a asp-page="/Privacy">Privacy</a>
+            &copy; 2020 - Codidact - <a asp-page="/Privacy">@LayoutLocalizer["Privacy_button"]</a>
         </div>
     </footer>
     <script src="~/js/site.js" asp-append-version="true" async></script>
