@@ -1,11 +1,16 @@
-﻿@model Codidact.Core.WebApp.Pages.Shared.CategoryHeaderModel
+﻿@using Codidact.Core.Application.Categories.Queries.ShortCategoriesListQuery
+@inject ShortCategoriesListQuery query
+
+@{
+    var results = await query.Handle(new ShortCategoriesListRequest());
+}
 
 <header class="header">
     <div class="container header--container">
         <div class="header--menu">
-            @foreach (var category in Model.Categories)
+            @foreach (var category in results)
             {
-                <a class="header--item" href="#">@category.Name</a>
+                <a class="header--item" asp-page="Questions" asp-route-category="@category.Name">@category.Name</a>
             }
             <div class="header--separator"></div>
         </div>
