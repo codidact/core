@@ -1,50 +1,49 @@
 ﻿@using Microsoft.AspNetCore.Mvc.Localization
+@using Codidact.Core.Application.Categories.Queries.ShortCategoriesListQuery
 @inject IViewLocalizer LayoutLocalizer
-<header class="header">
-    <div class="container header--container">
-        <div class="header--brand">
-            <a class="header--site-name" asp-area="" asp-page="/Index">Codidact</a>
+@inject ShortCategoriesListQuery query
+@{
+    var results = await query.Handle(new ShortCategoriesListRequest());
+    string activeCategory;
+    var routeValue = ViewContext.RouteData.Values["category"];
+    if (routeValue != null)
+    {
+        activeCategory = routeValue.ToString();
+    }
+    else
+    {
+        activeCategory = results.Select(cat => cat.Name).FirstOrDefault();
+    }
+}
+<header class="category-header is-blue">
+    <div class="category-header--tabs">
+        <div class="container category-header--tabs-container">
+            @foreach (var category in results)
+            {
+                <a asp-page="Questions" asp-route-category="@category.Name" class="category-header--tab @(category?.Name == activeCategory ? "is-active" : "")">@category.Name</a>
+            }
         </div>
-        <div class="header--menu">
-            <a class="header--item" href="#">@LayoutLocalizer["Questions_title"]</a>
-            <a class="header--item" href="#">@LayoutLocalizer["Tags_title"]</a>
-            <a class="header--item" href="#">@LayoutLocalizer["Users_title"]</a>
-            <div class="header--separator"></div>
+    </div>
+    <div class="container category-header--container">
+        <div class="category-header--name">Q&amp;A</div>
+        <div class="category-header--nav">
+            <a asp-page="Questions" asp-route-category="@activeCategory" class="category-header--nav-item is-active">@LayoutLocalizer["Questions_title"]</a>
+            <a asp-page="Tags" asp-route-category="@activeCategory" class="category-header--nav-item">@LayoutLocalizer["Tags_title"]</a>
+            <a asp-page="Users" asp-route-category="@activeCategory" class="category-header--nav-item">@LayoutLocalizer["Users_title"]</a>
+
+            <div class="category-header--nav-separator"></div>
+
             @if (!User.Identity.IsAuthenticated)
             {
-                <a class="header--item" asp-page="/Login">@LayoutLocalizer["Sign_in_button"]</a>
+                <a class="category-header--nav-item is-button" asp-page="/Login">@LayoutLocalizer["Sign_in_button"]</a>
             }
             else
             {
                 <form method="post" asp-page="/Logout">
-                    <button class="header--item" type="submit">@LayoutLocalizer["Sign_out_button"]</button>
+                    <button class="category-header--nav-item is-button" type="submit">@LayoutLocalizer["Sign_out_button"]</button>
                 </form>
             }
-            <a class="header--item" href="https://github.com/codidact/core">@LayoutLocalizer["On_github_button"]</a>
-            <a class="header--item is-mobile-menu is-complex" data-trigger-header-slide="#js-hms" href="#!">
-                <span class="header--menu-bars">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </span>
-            </a>
+            <a class="category-header--nav-item is-button" href="https://github.com/codidact/core">@LayoutLocalizer["On_github_button"]</a>
         </div>
     </div>
 </header>
-<aside class="header-slide" id="js-hms">
-    <a class="header-slide--item" href="#">@LayoutLocalizer["Questions_title"]</a>
-    <a class="header-slide--item" href="#">@LayoutLocalizer["Tags_title"]</a>
-    <a class="header-slide--item" href="#">@LayoutLocalizer["Users_title"]</a>
-    <div class="header-slide--separator"></div>
-    @if (User.Identity.IsAuthenticated)
-    {
-        <a class="header-slide--item" asp-page="/Logout">@LayoutLocalizer["Sign_out_button"]</a>
-    }
-    else
-    {
-        <a class="header-slide--item" asp-page="/Login">>@LayoutLocalizer["Sign_in_button"]</a>
-    }
-    <a class="header-slide--item" href="https://github.com/codidact/core">@LayoutLocalizer["On_github_button"]</a>
-</aside>
-
-<partial name="CategoryHeader" />
