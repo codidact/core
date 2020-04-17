@@ -117,36 +117,32 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Active_sort" xml:space="preserve">
-    <value>active</value>
-    <comment>Sort of type active</comment>
+  <data name="New_question_button" xml:space="preserve">
+    <value>New question</value>
+    <comment>The new question button</comment>
   </data>
-  <data name="Answers_span" xml:space="preserve">
-    <value>answers</value>
-    <comment>The span under the question saying how many answer it has</comment>
-  </data>
-  <data name="Best_sort" xml:space="preserve">
-    <value>best</value>
-    <comment>Sort of type Best</comment>
-  </data>
-  <data name="Oldest_sort" xml:space="preserve">
-    <value>oldest</value>
-    <comment>Sort of type oldest</comment>
-  </data>
-  <data name="Questions_page_title" xml:space="preserve">
-    <value>Questions</value>
-    <comment>The title of the questions page</comment>
+  <data name="On_github_button" xml:space="preserve">
+    <value>on GitHub</value>
+    <comment>The button for github on the layout header</comment>
   </data>
   <data name="Questions_title" xml:space="preserve">
     <value>Questions</value>
-    <comment>The title of the questions page after category name</comment>
+    <comment>The questions button on the header of the layout</comment>
   </data>
-  <data name="Question_date" xml:space="preserve">
-    <value>last active</value>
-    <comment>The header under the dates column in questions list</comment>
+  <data name="Sign_in_button" xml:space="preserve">
+    <value>Sign In</value>
+    <comment>The sign in button in the layout header</comment>
   </data>
-  <data name="Votes_span" xml:space="preserve">
-    <value>votes</value>
-    <comment>The span under the question saying how many votes it has</comment>
+  <data name="Sign_out_button" xml:space="preserve">
+    <value>Sign Out</value>
+    <comment>The sign out button in the layout header</comment>
+  </data>
+  <data name="Tags_title" xml:space="preserve">
+    <value>Tags</value>
+    <comment>The tags button on the title of the header in the layout</comment>
+  </data>
+  <data name="Users_title" xml:space="preserve">
+    <value>Users</value>
+    <comment>The users button on the title of the header in the layout</comment>
   </data>
 </root>
