@@ -146,18 +146,20 @@ namespace Codidact.Core.WebApp
         // Applies database migrations; won't cause any changes if the database is up-to-date.
         private void ApplyDatabaseMigrations(IApplicationBuilder app, ILogger logger)
         {
-            using var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope();
-            using (var context = serviceScope.ServiceProvider.GetService<ApplicationDbContext>())
+            using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
             {
-                try
+                using (var context = serviceScope.ServiceProvider.GetService<ApplicationDbContext>())
                 {
-                    context.Database.Migrate();
-                }
-                catch (System.Exception ex)
-                {
-                    logger.LogError("Unable to apply database migrations. Check the connection string in your " +
-                        "appsettings file.");
-                    throw ex;
+                    try
+                    {
+                        context.Database.Migrate();
+                    }
+                    catch (System.Exception ex)
+                    {
+                        logger.LogError("Unable to apply database migrations. Check the connection string in your " +
+                            "appsettings file.");
+                        throw ex;
+                    }
                 }
             }
         }

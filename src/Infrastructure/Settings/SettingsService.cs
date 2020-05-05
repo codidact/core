@@ -15,13 +15,5 @@ namespace Codidact.Core.Infrastructure.Settings
         {
             return PlatformSettings.PlatformName;
         }
-        /// <summary>
-        /// Gets the platform accent color from platform settings file
-        /// </summary>
-        /// <returns>Platform accent color</returns>
-        public string GetPlatformAccentColor()
-        {
-            return PlatformSettings.PlatformAccentColor;
-        }
     }
 }
