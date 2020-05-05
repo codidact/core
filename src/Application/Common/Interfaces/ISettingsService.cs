@@ -14,5 +14,10 @@ namespace Codidact.Core.Application.Common.Interfaces
         /// </summary>
         /// <returns>Platform name</returns>
         string GetPlatformName();
+        /// <summary>
+        /// Gets the platform accent color from platform settings file
+        /// </summary>
+        /// <returns>Platform accent color</returns>
+        string GetPlatformAccentColor();
     }
 }

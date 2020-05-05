@@ -1,5 +1,7 @@
 ﻿@using Microsoft.AspNetCore.Mvc.Localization
+@using Codidact.Core.Application.Common.Interfaces
 @inject IViewLocalizer LayoutLocalizer
+@inject ISettingsService PlatformSettings;
 
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -7,14 +9,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Codidact - @ViewData["Title"]</title>
-    <link rel="stylesheet" href="https://unpkg.com/@@codidact/co-design@@0.5.0/dist/codidact.css" />
+    <link rel="stylesheet" href="https://unpkg.com/@@codidact/co-design@@0.8.0/dist/codidact.css" />
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
-    <header class="header">
+    <header class="header h-bg-@PlatformSettings.GetPlatformAccentColor()-050">
         <div class="container header--container">
             <div class="header--brand">
-                <a class="header--site-name" asp-area="" asp-page="/Index">Codidact</a>
+                <a class="header--site-name" asp-area="" asp-page="/Index">@PlatformSettings.GetPlatformName()</a>
             </div>
             <div class="header--menu">
                 <a class="header--item" href="#">@LayoutLocalizer["Questions_title"]</a>
@@ -41,6 +43,27 @@
                 </a>
             </div>
         </div>
+
+    </header>
+    <header class="category-header is-@PlatformSettings.GetPlatformAccentColor()">
+        <div class="category-header--tabs">
+            <div class="container category-header--tabs-container">
+                <a href="#" class="category-header--tab is-active">Q&amp;A</a>
+                <a href="#" class="category-header--tab">Wiki</a>
+                <a href="#" class="category-header--tab">Meta</a>
+                <a href="#" class="category-header--tab">Blog</a>
+            </div>
+        </div>
+        <div class="container category-header--container">
+            <div class="category-header--name">Q&amp;A</div>
+            <div class="category-header--nav">
+                <a href="#" class="category-header--nav-item is-active">Questions</a>
+                <a href="#" class="category-header--nav-item">Search</a>
+                <input class="form-element is-width-x">
+                <div class="category-header--nav-separator"></div>
+                <a href="#" class="category-header--nav-item is-button has-no-line-breaks">Ask Question</a>
+            </div>
+        </div>
     </header>
     <aside class="header-slide" id="js-hms">
         <a class="header-slide--item" href="#">@LayoutLocalizer["Questions_title"]</a>
@@ -49,17 +72,45 @@
         <div class="header-slide--separator"></div>
         @if (User.Identity.IsAuthenticated)
         {
-    <a class="header-slide--item" asp-page="/Logout">@LayoutLocalizer["Sign_out_button"]</a>
+            <a class="header-slide--item" asp-page="/Logout">@LayoutLocalizer["Sign_out_button"]</a>
         }
         else
         {
-    <a class="header-slide--item" asp-page="/Login">>@LayoutLocalizer["Sign_in_button"]</a>
+            <a class="header-slide--item" asp-page="/Login">>@LayoutLocalizer["Sign_in_button"]</a>
         }
-    <a class="header-slide--item" href="https://github.com/codidact/core">@LayoutLocalizer["On_github_button"]</a>
+        <a class="header-slide--item" href="https://github.com/codidact/core">@LayoutLocalizer["On_github_button"]</a>
     </aside>
-    <main class="container has-padding-4">
-        @RenderBody()
-    </main>
+    <div class="container has-padding-4">
+        <div class="grid">
+
+            <div class="grid--cell is-8 is-12-md">
+                <main class="has-padding-4">
+                    @RenderBody()
+                </main>
+            </div>
+            <div class="grid--cell is-4 is-12-md">
+                <div class="widget has-margin-4">
+                    <div class="widget--header has-margin-0">
+                        <p>Hot Posts</p>
+                    </div>
+                    <div class="widget--body">
+                    </div>
+                </div>
+                <div class="widget has-margin-4">
+                    <div class="widget--header">
+                        <img src="~/assets/codidact.png" alt="Codidact logo" class="codidact-logo">
+                    </div>
+                    <div class="widget--body">
+                        <p>
+                            This site is part of the <a href="https://codidact.com">Codidact network</a>.
+                            We have other sites too — take a look!
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <footer class="has-padding-4 has-border-top-style-solid has-border-top-width-1 has-border-color-tertiary-050">
         <div class="container">

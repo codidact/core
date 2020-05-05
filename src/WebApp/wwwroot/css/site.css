@@ -1,1 +1,7 @@
-﻿
+﻿.codidact-logo {
+    width: 150px;
+}
+
+.has-no-line-breaks {
+    white-space: nowrap;
+}
