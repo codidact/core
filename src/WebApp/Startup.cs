@@ -1,18 +1,25 @@
 ﻿using Codidact.Core.Application;
 using Codidact.Core.Application.Common.Interfaces;
+using Codidact.Core.Domain.Entities;
 using Codidact.Core.Infrastructure;
 using Codidact.Core.Infrastructure.Persistence;
 using Codidact.Core.WebApp.Models;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using System;
+using System.Collections.Generic;
+using System.Globalization;
 using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
 
 namespace Codidact.Core.WebApp
 {
@@ -63,13 +70,35 @@ namespace Codidact.Core.WebApp
             .Configure<ISecretsService>((options, secretsService) =>
             {
                 options.ClientSecret = secretsService.Get("Identity:ClientSecret").GetAwaiter().GetResult();
-            }); 
+            });
 
             JwtSecurityTokenHandler.DefaultMapInboundClaims = false;
 
             services
                 .AddRazorPages()
-                .AddRazorRuntimeCompilation();
+                .AddRazorRuntimeCompilation()
+                .AddFluentValidation()
+                .AddViewLocalization(options => options.ResourcesPath = "Resources");
+
+            services.Configure<RequestLocalizationOptions>(
+             opts =>
+            {
+                var settingSupportedCultures = Configuration.GetSection("Localization:Cultures").Get<string[]>();
+                if (settingSupportedCultures == null || !settingSupportedCultures.Any())
+                {
+                    throw new CultureNotFoundException("No supported cultures found in settings");
+                }
+
+                var supportedCultures = settingSupportedCultures
+                   .Select(culture => new CultureInfo(culture))
+                   .ToList();
+
+                opts.DefaultRequestCulture = new RequestCulture(supportedCultures.First());
+                // Formatting numbers, dates, etc.
+                opts.SupportedCultures = supportedCultures;
+                // UI strings that we have localized.
+                opts.SupportedUICultures = supportedCultures;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -93,14 +122,24 @@ namespace Codidact.Core.WebApp
 
             app.UseRouting();
 
+            app.UseRequestLocalization();
+
             app.UseAuthentication();
             app.UseAuthorization();
 
-            app.UseEndpoints(endpoints => endpoints.MapRazorPages());
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapRazorPages();
+                endpoints.MapControllers();
+            });
 
             if (env.EnvironmentName != "Test")
             {
                 ApplyDatabaseMigrations(app, logger);
+                if (env.IsDevelopment())
+                {
+                    SeedDatabase(app, logger);
+                }
             }
         }
 
@@ -118,6 +157,138 @@ namespace Codidact.Core.WebApp
                     catch (System.Exception ex)
                     {
                         logger.LogError("Unable to apply database migrations. Check the connection string in your " +
+                            "appsettings file.");
+                        throw ex;
+                    }
+                }
+            }
+        }
+
+        private void SeedDatabase(IApplicationBuilder app, ILogger logger)
+        {
+            using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
+            {
+                using (var context = serviceScope.ServiceProvider.GetService<ApplicationDbContext>())
+                {
+                    try
+                    {
+                        TrustLevel adminTrustLevel;
+                        if (!context.TrustLevels.Any())
+                        {
+                            logger.LogDebug("Adding Trust Levels...");
+
+                            adminTrustLevel = new TrustLevel
+                            {
+                                DisplayName = "Instance Administrator",
+                                Explanation = "Administrator Level Trust",
+                            };
+                            context.TrustLevels.Add(adminTrustLevel);
+                            context.SaveChanges();
+                        }
+                        else
+                        {
+                            adminTrustLevel = context.TrustLevels
+                                .OrderByDescending(trust => trust.CreatedAt)
+                                .FirstOrDefault();
+                        }
+
+                        Category category;
+                        if (!context.Categories.Any())
+                        {
+                            logger.LogDebug("Creating main category...");
+
+                            category = new Category
+                            {
+                                DisplayName = "Main",
+                                ParticipationMinimumTrustLevelId = adminTrustLevel.Id,
+                                ShortExplanation = "Codidact Questions",
+                                LongExplanation = "Main Category for Codidact where all the codidact related questions go to"
+                            };
+                            context.Categories.Add(category);
+                            context.SaveChanges();
+                        }
+                        else
+                        {
+                            category = context.Categories
+                                .OrderByDescending(category => category.CreatedAt)
+                                .FirstOrDefault();
+                        }
+
+                        Member communityMember;
+                        // members
+                        if (!context.Members.Any())
+                        {
+                            logger.LogDebug("Creating community member...");
+
+                            communityMember = new Member
+                            {
+                                DisplayName = "Codidact Community",
+                                Bio = "The codidact community manifested",
+                                TrustLevelId = adminTrustLevel.Id
+                            };
+                            context.Members.Add(communityMember);
+                            context.SaveChanges();
+                        }
+                        else
+                        {
+                            communityMember = context.Members
+                                .OrderByDescending(member => member.CreatedAt)
+                                .FirstOrDefault();
+                        }
+
+                        // post types
+                        if (!context.PostTypes.Any())
+                        {
+                            logger.LogDebug("Creating post types...");
+
+                            context.PostTypes.Add(new PostType
+                            {
+                                Id = Domain.Enums.PostType.Question,
+                                DisplayName = "Question",
+                                Description = "A question"
+                            });
+                            context.SaveChanges();
+                        }
+                        else
+                        {
+                            communityMember = context.Members
+                                .OrderByDescending(member => member.CreatedAt)
+                                .FirstOrDefault();
+                        }
+
+                        // questions
+                        if (!context.Posts.Any(post => post.PostTypeId == Domain.Enums.PostType.Question))
+                        {
+                            logger.LogDebug("Creating a few sample questions...");
+
+                            context.Posts.Add(new Post
+                            {
+                                Title = "What is Codidact?",
+                                Body = "I don't understand what is this platform! Please give me a hint. Thanks",
+                                PostTypeId = Domain.Enums.PostType.Question,
+                                Views = 53,
+                                CreatedAt = DateTime.UtcNow,
+                                CreatedByMemberId = communityMember.Id,
+                                MemberId = communityMember.Id,
+                                CategoryId = category.Id
+                            });
+                            context.Posts.Add(new Post
+                            {
+                                Title = "How do I interface with real life?",
+                                Body = "I don't understand this concept of hand and motoric movement. I think therefor I move? What is reality actually? Please assist",
+                                PostTypeId = Domain.Enums.PostType.Question,
+                                Views = 53,
+                                CreatedAt = DateTime.UtcNow,
+                                CreatedByMemberId = communityMember.Id,
+                                MemberId = communityMember.Id,
+                                CategoryId = category.Id
+                            });
+                            context.SaveChanges();
+                        }
+                    }
+                    catch (System.Exception ex)
+                    {
+                        logger.LogError("Unable to seed the database. Check the connection string in your " +
                             "appsettings file.");
                         throw ex;
                     }

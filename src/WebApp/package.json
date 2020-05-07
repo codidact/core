@@ -1,0 +1,10 @@
+{
+  "scripts": {
+    "tsc": "npx tsc",
+    "serve": "tsc && dotnet run",
+    "build": "tsc && dotnet build"
+  },
+  "devDependencies": {
+    "typescript": "3.8.3"
+  }
+}

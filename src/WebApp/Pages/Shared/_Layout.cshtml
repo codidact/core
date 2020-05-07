@@ -1,11 +1,14 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer LayoutLocalizer
+
+<!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>@ViewData["Title"]</title>
+    <title>Codidact - @ViewData["Title"]</title>
+    <link rel="stylesheet" href="https://unpkg.com/@@codidact/co-design@@0.5.0/dist/codidact.css" />
     <link rel="stylesheet" href="~/css/site.css" />
-    <link rel="stylesheet" href="~/lib/co-design/css/codidact.css" />
 </head>
 <body>
     <header class="header">
@@ -14,21 +17,21 @@
                 <a class="header--site-name" asp-area="" asp-page="/Index">Codidact</a>
             </div>
             <div class="header--menu">
-                <a class="header--item" href="#">Place holder 1</a>
-                <a class="header--item" href="#">Place holder 2</a>
-                <a class="header--item" href="#">Place holder 3</a>
+                <a class="header--item" href="#">@LayoutLocalizer["Questions_title"]</a>
+                <a class="header--item" href="#">@LayoutLocalizer["Tags_title"]</a>
+                <a class="header--item" href="#">@LayoutLocalizer["Users_title"]</a>
                 <div class="header--separator"></div>
                 @if (!User.Identity.IsAuthenticated)
                 {
-                    <a class="header--item" asp-page="/Login">Sign In</a>
+                    <a class="header--item" asp-page="/Login">@LayoutLocalizer["Sign_in_button"]</a>
                 }
                 else
                 {
                     <form method="post" asp-page="/Logout">
-                        <button class="header--item" type="submit">Sign Out</button>
+                        <button class="header--item" type="submit">@LayoutLocalizer["Sign_out_button"]</button>
                     </form>
                 }
-                <a class="header--item" href="https://github.com/codidact/core">on GitHub</a>
+                <a class="header--item" href="https://github.com/codidact/core">@LayoutLocalizer["On_github_button"]</a>
                 <a class="header--item is-mobile-menu is-complex" data-trigger-header-slide="#js-hms" href="#!">
                     <span class="header--menu-bars">
                         <span></span>
@@ -40,19 +43,19 @@
         </div>
     </header>
     <aside class="header-slide" id="js-hms">
-        <a class="header-slide--item" href="#">Placeholder 1</a>
-        <a class="header-slide--item" href="#">Placeholder 2</a>
-        <a class="header-slide--item" href="#">Placeholder 3</a>
+        <a class="header-slide--item" href="#">@LayoutLocalizer["Questions_title"]</a>
+        <a class="header-slide--item" href="#">@LayoutLocalizer["Tags_title"]</a>
+        <a class="header-slide--item" href="#">@LayoutLocalizer["Users_title"]</a>
         <div class="header-slide--separator"></div>
         @if (User.Identity.IsAuthenticated)
         {
-            <a class="header-slide--item" asp-page="/Logout">Sign Out</a>
+    <a class="header-slide--item" asp-page="/Logout">@LayoutLocalizer["Sign_out_button"]</a>
         }
         else
         {
-            <a class="header-slide--item" asp-page="/Login">Sign In</a>
+    <a class="header-slide--item" asp-page="/Login">>@LayoutLocalizer["Sign_in_button"]</a>
         }
-        <a class="header-slide--item" href="https://github.com/codidact/core">on GitHub</a>
+    <a class="header-slide--item" href="https://github.com/codidact/core">@LayoutLocalizer["On_github_button"]</a>
     </aside>
     <main class="container has-padding-4">
         @RenderBody()
@@ -60,9 +63,9 @@
 
     <footer class="has-padding-4 has-border-top-style-solid has-border-top-width-1 has-border-color-tertiary-050">
         <div class="container">
-            &copy; 2020 - Codidact - <a asp-page="/Privacy">Privacy</a>
+            &copy; 2020 - Codidact - <a asp-page="/Privacy">@LayoutLocalizer["Privacy_button"]</a>
         </div>
     </footer>
-    <script src="~/js/site.js" asp-append-version="true" async></script>
+    <script src="~/scripts/site.js" asp-append-version="true" async></script>
 </body>
 </html>

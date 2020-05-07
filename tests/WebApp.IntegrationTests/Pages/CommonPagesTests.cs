@@ -29,8 +29,8 @@ namespace Codidact.Core.WebApp.IntegrationTests.Pages
 
             // Assert
             response.EnsureSuccessStatusCode(); // Status Code 200-299
-            Assert.Equal("text/html; charset=utf-8",
-                response.Content.Headers.ContentType.ToString());
+            Assert.Equal("text/html",
+                response.Content.Headers.ContentType.MediaType);
         }
 
         [Theory]

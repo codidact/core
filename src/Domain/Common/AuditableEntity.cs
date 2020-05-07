@@ -1,4 +1,5 @@
 ﻿using System;
+using Codidact.Core.Domain.Entities;
 
 namespace Codidact.Core.Domain.Common
 {
@@ -10,7 +11,7 @@ namespace Codidact.Core.Domain.Common
         /// <summary>
         /// The date at which the entity was created
         /// </summary>
-        public DateTime CreateDateAt { get; set; }
+        public DateTime CreatedAt { get; set; }
 
         /// <summary>
         /// The date at which the entity was last modified
@@ -20,11 +21,12 @@ namespace Codidact.Core.Domain.Common
         /// <summary>
         /// The member id which created this entity
         /// </summary>
-        public long CreatedByMemberId { get; set; }
+        public long? CreatedByMemberId { get; set; }
 
         /// <summary>
         /// The member id which last modified this entity
         /// </summary>
         public long? LastModifiedByMemberId { get; set; }
+
     }
 }
