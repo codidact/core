@@ -29,7 +29,7 @@
 
 ## Setting up Secrets
 
- 1. Run the following command inside of 'src/WebUI' to install the connection string
+ 1. Run the following command inside of 'src/WebApp' to install the connection string
 
   ```
   dotnet user-secrets set "ConnectionStrings:DefaultConnection" "YOUR_CONNECTION_STRING"
