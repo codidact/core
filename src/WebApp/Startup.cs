@@ -43,7 +43,8 @@ namespace Codidact.Core.WebApp
             services.AddInfrastructure(Configuration);
 
             services.AddHttpContextAccessor();
-
+            
+            // set up cookie service
             services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = "cookie";
@@ -74,6 +75,7 @@ namespace Codidact.Core.WebApp
 
             JwtSecurityTokenHandler.DefaultMapInboundClaims = false;
 
+            // add services
             services
                 .AddRazorPages()
                 .AddRazorRuntimeCompilation()
@@ -116,14 +118,19 @@ namespace Codidact.Core.WebApp
                 app.UseHsts();
             }
 
+            // allow redirection
             app.UseHttpsRedirection();
 
+            // allow static files
             app.UseStaticFiles();
 
+            // allow routing
             app.UseRouting();
 
+            // allow request localization
             app.UseRequestLocalization();
 
+            // allow auth
             app.UseAuthentication();
             app.UseAuthorization();
 
