@@ -129,10 +129,6 @@
     <value>best</value>
     <comment>Sort of type Best</comment>
   </data>
-  <data name="New_question_button" xml:space="preserve">
-    <value>New question</value>
-    <comment>The new question button</comment>
-  </data>
   <data name="Oldest_sort" xml:space="preserve">
     <value>oldest</value>
     <comment>Sort of type oldest</comment>
