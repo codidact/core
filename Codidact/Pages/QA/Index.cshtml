@@ -1,0 +1,74 @@
+﻿@page
+@model Codidact.Pages.QA.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="AddQuestion">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Posts[0].Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Posts[0].Body)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Posts[0].CreationDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Posts[0].LastActivityDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Posts[0].LastEditorDisplayName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Posts[0].Score)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Posts[0].Tags)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Posts) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Body)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreationDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastActivityDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastEditorDisplayName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Score)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tags)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ViewCount)
+            </td>
+            <td>
+                <a asp-page="./Details" asp-route-id="@item.Id">Details</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

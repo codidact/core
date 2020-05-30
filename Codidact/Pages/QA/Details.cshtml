@@ -1,0 +1,107 @@
+﻿@page
+@model Codidact.Pages.QA.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>Details</h1>
+
+<section id="question">
+    <h4>Question</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Question.Title)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Question.Title)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Question.Body)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Question.Body)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Question.ClosedDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Question.ClosedDate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Question.CreationDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Question.CreationDate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Question.LastActivityDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Question.LastActivityDate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Question.LastEditDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Question.LastEditDate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Question.LastEditorDisplayName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Question.LastEditorDisplayName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Question.Score)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Question.Score)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Question.Tags)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Question.Tags)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Question.ViewCount)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Question.ViewCount)
+        </dd>
+    </dl>
+</section>
+
+<section id="answers">
+    <h4>Answers</h4>
+    @if (Model.Answers != null)
+	{
+        @foreach (var a in Model.Answers)
+	    {
+            <div id="answer_@a.Id">
+                <h3>@a.Body</h3>
+                <p>@a.OwnerUser.DisplayName @@ @a.CreationDate</p>
+            </div>
+	    }
+	}
+</section>
+
+<section id="addanswer">
+    <h4>Add Answer</h4>
+    <form method="post">
+        <input type="hidden" asp-for="NewAnswer.QuestionID" />
+        <div class="form-group">
+            <label asp-for="NewAnswer.Body" class="control-label"></label>
+            <textarea asp-for="NewAnswer.Body" class="form-control" rows="10"></textarea>
+            <span asp-validation-for="NewAnswer.Body" class="text-danger"></span>
+            <input type="submit" value="Add Answer" class="btn btn-primary" />
+        </div>
+    </form>
+</section>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
